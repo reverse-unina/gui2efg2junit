@@ -165,9 +165,13 @@ public class EfgEvent extends ElementWrapper implements UserEvent, Iterable<EfgE
 	public static EfgEvent fromUserEvent (XmlGraph g, UserEvent e) {
 		return new EfgEvent (g,e);
 	}
-		
+
 	public void setId (String id) {
 		getElement().setAttribute("id",id);
+	}
+	
+	public String getId() {
+		return getElement().getAttribute("id");
 	}
 
 }

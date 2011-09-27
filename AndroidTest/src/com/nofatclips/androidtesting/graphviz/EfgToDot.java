@@ -45,8 +45,12 @@ public class EfgToDot implements Plottable {
 			String target = e.getAttribute("widget_name");
 			if (target.equals(""))
 				target = e.getAttribute("value");
-			if (target.equals(""))
+			if (target.equals("")) {
 				target = e.getAttribute("widget_type");
+				if (e.getAttribute("widget_id")!="") {
+					target = target + " #" + e.getAttribute("widget_id");
+				}
+			}
 			String nodeDesc = e.getAttribute("type") + "\\n'" + target + "'";
 			this.nodes.put(name, nodeDesc);
 			this.extractNodes(e);

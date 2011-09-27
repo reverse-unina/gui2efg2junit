@@ -47,6 +47,14 @@ public class TestCaseEvent extends ElementWrapper implements UserEvent {
 		getElement().setAttribute("value",v);
 	}
 
+	public void setId (String id) {
+		getElement().setAttribute("id",id);
+	}
+	
+	public String getId() {
+		return getElement().getAttribute("id");
+	}
+
 	public WidgetState getWidget() {
 		return new TestCaseWidget ((Element)getElement().getChildNodes().item(0));
 	}
@@ -99,6 +107,7 @@ public class TestCaseEvent extends ElementWrapper implements UserEvent {
 		TestCaseEvent e = createEvent (this.getElement().getOwnerDocument());
 		e.setType(this.getType());
 		e.setValue(this.getValue());
+		e.setId(this.getId());
 		e.setWidget(this.getWidget().clone());
 		return e;
 	}

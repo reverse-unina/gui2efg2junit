@@ -15,7 +15,7 @@ public class EventFlowTree extends XmlGraph implements Plottable {
 	
 	public EventFlowTree () throws ParserConfigurationException {
 		super ("eventtree.dtd","EFG");
-		this.id = 0;
+//		this.id = 0;
 		this.efg = getBuilder().newDocument();
 		this.rootElement = this.efg.createElement("EFG");
 		this.rootElement.setAttribute("id", "root");
@@ -72,7 +72,7 @@ public class EventFlowTree extends XmlGraph implements Plottable {
 	// Adds a new child node at the current position
 	protected boolean addEvent (UserEvent userEvent) {
 		EfgEvent event = EfgEvent.fromUserEvent (this, userEvent);
-		event.setId(getUniqueId());
+		event.setId(userEvent.getId());
 		getNavigator().appendChild(event.getElement());
 		setNavigator (event);
 		return true;
@@ -97,10 +97,10 @@ public class EventFlowTree extends XmlGraph implements Plottable {
 		return this.efg;
 	}
 	
-	public String getUniqueId () {
-		this.id++;
-		return "e"+this.id;
-	}
+//	public String getUniqueId () {
+//		this.id++;
+//		return "e"+this.id;
+//	}
 	
 	public Element getNavigator() {
 		return this.navigator;
@@ -121,6 +121,6 @@ public class EventFlowTree extends XmlGraph implements Plottable {
 	private Document efg;
 	private Element rootElement;
 	private Element navigator;
-	private int id;
+//	private int id;
 	
 }
