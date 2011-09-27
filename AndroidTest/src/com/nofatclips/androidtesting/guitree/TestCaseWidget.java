@@ -87,6 +87,8 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 	public String getSimpleType() {
 		if (getType().endsWith("RadioButton"))
 			return "radio";
+		if (getType().endsWith("CheckBox"))
+			return "check";
 		if (getType().endsWith("Button"))
 			return "button";
 		if (getType().endsWith("EditText"))

@@ -1,3 +1,8 @@
+	public void afterRestart() {
+		solo.sleep(SLEEP_AFTER_RESTART);
+		Log.d("nofatclips", "Ready to operate after restarting...");
+	}
+	
 	public void retrieveWidgets () {
 		theViews.clear();
 		for (View w: solo.getCurrentViews()) {
@@ -68,7 +73,7 @@
 		}
 		if (widgetType == "editText") {
 			solo.enterText((EditText)v, value);
-		} else if (widgetType == "button") {
+		} else if (widgetType == "click") {
 			TouchUtils.clickView(this, v);
 		}
 	}
