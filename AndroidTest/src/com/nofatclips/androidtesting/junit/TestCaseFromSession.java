@@ -48,7 +48,7 @@ public class TestCaseFromSession implements Testable {
 	}
 	
 	private void generateTest(Trace aTrace, String message) {
-		loc ("public void testTrace" + aTrace.getId() + " () {").blank();
+		loc ("public void testTrace" + padLeft(aTrace.getId()) + " () {").blank();
 		loc ("// Testing base activity");
 		generateTest(this.aGuiTree.getBaseActivity(), "Testing base activity");
 		for (Transition t: aTrace) {
@@ -164,6 +164,10 @@ public class TestCaseFromSession implements Testable {
 
     public static String  hex(char ch) {
         return Integer.toHexString(ch).toUpperCase(Locale.ENGLISH);
+    }
+    
+    public static String padLeft(String s) {
+        return String.format("%05d", Integer.valueOf(s));  
     }
 
     Session aGuiTree;
