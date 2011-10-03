@@ -48,8 +48,7 @@ public class TestCaseFromSession implements Testable {
 	}
 	
 	private void generateTest(Trace aTrace, String message) {
-		loc ("public void testTrace" + aTrace.getId() + " () {");
-		loc ("afterRestart();").blank();
+		loc ("public void testTrace" + aTrace.getId() + " () {").blank();
 		loc ("// Testing base activity");
 		generateTest(this.aGuiTree.getBaseActivity(), "Testing base activity");
 		for (Transition t: aTrace) {
@@ -59,10 +58,11 @@ public class TestCaseFromSession implements Testable {
 			}
 			UserEvent e = t.getEvent();
 			WidgetState w = e.getWidget();
+			String idOrName = (w.getId().equals("-1"))?("\"" + w.getName() + "\""):w.getId();
 			if (e.getValue().equals("") || (e.getValue()==null) ) {
-				loc ("fireEvent (" + w.getId() + ", \"" + w.getType() + "\", \"" + e.getType() + "\");").blank();
+				loc ("fireEvent (" + idOrName + ", \"" + w.getType() + "\", \"" + e.getType() + "\");").blank();
 			} else {
-				loc ("fireEvent (" + w.getId() + ", \"" + w.getType() + "\", \"" + e.getType() + "\", \"" + e.getValue() + "\");").blank();
+				loc ("fireEvent (" + idOrName + ", \"" + w.getType() + "\", \"" + e.getType() + "\", \"" + e.getValue() + "\");").blank();
 			}
 			loc ("// Testing final activity for transition " + t.getId());
 			generateTest (t.getFinalActivity());

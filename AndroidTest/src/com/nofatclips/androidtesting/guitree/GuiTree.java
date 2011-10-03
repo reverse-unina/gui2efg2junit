@@ -58,8 +58,8 @@ public class GuiTree extends XmlGraph implements Session, Testable {
 	}
 
 	public String getPackageName() {
-		// TODO Package name should not be a guess !!!
-		return guessPackageName();
+		boolean hasClassName = getDom().getDocumentElement().hasAttribute("package_name");
+		return (hasClassName)?getDom().getDocumentElement().getAttribute("package_name"):guessPackageName();
 	}
 	
 	public String guessPackageName() {
@@ -70,14 +70,22 @@ public class GuiTree extends XmlGraph implements Session, Testable {
 	}
 
 	public String getClassName() {
-		// TODO Auto-generated method stub
-		return guessClassName();
+		boolean hasClassName = getDom().getDocumentElement().hasAttribute("class_name");
+		return (hasClassName)?getDom().getDocumentElement().getAttribute("class_name"):guessClassName();
 	}
 	
 	public String guessClassName() {
 		return getPackageName() + "." + getBaseActivity().getName();
 	}
 	
+	public void setClassName(String cname) {
+		getDom().getDocumentElement().setAttribute("class_name", cname);
+	}
+
+	public void setPackageName(String pname) {
+		getDom().getDocumentElement().setAttribute("package_name", pname);
+	}
+
 	public ActivityState getBaseActivity () {
 		return traces().next().transitions().next().getStartActivity();
 	}

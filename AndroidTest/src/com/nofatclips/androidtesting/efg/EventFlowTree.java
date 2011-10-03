@@ -81,7 +81,7 @@ public class EventFlowTree extends XmlGraph implements Plottable {
 	// Checks if the given node is present as a direct child of the current node and returns it. Returns null otherwise.
 	public EfgEvent hasEvent (UserEvent event) {
 		for (EfgEvent candidate: new EfgEvent (getNavigator())) {
-			if (candidate.equals(event)) {
+			if (candidate.getId().equals(event.getId())) {
 				return candidate;
 			}
 		}
