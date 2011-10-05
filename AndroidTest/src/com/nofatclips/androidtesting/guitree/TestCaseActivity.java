@@ -46,7 +46,17 @@ public class TestCaseActivity extends ElementWrapper implements ActivityState {
 	public void setName(String name) {
 		getElement().setAttribute("name",name);
 	}
-		
+
+	@Override
+	public String getId() {
+		return getElement().getAttribute("id");
+	}
+
+	@Override
+	public void setId(String id) {
+		getElement().setAttribute("id",id);		
+	}
+
 	public static TestCaseActivity createActivity (Document dom, String tag) {
 		Element el = dom.createElement(tag);
 		Element desc = dom.createElement(DESC_TAG);
