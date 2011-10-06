@@ -6,6 +6,7 @@ import org.w3c.dom.Element;
 
 import com.nofatclips.androidtesting.model.UserEvent;
 import com.nofatclips.androidtesting.model.WidgetState;
+import com.nofatclips.androidtesting.model.WidgetAdapter;
 import com.nofatclips.androidtesting.model.WrapperInterface;
 import com.nofatclips.androidtesting.xml.ElementWrapper;
 import com.nofatclips.androidtesting.xml.NodeListWrapper;
@@ -53,18 +54,7 @@ public class EfgEvent extends ElementWrapper implements UserEvent, Iterable<EfgE
 	}
 
 	public WidgetState getWidget() {
-		return new WidgetState () {
-
-			public void setElement(Element e) {
-			}
-
-			public Element getElement() {
-				return null;
-			}
-
-			public WrapperInterface getWrapper(Element e) {
-				return null;
-			}
+		return new WidgetAdapter () {
 
 			public String getId() {
 				return getWidgetId();
@@ -90,33 +80,6 @@ public class EfgEvent extends ElementWrapper implements UserEvent, Iterable<EfgE
 				setWidgetType(type);
 			}
 			
-			public WidgetState clone() {
-				try {
-					return (WidgetState) super.clone();
-				} catch (CloneNotSupportedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				return null;
-			}
-
-			@Override
-			public String getSimpleType() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public String getTextType() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public void setTextType(String inputType) {
-				// TODO Auto-generated method stub
-				
-			}
 		};
 	}
 	

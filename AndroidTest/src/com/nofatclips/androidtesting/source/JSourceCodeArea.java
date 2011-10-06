@@ -83,7 +83,7 @@ public class JSourceCodeArea extends JTextArea {
 			} catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}			
+			}
 		}
 
 		private void saveFile(File fileName) throws FileNotFoundException {
