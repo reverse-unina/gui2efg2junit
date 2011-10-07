@@ -19,7 +19,7 @@
 		this.solo = new Solo (getInstrumentation(), getActivity());
 		restart();
 		afterRestart();
-		this.theActivity = solo.getCurrentActivity();
+		refreshCurrentActivity();
 	}
 	
 	@Override

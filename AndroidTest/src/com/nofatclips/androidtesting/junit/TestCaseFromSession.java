@@ -31,7 +31,8 @@ public class TestCaseFromSession implements Testable {
 		loc ("public final static String PACKAGE_NAME = \"" + packageName + "\";");
 		loc ("public final static String CLASS_NAME = \"" + className + "\";");
 		loc ("public final static int SLEEP_AFTER_EVENT = 2000;");
-		loc ("public final static int SLEEP_AFTER_RESTART = 2000;").blank();
+		loc ("public final static int SLEEP_AFTER_RESTART = 2000;");
+		loc ("public final static boolean FORCE_RESTART = true;").blank();
 		
 		this.j.includeSnippet("tc_framework.txt");
 

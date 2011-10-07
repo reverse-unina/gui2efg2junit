@@ -70,14 +70,11 @@
 		if (v == null) {
 			v = theActivity.findViewById(widgetId);
 		}
-		fireEventonView (v, eventType, value);
+		fireEvent(v, eventType, value);
 	}
 	
 	public void fireEvent (String widgetName, String widgetType, String eventType, String value) {
 		View v = null;
-		if (eventType.equals("back")) {
-			fireEventonView (null, "back", "");
-		}
 		if (widgetType.endsWith("Button")) {
 			v = solo.getButton(widgetName);
 		}
@@ -92,15 +89,13 @@
 				if (v!=null) break;
 			}
 		}
-		fireEventonView (v, eventType, value);
+		fireEvent(v, eventType, value);
 	}
 	
-	private void fireEventonView (View v, String eventType, String value) {
-		if (eventType.equals("click")) {
+	private void fireEvent (View v, String eventType, String value) {
+		if (eventType == "click") {
 			TouchUtils.clickView(this, v);
-		} else if (eventType.equals("back")) {
-			solo.goBack();
-		} else if (eventType.equals("swapTab") && value!=null) {
+		} else if (eventType == "swapTab" && value!=null) {
 			if (v instanceof TabHost) {
 				swapTab ((TabHost)v, value);
 			} else {
@@ -109,7 +104,7 @@
 		} else {
 			return;
 		}
-		refreshCurrentActivity();
+		this.theActivity = solo.getCurrentActivity();
 		solo.sleep(SLEEP_AFTER_EVENT);
 	}
 	
@@ -141,17 +136,10 @@
 	}
 	
 	public void restart() {
-		if (FORCE_RESTART) {
-			ContextWrapper main = new ContextWrapper(solo.getCurrentActivity());
-			Intent i = main.getBaseContext().getPackageManager().getLaunchIntentForPackage(main.getBaseContext().getPackageName() );
-			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK );
-			main.startActivity(i);
-		}
-	}
-
-	private void refreshCurrentActivity() {
-		this.theActivity = solo.getCurrentActivity();
-		Log.i("nofatclips", "Current activity is " + getActivity().getLocalClassName());
+		ContextWrapper main = new ContextWrapper(solo.getCurrentActivity());
+		Intent i = main.getBaseContext().getPackageManager().getLaunchIntentForPackage(main.getBaseContext().getPackageName() );
+		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK );
+		main.startActivity(i);
 	}
 	
 	public void debug (String msg) {
