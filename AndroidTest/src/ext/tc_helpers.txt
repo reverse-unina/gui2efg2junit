@@ -45,8 +45,8 @@
 		View v = getWidget(theId);
 		assertNotNull("Checking for id", v);
 		
-		String type = v.toString();
-		type = type.substring(0, type.indexOf('@'));
+		String type = v.getClass().getName();
+		// type = type.substring(0, type.indexOf('@'));
 		assertEquals("Checking for type", theType, type);
 		
 		if (theName != "") {
