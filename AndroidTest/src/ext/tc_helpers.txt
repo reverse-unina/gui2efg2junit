@@ -70,13 +70,13 @@
 		if (v == null) {
 			v = theActivity.findViewById(widgetId);
 		}
-		fireEventonView (v, eventType, value);
+		fireEventOnView (v, eventType, value);
 	}
 	
 	public void fireEvent (String widgetName, String widgetType, String eventType, String value) {
 		View v = null;
-		if (eventType.equals("back")) {
-			fireEventonView (null, "back", "");
+		if (eventType.equals("back") || eventType.equals("scrollDown")) {
+			fireEventOnView(null, eventType, null);
 		}
 		if (widgetType.endsWith("Button")) {
 			v = solo.getButton(widgetName);
@@ -92,14 +92,16 @@
 				if (v!=null) break;
 			}
 		}
-		fireEventonView (v, eventType, value);
+		fireEventOnView (v, eventType, value);
 	}
 	
-	private void fireEventonView (View v, String eventType, String value) {
+	private void fireEventOnView (View v, String eventType, String value) {
 		if (eventType.equals("click")) {
 			TouchUtils.clickView(this, v);
 		} else if (eventType.equals("back")) {
 			solo.goBack();
+		} else if (eventType.equals("scrollDown")) {
+			solo.scrollDown();
 		} else if (eventType.equals("swapTab") && value!=null) {
 			if (v instanceof TabHost) {
 				swapTab ((TabHost)v, value);
