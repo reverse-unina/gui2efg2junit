@@ -56,6 +56,10 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 		getElement().setAttribute("type",type);
 	}
 
+	public void setSimpleType(String type) {
+		getElement().setAttribute("simple_type",type);
+	}
+
 	@Override
 	public void setTextType(String inputType) {
 		getElement().setAttribute("text_type",inputType);
@@ -81,21 +85,28 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 		TestCaseWidget newOne = new TestCaseWidget(el);
 		newOne.setIdNameType(this.getId(), this.getName(), this.getType());
 		newOne.setTextType(this.getTextType());
+		newOne.setSimpleType(this.getSimpleType());
 		return newOne;
 	}
 
 	public String getSimpleType() {
-		if (getType().endsWith("null"))
+		Boolean flag = getElement().hasAttribute("simple_type");
+		return (flag)?getElement().getAttribute("simple_type"):guessSimpleType();
+	}
+
+	public String guessSimpleType() {
+		String type = getType(); 
+		if (type.endsWith("null"))
 			return "null";
-		if (getType().endsWith("RadioButton"))
+		if (type.endsWith("RadioButton"))
 			return "radio";
-		if (getType().endsWith("CheckBox"))
+		if (type.endsWith("CheckBox"))
 			return "check";
-		if (getType().endsWith("Button"))
+		if (type.endsWith("Button"))
 			return "button";
-		if (getType().endsWith("EditText"))
+		if (type.endsWith("EditText"))
 			return "editText";
-		if (getType().endsWith("TabHost"))
+		if (type.endsWith("TabHost"))
 			return "tabHost";
 		return "";
 	}
