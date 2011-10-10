@@ -59,5 +59,8 @@ public class WidgetAdapter implements WidgetState {
 
 	@Override
 	public void setTextType(String inputType) {}
+
+	@Override
+	public void setSimpleType(String simpleType) {}
 	
 }

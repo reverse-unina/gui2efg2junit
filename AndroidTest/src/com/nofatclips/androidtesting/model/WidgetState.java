@@ -12,5 +12,6 @@ public interface WidgetState extends WrapperInterface {
 	public void setTextType (String inputType);
 	public WidgetState clone();
 	public String getSimpleType();
+	public void setSimpleType(String simpleType);
 	
 }
