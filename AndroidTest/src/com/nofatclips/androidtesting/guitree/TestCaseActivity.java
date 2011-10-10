@@ -85,15 +85,21 @@ public class TestCaseActivity extends ElementWrapper implements ActivityState {
 		return newActivity;
 	}
 	
+//	public void copyDescriptionFrom (ActivityState originalActivity) {
+//		Document dom = this.getElement().getOwnerDocument();
+//		for (WidgetState w: originalActivity) {
+//			TestCaseWidget tcw = TestCaseWidget.createWidget(dom);
+//			tcw.setIdNameType(w.getId(), w.getName(), w.getType());
+//			this.addWidget (tcw);
+//		}
+//	}
+
 	public void copyDescriptionFrom (ActivityState originalActivity) {
-		Document dom = this.getElement().getOwnerDocument();
 		for (WidgetState w: originalActivity) {
-			TestCaseWidget tcw = TestCaseWidget.createWidget(dom);
-			tcw.setIdNameType(w.getId(), w.getName(), w.getType());
-			this.addWidget (tcw);
+			this.addWidget (w.clone());
 		}
 	}
-	
+
 	public TestCaseActivity clone () {
 		return createActivity(this);
 	}
