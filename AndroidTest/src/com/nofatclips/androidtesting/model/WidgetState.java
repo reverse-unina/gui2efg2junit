@@ -13,5 +13,7 @@ public interface WidgetState extends WrapperInterface {
 	public WidgetState clone();
 	public String getSimpleType();
 	public void setSimpleType(String simpleType);
+	public boolean isAvailable();
+	public void setAvailable (String a);
 	
 }

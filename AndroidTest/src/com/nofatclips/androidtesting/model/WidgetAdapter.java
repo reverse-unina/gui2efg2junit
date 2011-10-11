@@ -62,5 +62,13 @@ public class WidgetAdapter implements WidgetState {
 
 	@Override
 	public void setSimpleType(String simpleType) {}
+
+	@Override
+	public boolean isAvailable() {
+		return true;
+	}
+
+	@Override
+	public void setAvailable(String a) {}
 	
 }

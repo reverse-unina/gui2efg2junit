@@ -43,5 +43,4 @@ public class FinalActivity extends TestCaseActivity {
 		return createActivity(this);
 	}
 
-
 }

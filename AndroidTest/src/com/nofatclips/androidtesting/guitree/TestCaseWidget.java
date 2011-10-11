@@ -28,6 +28,11 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 	public String getName() {
 		return getElement().getAttribute("name");
 	}
+	
+	public boolean isAvailable() {
+		if (!getElement().hasAttribute("available")) return true;
+		return (getElement().getAttribute("available").equals("true"));
+	}
 
 	public String getType() {
 		return guessType(); // getElement().getAttribute("type");
@@ -50,6 +55,10 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 
 	public void setName(String name) {
 		getElement().setAttribute("name",name);
+	}
+	
+	public void setAvailable (String a) {
+		getElement().setAttribute("available",a);
 	}
 
 	public void setType(String type) {
@@ -86,7 +95,12 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 		newOne.setIdNameType(this.getId(), this.getName(), this.getType());
 		newOne.setTextType(this.getTextType());
 		newOne.setSimpleType(this.getSimpleType());
+		newOne.setAvailable(this.getAvailable());
 		return newOne;
+	}
+	
+	protected String getAvailable () {
+		return getElement().getAttribute("available");
 	}
 
 	public String getSimpleType() {
