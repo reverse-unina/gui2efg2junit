@@ -92,13 +92,11 @@ public class TestCaseEvent extends ElementWrapper implements UserEvent {
 	}
 
 	public static TestCaseEvent createEvent(GuiTree theSession) {
-		// TODO Auto-generated method stub
 		TestCaseEvent event = new TestCaseEvent(theSession);
 		return event;
 	}
 
 	public static TestCaseEvent createEvent(Document dom) {
-		// TODO Auto-generated method stub
 		TestCaseEvent event = new TestCaseEvent(dom);
 		return event;
 	}

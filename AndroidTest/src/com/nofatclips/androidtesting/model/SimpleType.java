@@ -1,0 +1,12 @@
+package com.nofatclips.androidtesting.model;
+
+public interface SimpleType {
+
+	public final static String BUTTON = "button";
+	public final static String EDIT_TEXT = "editText";
+	public final static String RADIO = "radio";
+	public final static String CHECKBOX = "check";
+	public final static String TAB_HOST = "tabHost";
+	public final static String NULL = "null";
+	
+}

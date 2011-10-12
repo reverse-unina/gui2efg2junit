@@ -1,11 +1,7 @@
 package com.nofatclips.androidtesting.model;
 
-public interface UserEvent extends WrapperInterface {
+public interface UserEvent extends UserInteraction {
 	
-	public String getType();
-	public void setType(String type);
-	public String getValue();
-	public void setValue(String value);
 	public String getId();
 	public void setId(String value);
 	public WidgetState getWidget();
@@ -14,7 +10,5 @@ public interface UserEvent extends WrapperInterface {
 	public void setWidgetName(String n);
 	public String getWidgetType();
 	public void setWidgetType(String t);
-	public String getWidgetId();
-	public void setWidgetId(String id);
 	
 }

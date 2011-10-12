@@ -106,7 +106,6 @@ public class TestCaseActivity extends ElementWrapper implements ActivityState {
 	
 	@Override
 	public void addWidget(WidgetState w) {
-		// TODO Auto-generated method stub
 		this.description.appendChild(w.getElement());
 	}
 

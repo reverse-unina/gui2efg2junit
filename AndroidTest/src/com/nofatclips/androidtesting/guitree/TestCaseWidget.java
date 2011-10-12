@@ -34,6 +34,12 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 		return (getElement().getAttribute("available").equals("true"));
 	}
 
+	@Override
+	public int getCount() {
+		if (!getElement().hasAttribute("count")) return 1;
+		return Integer.parseInt(getElement().getAttribute("count"));
+	}
+
 	public String getType() {
 		return guessType(); // getElement().getAttribute("type");
 	}
@@ -74,6 +80,11 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 		getElement().setAttribute("text_type",inputType);
 	}
 
+	@Override
+	public void setCount(int count) {
+		getElement().setAttribute("count", String.valueOf(count));
+	}
+
 	public void setIdNameType (String id, String name, String type) {
 		setId (id);
 		setName (name);
@@ -96,6 +107,9 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 		newOne.setTextType(this.getTextType());
 		newOne.setSimpleType(this.getSimpleType());
 		newOne.setAvailable(this.getAvailable());
+		if (this.getCount() != 1) {
+			newOne.setCount(this.getCount());
+		}
 		return newOne;
 	}
 	

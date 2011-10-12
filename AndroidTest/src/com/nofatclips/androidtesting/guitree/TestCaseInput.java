@@ -35,6 +35,14 @@ public class TestCaseInput extends ElementWrapper implements UserInput {
 		return getElement().getAttribute("input_type");
 	}
 
+	public String getName() {
+		return getElement().getAttribute("input_name");
+	}
+
+	public String getWidgetType() {
+		return getElement().getAttribute("widget_type");
+	}
+
 	public String getWidgetId() {
 		return getElement().getAttribute("input_id");
 	}
@@ -46,7 +54,7 @@ public class TestCaseInput extends ElementWrapper implements UserInput {
 	public void setWidget(WidgetState w) {
 		setName (w.getType());
 		setWidgetId(w.getId());
-		setType (w.getSimpleType());
+		setWidgetType (w.getSimpleType());
 	}
 	
 	public void setWidgetId (String id) {
@@ -60,7 +68,11 @@ public class TestCaseInput extends ElementWrapper implements UserInput {
 	public void setType (String type) {
 		getElement().setAttribute("input_type", type);
 	}
-	
+
+	public void setWidgetType (String type) {
+		getElement().setAttribute("widget_type", type);
+	}
+
 	public void setValue (String value) {
 		getElement().setAttribute("input_value", value);
 	}
@@ -75,8 +87,12 @@ public class TestCaseInput extends ElementWrapper implements UserInput {
 	}
 
 	public TestCaseInput clone () {
-		TestCaseInput i = createInput(this.getElement().getOwnerDocument());
+		TestCaseInput i = createInput(getElement().getOwnerDocument());
 		i.setWidgetId(this.getWidgetId());
+		i.setName(this.getName());
+		i.setType(this.getType());
+		i.setWidgetType(this.getWidgetType());
+		i.setValue(this.getValue());
 		return i;
 	}
 

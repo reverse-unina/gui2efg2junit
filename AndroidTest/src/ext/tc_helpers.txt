@@ -75,10 +75,10 @@
 	
 	public void fireEvent (String widgetName, String widgetType, String eventType, String value) {
 		View v = null;
-		if (eventType.equals("back") || eventType.equals("scrollDown")) {
+		if (eventType.equals(BACK) || eventType.equals(SCROLL_DOWN)) {
 			fireEventOnView(null, eventType, null);
 		}
-		if (widgetType.endsWith("Button")) {
+		if (widgetType.equals(BUTTON)) {
 			v = solo.getButton(widgetName);
 		}
 		if (v == null) {
@@ -96,13 +96,13 @@
 	}
 	
 	private void fireEventOnView (View v, String eventType, String value) {
-		if (eventType.equals("click")) {
+		if (eventType.equals(CLICK)) {
 			TouchUtils.clickView(this, v);
-		} else if (eventType.equals("back")) {
+		} else if (eventType.equals(BACK)) {
 			solo.goBack();
-		} else if (eventType.equals("scrollDown")) {
+		} else if (eventType.equals(SCROLL_DOWN)) {
 			solo.scrollDown();
-		} else if (eventType.equals("swapTab") && value!=null) {
+		} else if (eventType.equals(SWAP_TAB) && value!=null) {
 			if (v instanceof TabHost) {
 				swapTab ((TabHost)v, value);
 			} else {
@@ -120,9 +120,9 @@
 		if (v == null) {
 			v = theActivity.findViewById(widgetId);
 		}
-		if (widgetType == "editText") {
+		if (widgetType == TYPE_TEXT) {
 			solo.enterText((EditText)v, value);
-		} else if (widgetType == "click") {
+		} else if (widgetType == CLICK) {
 			TouchUtils.clickView(this, v);
 		}
 	}

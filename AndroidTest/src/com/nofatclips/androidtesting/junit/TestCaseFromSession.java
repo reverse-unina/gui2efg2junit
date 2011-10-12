@@ -1,10 +1,13 @@
 package com.nofatclips.androidtesting.junit;
 
+import java.lang.reflect.Field;
 import java.util.Locale;
 
 import com.nofatclips.androidtesting.model.ActivityState;
 import com.nofatclips.androidtesting.model.Session;
 import com.nofatclips.androidtesting.Testable;
+import com.nofatclips.androidtesting.model.InteractionType;
+import com.nofatclips.androidtesting.model.SimpleType;
 import com.nofatclips.androidtesting.model.Trace;
 import com.nofatclips.androidtesting.model.Transition;
 import com.nofatclips.androidtesting.model.UserEvent;
@@ -33,7 +36,38 @@ public class TestCaseFromSession implements Testable {
 		loc ("public final static int SLEEP_AFTER_EVENT = 2000;");
 		loc ("public final static int SLEEP_AFTER_RESTART = 2000;");
 		loc ("public final static boolean FORCE_RESTART = false;").blank();
-		
+
+		for (Field f: InteractionType.class.getFields()) {
+//			String fieldType = f.getType().getSimpleName();
+//			String fieldName = f.getName();
+			String fieldValue = "";
+			try {
+				fieldValue = "\"" + f.get("").toString() + "\"";
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			loc ("public final static String " + f.getName() + " = " + fieldValue + ";");
+		}
+
+		for (Field f: SimpleType.class.getFields()) {
+			String fieldValue = "";
+			try {
+				fieldValue = "\"" + f.get("").toString() + "\"";
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			loc ("public final static String " + f.getName() + " = " + fieldValue + ";");
+		}
+
+		loc("");
 		this.j.includeSnippet("tc_framework.txt");
 
 		loc ("// Test Cases").blank();
@@ -61,9 +95,9 @@ public class TestCaseFromSession implements Testable {
 			WidgetState w = e.getWidget();
 			String idOrName = (w.getId().equals("-1"))?("\"" + w.getName() + "\""):w.getId();
 			if (e.getValue().equals("") || (e.getValue()==null) ) {
-				loc ("fireEvent (" + idOrName + ", \"" + w.getType() + "\", \"" + e.getType() + "\");").blank();
+				loc ("fireEvent (" + idOrName + ", \"" + w.getSimpleType() + "\", \"" + e.getType() + "\");").blank();
 			} else {
-				loc ("fireEvent (" + idOrName + ", \"" + w.getType() + "\", \"" + e.getType() + "\", \"" + e.getValue() + "\");").blank();
+				loc ("fireEvent (" + idOrName + ", \"" + w.getSimpleType() + "\", \"" + e.getType() + "\", \"" + e.getValue() + "\");").blank();
 			}
 			loc ("// Testing final activity for transition " + t.getId());
 			generateTest (t.getFinalActivity());

@@ -32,6 +32,20 @@ public class EventFlowModeler {
 				frame.setVisible(true);
 		   }
 		});
+//		for (java.lang.reflect.Field f: com.nofatclips.androidtesting.model.InteractionType.class.getFields()) {
+//			System.out.print(f.getType().getSimpleName());
+//			System.out.print(f.getName());
+//			try {
+//				System.out.print(f.get(""));
+//			} catch (IllegalArgumentException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (IllegalAccessException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//
+//		}
 	}
 }
 
