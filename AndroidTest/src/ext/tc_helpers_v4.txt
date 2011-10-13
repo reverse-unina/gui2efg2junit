@@ -6,11 +6,9 @@
 	public void retrieveWidgets () {
 		clearWidgetList();
 		for (View w: solo.getCurrentViews()) {
-
-			//
-			allViews.add(w);
-			//
-			
+			if (!theViews.containsKey(w.getId())) {
+				allViews.add(w);
+			}
 			if (w.getId()>0) {
 				theViews.put(w.getId(), w); // Add only if the widget has a valid ID
 			}
@@ -32,17 +30,6 @@
 	public View getWidget (int key) {
 		return getWidgets().get(key);
 	}
-
-	public ArrayList<View> getWidgetsById (int id) {
-		ArrayList<View> theList = new ArrayList<View>();
-		for (View theView: getAllWidgets()) {
-			if (theView.getId() == id) {
-				Log.i("nofatclips", "Added to return list id=" + id);
-				theList.add(theView);
-			}
-		}
-		return theList;
-	}
 	
 	public ArrayList<View> getAllWidgets () {
 		return this.allViews;
@@ -55,32 +42,19 @@
 	
 	public void doTestWidget (int theId, String theType, String theName) {
 		if (theId == -1) return;
-//		View v = getWidget(theId);
-//		assertNotNull("Checking for id", v);
-//		
-//		String type = v.getClass().getName();
-//		// type = type.substring(0, type.indexOf('@'));
-//		assertEquals("Checking for type", theType, type);
-//		
-//		if (theName != "") { //
-//			MoreAsserts.assertAssignableFrom(TextView.class, v);
-//			TextView widget = (TextView) v;
-//			String name = widget.getText().toString();
-//			assertEquals("Checking for name", theName, name);
-//		}
+		View v = getWidget(theId);
+		assertNotNull("Checking for id", v);
 		
-		boolean found = false;
-		for (View testee: getWidgetsById(theId)) {
-			Log.i("nofatclips", "Retrieved from return list id=" + testee.getId());
-			String testeeType = testee.getClass().getName();
-			Log.i("nofatclips", "Testing for type (" + testeeType + ") against the original (" + theType);
-			String testeeName = (testee instanceof TextView)?((TextView) testee).getText().toString():"";
-			Log.i("nofatclips", "Testing for name (" + testeeName + ") against the original (" + theName);
-			if ( (theType.equals(testeeType)) && (theName.equals(testeeName)) ) {
-				found = true;
-			}
+		String type = v.getClass().getName();
+		// type = type.substring(0, type.indexOf('@'));
+		assertEquals("Checking for type", theType, type);
+		
+		if (theName != "") {
+			MoreAsserts.assertAssignableFrom(TextView.class, v);
+			TextView widget = (TextView) v;
+			String name = widget.getText().toString();
+			assertEquals("Checking for name", theName, name);
 		}
-		assertTrue(found);
 	}
 	
 	public void fireEvent (int widgetId, String widgetType, String eventType) {
