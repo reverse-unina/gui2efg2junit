@@ -76,6 +76,14 @@ public class TestCaseInput extends ElementWrapper implements UserInput {
 	public void setValue (String value) {
 		getElement().setAttribute("input_value", value);
 	}
+	
+	public void setId (String id) {
+		getElement().setAttribute("id",id);
+	}
+	
+	public String getId() {
+		return getElement().getAttribute("id");
+	}
 
 	public static TestCaseInput createInput(GuiTree theSession) {
 		TestCaseInput input = new TestCaseInput(theSession);
@@ -88,6 +96,7 @@ public class TestCaseInput extends ElementWrapper implements UserInput {
 
 	public TestCaseInput clone () {
 		TestCaseInput i = createInput(getElement().getOwnerDocument());
+		i.setId (this.getId());
 		i.setWidgetId(this.getWidgetId());
 		i.setName(this.getName());
 		i.setType(this.getType());

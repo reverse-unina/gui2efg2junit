@@ -103,6 +103,7 @@
 		View v = null;
 		if (eventType.equals(BACK) || eventType.equals(SCROLL_DOWN)) {
 			fireEventOnView(null, eventType, null);
+			return;
 		}
 		if (widgetType.equals(BUTTON)) {
 			v = solo.getButton(widgetName);

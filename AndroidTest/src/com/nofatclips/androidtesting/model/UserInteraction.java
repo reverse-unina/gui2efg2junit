@@ -8,5 +8,7 @@ public interface UserInteraction extends WrapperInterface {
 	public void setWidgetId (String widgetId);
 	public String getValue();
 	public void setValue (String value);
+	public String getId();
+	public void setId (String id);
 	
 }
