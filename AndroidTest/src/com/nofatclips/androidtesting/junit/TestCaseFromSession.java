@@ -93,11 +93,11 @@ public class TestCaseFromSession implements Testable {
 			}
 			UserEvent e = t.getEvent();
 			WidgetState w = e.getWidget();
-			String idOrName = (w.getId().equals("-1"))?("\"" + w.getName() + "\""):w.getId();
+			String idOrNot = (w.getId().equals("-1"))?"":w.getId() + ", ";
 			if (e.getValue().equals("") || (e.getValue()==null) ) {
-				loc ("fireEvent (" + idOrName + ", \"" + w.getSimpleType() + "\", \"" + e.getType() + "\");").blank();
+				loc ("fireEvent (" + idOrNot + "\"" + w.getName() + "\", \"" + w.getSimpleType() + "\", \"" + e.getType() + "\");").blank();
 			} else {
-				loc ("fireEvent (" + idOrName + ", \"" + w.getSimpleType() + "\", \"" + e.getType() + "\", \"" + e.getValue() + "\");").blank();
+				loc ("fireEvent (" + idOrNot + "\"" + w.getName() + "\", \"" + w.getSimpleType() + "\", \"" + e.getType() + "\", \"" + e.getValue() + "\");").blank();
 			}
 			loc ("// Testing final activity for transition " + t.getId());
 			generateTest (t.getFinalActivity());

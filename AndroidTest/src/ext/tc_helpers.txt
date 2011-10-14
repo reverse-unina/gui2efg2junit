@@ -32,6 +32,20 @@
 	public View getWidget (int key) {
 		return getWidgets().get(key);
 	}
+	
+	public View getWidget (int theId, String theType, String theName) {
+		for (View testee: getWidgetsById(theId)) {
+			Log.i("nofatclips", "Retrieved from return list id=" + testee.getId());
+			String testeeType = testee.getClass().getName();
+			Log.i("nofatclips", "Testing for type (" + testeeType + ") against the original (" + theType);
+			String testeeName = (testee instanceof TextView)?((TextView) testee).getText().toString():"";
+			Log.i("nofatclips", "Testing for name (" + testeeName + ") against the original (" + theName);
+			if ( (theType.equals(testeeType)) && (theName.equals(testeeName)) ) {
+				return testee;
+			}
+		}
+		return null;
+	}
 
 	public ArrayList<View> getWidgetsById (int id) {
 		ArrayList<View> theList = new ArrayList<View>();
@@ -67,32 +81,27 @@
 //			TextView widget = (TextView) v;
 //			String name = widget.getText().toString();
 //			assertEquals("Checking for name", theName, name);
-//		}
-		
-		boolean found = false;
-		for (View testee: getWidgetsById(theId)) {
-			Log.i("nofatclips", "Retrieved from return list id=" + testee.getId());
-			String testeeType = testee.getClass().getName();
-			Log.i("nofatclips", "Testing for type (" + testeeType + ") against the original (" + theType);
-			String testeeName = (testee instanceof TextView)?((TextView) testee).getText().toString():"";
-			Log.i("nofatclips", "Testing for name (" + testeeName + ") against the original (" + theName);
-			if ( (theType.equals(testeeType)) && (theName.equals(testeeName)) ) {
-				found = true;
-			}
-		}
-		assertTrue(found);
+//		}	
+		assertNotNull("Testing for id #" + theId + " (" + theType + "): " + theName, getWidget(theId, theType, theName));
 	}
 	
 	public void fireEvent (int widgetId, String widgetType, String eventType) {
 		fireEvent(widgetId, widgetType, eventType, null);
+	}
+	
+	public void fireEvent (int widgetId, String widgetName, String widgetType, String eventType) {
+		fireEvent(widgetId, widgetName, widgetType, eventType, null);
 	}
 
 	public void fireEvent (String widgetName, String widgetType, String eventType) {
 		fireEvent(widgetName, widgetType, eventType, null);
 	}
 
-	public void fireEvent (int widgetId, String widgetType, String eventType, String value) {
-		View v = getWidget(widgetId);
+	public void fireEvent (int widgetId, String widgetName, String widgetType, String eventType, String value) {
+		View v = getWidget(widgetId, widgetType, widgetName);
+		if (v == null) {
+			v = getWidget(widgetId);
+		}
 		if (v == null) {
 			v = theActivity.findViewById(widgetId);
 		}
