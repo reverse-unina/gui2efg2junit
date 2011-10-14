@@ -43,6 +43,14 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 	public String getType() {
 		return guessType(); // getElement().getAttribute("type");
 	}
+	
+	public int getIndex() {
+		return Integer.parseInt(getElement().getAttribute("index"));
+	}
+	
+	public void setIndex (int index) {
+		getElement().setAttribute("index", String.valueOf(index));
+	}
 
 	@Override
 	public String getTextType() {
@@ -107,6 +115,7 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 		newOne.setTextType(this.getTextType());
 		newOne.setSimpleType(this.getSimpleType());
 		newOne.setAvailable(this.getAvailable());
+		newOne.setIndex(this.getIndex());
 		if (this.getCount() != 1) {
 			newOne.setCount(this.getCount());
 		}
