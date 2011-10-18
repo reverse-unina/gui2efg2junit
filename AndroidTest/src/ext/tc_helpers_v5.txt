@@ -35,23 +35,16 @@
 	
 	public View getWidget (int theId, String theType, String theName) {
 		for (View testee: getWidgetsById(theId)) {
-			if (checkWidgetEquivalence(testee, theId, theType, theName)) {
+			Log.i("nofatclips", "Retrieved from return list id=" + testee.getId());
+			String testeeType = testee.getClass().getName();
+			Log.i("nofatclips", "Testing for type (" + testeeType + ") against the original (" + theType);
+			String testeeName = (testee instanceof TextView)?((TextView) testee).getText().toString():"";
+			Log.i("nofatclips", "Testing for name (" + testeeName + ") against the original (" + theName);
+			if ( (theType.equals(testeeType)) && (theName.equals(testeeName)) ) {
 				return testee;
 			}
 		}
 		return null;
-	}
-	
-	public boolean checkWidgetEquivalence (View testee, int theId, String theType, String theName) {
-		Log.i("nofatclips", "Retrieved from return list id=" + testee.getId());
-		String testeeType = testee.getClass().getName();
-		Log.i("nofatclips", "Testing for type (" + testeeType + ") against the original (" + theType + ")");
-		String testeeName = (testee instanceof TextView)?((TextView) testee).getText().toString():"";
-		Log.i("nofatclips", "Testing for name (" + testeeName + ") against the original (" + theName + ")");
-		if ( (theType.equals(testeeType)) && (theName.equals(testeeName)) && (theId == testee.getId()) ) {
-			return true;
-		}
-		return false;
 	}
 
 	public ArrayList<View> getWidgetsById (int id) {
@@ -92,23 +85,20 @@
 		assertNotNull("Testing for id #" + theId + " (" + theType + "): " + theName, getWidget(theId, theType, theName));
 	}
 	
-	public void fireEvent (int widgetId, int widgetIndex, String widgetType, String eventType) {
-		fireEvent(widgetId, widgetIndex, widgetType, eventType, null);
+	public void fireEvent (int widgetId, String widgetType, String eventType) {
+		fireEvent(widgetId, widgetType, eventType, null);
 	}
 	
-	public void fireEvent (int widgetId, int widgetIndex, String widgetName, String widgetType, String eventType) {
-		fireEvent(widgetId, widgetIndex, widgetName, widgetType, eventType, null);
+	public void fireEvent (int widgetId, String widgetName, String widgetType, String eventType) {
+		fireEvent(widgetId, widgetName, widgetType, eventType, null);
 	}
-	
-	public void fireEvent (int widgetIndex, String widgetName, String widgetType, String eventType) {
-		fireEvent(widgetIndex, widgetName, widgetType, eventType, null);
+
+	public void fireEvent (String widgetName, String widgetType, String eventType) {
+		fireEvent(widgetName, widgetType, eventType, null);
 	}
-	
-	public void fireEvent (int widgetId, int widgetIndex, String widgetName, String widgetType, String eventType, String value) {
-		View v = getAllWidgets().get(widgetIndex);
-		if (!checkWidgetEquivalence(v, widgetId, widgetType, widgetName)) {
-			v = getWidget(widgetId, widgetType, widgetName);
-		}
+
+	public void fireEvent (int widgetId, String widgetName, String widgetType, String eventType, String value) {
+		View v = getWidget(widgetId, widgetType, widgetName);
 		if (v == null) {
 			v = getWidget(widgetId);
 		}
@@ -118,7 +108,7 @@
 		fireEventOnView (v, eventType, value);
 	}
 	
-	public void fireEvent (int widgetIndex, String widgetName, String widgetType, String eventType, String value) {
+	public void fireEvent (String widgetName, String widgetType, String eventType, String value) {
 		View v = null;
 		if (eventType.equals(BACK) || eventType.equals(SCROLL_DOWN)) {
 			fireEventOnView(null, eventType, null);
@@ -154,8 +144,6 @@
 			} else {
 				swapTab (this.tabs, value);
 			}
-		} else if (eventType == LIST_SELECT) {
-			selectListItem((ListView)v, value);
 		} else {
 			return;
 		}
@@ -188,30 +176,6 @@
 			}
 		});
 		this.getInstrumentation().waitForIdleSync();
-	}
-	
-	private void selectListItem (ListView l, String item) {
-		selectListItem (l, Integer.valueOf(item));
-	}
-
-	private void selectListItem (final ListView l, int num) {
-		final int n = Math.min(l.getCount(), Math.max(1,num))-1;
-		l.requestFocus();
-		Log.i("nofatclips", "Swapping to listview item " + num);
-		getActivity().runOnUiThread(new Runnable() {
-			public void run() {
-				l.setSelection(n);
-			}
-		});
-		this.getInstrumentation().waitForIdleSync();
-		if (num<l.getCount()/2) {
-			solo.sendKey(Solo.DOWN);
-			solo.sendKey(Solo.UP);
-		} else {
-			solo.sendKey(Solo.UP);
-			solo.sendKey(Solo.DOWN);
-		}
-		TouchUtils.clickView(this, l.getSelectedView());
 	}
 	
 	public void restart() {

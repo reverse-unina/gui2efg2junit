@@ -45,6 +45,7 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 	}
 	
 	public int getIndex() {
+		if (!getElement().hasAttribute("index")) return 0;
 		return Integer.parseInt(getElement().getAttribute("index"));
 	}
 	

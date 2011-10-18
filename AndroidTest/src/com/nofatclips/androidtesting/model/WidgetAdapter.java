@@ -78,5 +78,10 @@ public class WidgetAdapter implements WidgetState {
 
 	@Override
 	public void setCount(int count) {}
+
+	@Override
+	public int getIndex() {
+		return 0;
+	}
 	
 }

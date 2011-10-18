@@ -7,5 +7,6 @@ public interface InteractionType {
 	public final static String SCROLL_DOWN = "scrollDown";
 	public final static String SWAP_TAB = "swapTab";
 	public final static String TYPE_TEXT = "editText";
+	public final static String LIST_SELECT = "selectListItem";
 	
 }

@@ -17,5 +17,6 @@ public interface WidgetState extends WrapperInterface {
 	public void setCount(int count);
 	public boolean isAvailable();
 	public void setAvailable (String a);
+	public int getIndex();
 	
 }
