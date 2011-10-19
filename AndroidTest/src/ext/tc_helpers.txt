@@ -198,6 +198,7 @@
 		final int n = Math.min(l.getCount(), Math.max(1,num))-1;
 		l.requestFocus();
 		Log.i("nofatclips", "Swapping to listview item " + num);
+		solo.sendKey(Solo.DOWN);
 		getActivity().runOnUiThread(new Runnable() {
 			public void run() {
 				l.setSelection(n);
@@ -211,6 +212,7 @@
 			solo.sendKey(Solo.UP);
 			solo.sendKey(Solo.DOWN);
 		}
+		this.getInstrumentation().waitForIdleSync();
 		TouchUtils.clickView(this, l.getSelectedView());
 	}
 	
