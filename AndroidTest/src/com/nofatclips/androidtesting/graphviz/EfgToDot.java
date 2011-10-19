@@ -46,6 +46,8 @@ public class EfgToDot implements Plottable {
 			String target = e.getAttribute("widget_name");
 			boolean special = e.getAttribute("widget_type").equals("null");
 			if (target.equals(""))
+				target = e.getAttribute("desc");
+			if (target.equals(""))
 				target = e.getAttribute("value");
 			if (target.equals("")) {
 				target = e.getAttribute("widget_type");

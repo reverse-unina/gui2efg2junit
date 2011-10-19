@@ -30,6 +30,7 @@ public class EfgEvent extends ElementWrapper implements UserEvent, Iterable<EfgE
 		this (g);
 		setType(e.getType());
 		setValue(e.getValue());
+		setDescription(e.getDescription());
 		setWidget(e.getWidget());
 	}
 	
@@ -135,6 +136,16 @@ public class EfgEvent extends ElementWrapper implements UserEvent, Iterable<EfgE
 	
 	public String getId() {
 		return getElement().getAttribute("id");
+	}
+
+	@Override
+	public String getDescription() {
+		return getElement().getAttribute("desc");
+	}
+
+	@Override
+	public void setDescription(String d) {
+		getElement().setAttribute("desc", d);
 	}
 
 }

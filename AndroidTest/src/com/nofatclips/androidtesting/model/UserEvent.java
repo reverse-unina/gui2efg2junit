@@ -10,5 +10,7 @@ public interface UserEvent extends UserInteraction {
 	public void setWidgetName(String n);
 	public String getWidgetType();
 	public void setWidgetType(String t);
+	public String getDescription ();
+	public void setDescription (String d);
 	
 }

@@ -74,6 +74,15 @@ public class TestCaseEvent extends ElementWrapper implements UserEvent {
 		getWidget().setName(n);
 	}
 	
+	@Override
+	public void setDescription (String d) {
+		getElement().setAttribute("desc",d);
+	}
+	
+	@Override
+	public String getDescription () {
+		return getElement().getAttribute("desc");
+	}
 
 	public String getWidgetType() {
 		return getWidget().getType();
@@ -106,6 +115,7 @@ public class TestCaseEvent extends ElementWrapper implements UserEvent {
 		e.setType(this.getType());
 		e.setValue(this.getValue());
 		e.setId(this.getId());
+		e.setDescription(this.getDescription());
 		e.setWidget(this.getWidget().clone());
 		return e;
 	}
