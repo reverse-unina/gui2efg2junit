@@ -105,6 +105,10 @@ public class GuiTree extends XmlGraph implements Session, Testable {
 		getDom().getDocumentElement().appendChild(t.getElement());
 	}
 
+	public void removeTrace (Trace t) {
+		getDom().getDocumentElement().removeChild(t.getElement());
+	}
+
 	// Iterator Methods
 	
 	public Iterator<Trace> traces() {
