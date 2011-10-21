@@ -27,14 +27,16 @@ public class TestCaseFromSession implements Testable {
 		String packageName = this.aGuiTree.getPackageName();
 		String className = this.aGuiTree.getClassName();
 		String testClassName = tidyName(this.aGuiTree.getAppName()) + "GuiTest"; // + ((className == "")?"":generic);
+		String sleepAfterEvent = this.aGuiTree.getSleepAfterEvent ();
+		String sleepAfterRestart = this.aGuiTree.getSleepAfterRestart ();
 		
 		this.j.setClassName(testClassName);
 		this.j.includeSnippet("tc_imports.txt");
 
 		loc ("public final static String PACKAGE_NAME = \"" + packageName + "\";");
 		loc ("public final static String CLASS_NAME = \"" + className + "\";");
-		loc ("public final static int SLEEP_AFTER_EVENT = 2000;");
-		loc ("public final static int SLEEP_AFTER_RESTART = 2000;");
+		loc ("public final static int SLEEP_AFTER_EVENT = " + (sleepAfterEvent.equals("")?2000:sleepAfterEvent) + ";");
+		loc ("public final static int SLEEP_AFTER_RESTART = " + (sleepAfterRestart.equals("")?2000:sleepAfterRestart) + ";");
 		loc ("public final static boolean FORCE_RESTART = false;").blank();
 
 		for (Field f: InteractionType.class.getFields()) {

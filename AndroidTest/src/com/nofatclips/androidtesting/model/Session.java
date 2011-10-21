@@ -12,5 +12,7 @@ public interface Session extends Iterable<Trace> {
 	public ActivityState getBaseActivity();
 	public void addTrace (Trace theTrace);
 	public void removeTrace (Trace theTrace);
+	public String getSleepAfterRestart();
+	public String getSleepAfterEvent();
 
 }
