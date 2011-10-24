@@ -70,13 +70,19 @@ public class TestCaseTrace extends ElementWrapper implements Trace {
 
 	@Override
 	public void setFinalActivity(ActivityState theActivity) {
+		Transition lastTransition = getFinalTransition();
+		if (lastTransition != null) {
+			lastTransition.setFinalActivity(theActivity);
+		}
+	}
+	
+	@Override
+	public Transition getFinalTransition() {
 		Transition lastTransition = null;
 		for (Transition t: this) {
 			lastTransition = t;
 		}
-		if (lastTransition != null) {
-			lastTransition.setFinalActivity(theActivity);
-		}
+		return lastTransition;
 	}
 		
 }

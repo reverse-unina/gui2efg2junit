@@ -108,6 +108,15 @@ public class TestCaseActivity extends ElementWrapper implements ActivityState {
 	public void addWidget(WidgetState w) {
 		this.description.appendChild(w.getElement());
 	}
+	
+	@Override
+	public boolean hasWidget(WidgetState widgetToCheck) {
+		for (WidgetState stored: this) {
+			if (widgetToCheck.equals(stored))
+				return true;
+		}
+		return false;
+	}
 
 	public static String getTag () {
 		return "ACTIVITY";

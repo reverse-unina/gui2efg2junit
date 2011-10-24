@@ -9,5 +9,6 @@ public interface Trace extends Iterable<Transition>, WrapperInterface {
 	public Iterator<Transition> transitions();
 	public void addTransition(Transition tail);
 	public void setFinalActivity(ActivityState theActivity);
+	public Transition getFinalTransition ();
 	
 }

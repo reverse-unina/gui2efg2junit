@@ -7,5 +7,6 @@ public interface ActivityState extends WrapperInterface, Iterable<WidgetState> {
 	public String getId();
 	public void setId (String id);
 	public void addWidget (WidgetState widget);
+	public boolean hasWidget (WidgetState widget);
 	
 }

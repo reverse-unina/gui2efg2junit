@@ -123,6 +123,14 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 		return newOne;
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof WidgetState)) return false;
+		WidgetState that = (WidgetState)o;
+		return ( (this.getId()==that.getId()) && (this.getName()==that.getName()) && (this.getType()==that.getType()) && 
+				(this.getTextType()==that.getTextType()) && (this.getCount()==that.getCount()) );
+	}
+	
 	protected String getAvailable () {
 		return getElement().getAttribute("available");
 	}
