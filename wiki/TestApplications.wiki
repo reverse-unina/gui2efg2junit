@@ -27,6 +27,7 @@ These open source applications are not compatible with the current version of th
 
  * Battery Dog: http://andbatdog.sourceforge.net/ (Clicking on Graph via Instrumentation or via Robotium, nothing happens!)
 
+ * Guess The Number: http://code.google.com/p/guessthenumber/ (When clicking on most of the buttons via Robotium or via Instrumentation, nothing happens!)
 
 = Other Applications =
 
