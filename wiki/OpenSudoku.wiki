@@ -9,7 +9,7 @@ http://code.google.com/p/opensudoku-android/
 
 = Test Results from 26 Oct 2011 =
 
-[https://gui2efg2junit.googlecode.com/files/opensudoku.png https://gui2efg2junit.googlecode.com/files/opensudoku.png]
+[https://code.google.com/p/gui2efg2junit/downloads/detail?name=opensudoku.png&can=2&q= https://gui2efg2junit.googlecode.com/files/opensudoku.png]
 
  * GuiTree: https://gui2efg2junit.googlecode.com/files/OpensudokuGuiTest.java
  * EFG: https://gui2efg2junit.googlecode.com/files/opensudoku_efg.xml
