@@ -17,6 +17,8 @@ The Activity name returned by Robotium is not reliable. The comparator must igno
 
 = Test Results from 26 Oct 2011 =
 
+Due to the reported issue with Robotium, the back event is not injected on the GraphicalActivity, because it's not recognized as a different activity than StatisticsView. This will be fixed in a subsequent release.
+
 [http://code.google.com/p/gui2efg2junit/downloads/detail?name=mileage_20111026.png&can=2&q= http://gui2efg2junit.googlecode.com/files/mileage_20111026.png]
 
  * GuiTree: http://gui2efg2junit.googlecode.com/files/mileage_guitree_20111026.xml
