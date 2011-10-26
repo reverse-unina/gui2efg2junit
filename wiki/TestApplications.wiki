@@ -13,7 +13,7 @@ This open source applications have (more or less) successfully been tested with 
 
  * AndBible: http://code.google.com/p/and-bible/
 
- * API Demos: shipped with Android OS [http://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/view/index.html Source]
+ * ApiDemos: shipped with Android OS [http://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/view/index.html Source]
 
  * OpenSudoku: http://code.google.com/p/opensudoku-android/
 
