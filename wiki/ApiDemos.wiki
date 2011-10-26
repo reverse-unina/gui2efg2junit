@@ -1,0 +1,14 @@
+#summary One-sentence summary of this page.
+#labels Phase-QA
+
+= Introduction =
+
+API Demos is included in your Android distribution.
+
+= Test Results from 26 Oct 2011 =
+
+Test limited to the first 400 traces. The "Purgeable Bitmap" activity has not been explored since a bug in its content crashes the application.
+
+[http://code.google.com/p/gui2efg2junit/downloads/detail?name=apidemos_20111026.png&can=2&q= http://gui2efg2junit.googlecode.com/files/apidemos_20111026.png]
+
+[http://gui2efg2junit.googlecode.com/files/apidemos_20111026.zip Download]
