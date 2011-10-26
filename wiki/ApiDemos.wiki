@@ -10,3 +10,9 @@ API Demos is included in your Android distribution.
 Test limited to the first 400 traces. The "Purgeable Bitmap" activity has not been explored since a bug in its content crashes the application.
 
 [http://gui2efg2junit.googlecode.com/files/apidemos_20111026.zip Download] - [http://code.google.com/p/gui2efg2junit/downloads/detail?name=apidemos_20111026.png&can=2&q= Image]
+
+= Test Results from 20 Oct 2011 =
+
+Test limited to the first 400 traces. The Session ends after 240 traces due to a crash of the tested application in the "Purgeable Bitmap" activity. This is an actual repeatable crash of the API Demos app.
+
+[http://gui2efg2junit.googlecode.com/files/apidemos_20111020.zip Download]
