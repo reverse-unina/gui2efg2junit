@@ -1,0 +1,17 @@
+#summary Info and test results for OpenSudoku.
+#labels Phase-QA
+
+= Introduction =
+
+OpenSudoku can be found here:
+
+http://code.google.com/p/opensudoku-android/
+
+= Test Results from 26 Oct 2011 =
+
+https://gui2efg2junit.googlecode.com/files/opensudoku.png
+
+ * GuiTree: https://gui2efg2junit.googlecode.com/files/OpensudokuGuiTest.java
+ * EFG: https://gui2efg2junit.googlecode.com/files/opensudoku_efg.xml
+ * DOT: https://gui2efg2junit.googlecode.com/files/opensudoku.dot
+ * jUnit: https://gui2efg2junit.googlecode.com/files/OpensudokuGuiTest.java
