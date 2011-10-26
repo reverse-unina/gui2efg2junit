@@ -105,12 +105,8 @@
 	}
 	
 	public void fireEvent (int widgetId, int widgetIndex, String widgetName, String widgetType, String eventType, String value) {
-	
-		View v = null;
-		if (widgetIndex<getAllWidgets().size()) {
-			v = getAllWidgets().get(widgetIndex); // Search widget by index
-		}
-		if ((v!=null) && !checkWidgetEquivalence(v, widgetId, widgetType, widgetName)) {
+		View v = getAllWidgets().get(widgetIndex);
+		if (!checkWidgetEquivalence(v, widgetId, widgetType, widgetName)) {
 			v = getWidget(widgetId, widgetType, widgetName);
 		}
 		if (v == null) {
@@ -148,8 +144,6 @@
 	private void fireEventOnView (View v, String eventType, String value) {
 		if (eventType.equals(CLICK)) {
 			click (v);
-		} else if (eventType == LONG_CLICK) {
-			longClick(v);
 		} else if (eventType.equals(BACK)) {
 			solo.goBack();
 		} else if (eventType.equals(SCROLL_DOWN)) {
@@ -162,13 +156,11 @@
 			}
 		} else if (eventType == LIST_SELECT) {
 			selectListItem((ListView)v, value);
-		} else if (eventType == LIST_LONG_SELECT) {
-			selectListItem((ListView)v, value, true);
 		} else {
 			return;
 		}
-		solo.sleep(SLEEP_AFTER_EVENT);
 		refreshCurrentActivity();
+		solo.sleep(SLEEP_AFTER_EVENT);
 	}
 	
 	public void setInput (int widgetId, String widgetType, String value) {
@@ -199,14 +191,10 @@
 	}
 	
 	private void selectListItem (ListView l, String item) {
-		selectListItem (l, Integer.valueOf(item), false);
+		selectListItem (l, Integer.valueOf(item));
 	}
 
-	private void selectListItem (ListView l, String item, boolean longClick) {
-		selectListItem (l, Integer.valueOf(item), longClick);
-	}
-
-	private void selectListItem (final ListView l, int num, boolean longClick) {
+	private void selectListItem (final ListView l, int num) {
 		final int n = Math.min(l.getCount(), Math.max(1,num))-1;
 		l.requestFocus();
 		Log.i("nofatclips", "Swapping to listview item " + num);
@@ -225,20 +213,12 @@
 			solo.sendKey(Solo.DOWN);
 		}
 		this.getInstrumentation().waitForIdleSync();
-		if (longClick) {
-			longClick (l.getSelectedView());
-		} else {
-			click (l.getSelectedView());
-		}
+		click (l.getSelectedView());
 	}
 	
 	protected void click (View v) {
 		// TouchUtils.clickView(this, v);
 		solo.clickOnView(v);
-	}
-
-	protected void longClick (View v) {
-		solo.clickLongOnView(v);
 	}
 
 	public void restart() {

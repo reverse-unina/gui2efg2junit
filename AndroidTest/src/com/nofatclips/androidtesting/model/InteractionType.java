@@ -8,5 +8,8 @@ public interface InteractionType {
 	public final static String SWAP_TAB = "swapTab";
 	public final static String TYPE_TEXT = "editText";
 	public final static String LIST_SELECT = "selectListItem";
+	public final static String LONG_CLICK = "longClick";
+	public final static String LIST_LONG_SELECT = "longClickListItem";
+	public final static String OPEN_MENU = "openMenu";
 	
 }

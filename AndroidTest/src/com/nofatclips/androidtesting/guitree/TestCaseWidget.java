@@ -29,9 +29,16 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 		return getElement().getAttribute("name");
 	}
 	
+	@Override
 	public boolean isAvailable() {
 		if (!getElement().hasAttribute("available")) return true;
 		return (getElement().getAttribute("available").equals("true"));
+	}
+
+	@Override
+	public boolean isClickable() {
+		if (!getElement().hasAttribute("clickable")) return true;
+		return (getElement().getAttribute("clickable").equals("true"));
 	}
 
 	@Override
@@ -72,8 +79,14 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 		getElement().setAttribute("name",name);
 	}
 	
+	@Override
 	public void setAvailable (String a) {
-		getElement().setAttribute("available",a);
+		getElement().setAttribute("available", a);
+	}
+
+	@Override
+	public void setClickable (String c) {
+		getElement().setAttribute("clickable", c);
 	}
 
 	public void setType(String type) {
@@ -116,6 +129,7 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 		newOne.setTextType(this.getTextType());
 		newOne.setSimpleType(this.getSimpleType());
 		newOne.setAvailable(this.getAvailable());
+		newOne.setClickable(this.getClickable());
 		newOne.setIndex(this.getIndex());
 		if (this.getCount() != 1) {
 			newOne.setCount(this.getCount());
@@ -133,6 +147,10 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 	
 	protected String getAvailable () {
 		return getElement().getAttribute("available");
+	}
+
+	protected String getClickable() {
+		return getElement().getAttribute("clickable");
 	}
 
 	public String getSimpleType() {

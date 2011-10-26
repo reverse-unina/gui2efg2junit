@@ -83,5 +83,13 @@ public class WidgetAdapter implements WidgetState {
 	public int getIndex() {
 		return 0;
 	}
+
+	@Override
+	public boolean isClickable() {
+		return true;
+	}
+
+	@Override
+	public void setClickable(String c) {}
 	
 }

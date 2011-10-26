@@ -91,15 +91,15 @@ public class TestCaseFromSession implements Testable {
 		for (Transition t: aTrace) {
 			loc ("// Testing transition " + t.getId());
 			for (UserInput input: t) {
-				loc ("setInput (" + input.getWidgetId() + ", \"" + input.getType() + "\", \"" + input.getValue() + "\");");
+				loc ("setInput (" + input.getWidgetId() + ", \"" + input.getType() + "\", \"" + escapeJava(input.getValue()) + "\");");
 			}
 			UserEvent e = t.getEvent();
 			WidgetState w = e.getWidget();
 			String idOrNot = (w.getId().equals("-1"))?"":w.getId() + ", ";
 			if (e.getValue().equals("") || (e.getValue()==null) ) {
-				loc ("fireEvent (" + idOrNot + "" + w.getIndex() + ", \"" + w.getName() + "\", \"" + w.getSimpleType() + "\", \"" + e.getType() + "\");").blank();
+				loc ("fireEvent (" + idOrNot + "" + w.getIndex() + ", \"" + escapeJava(w.getName()) + "\", \"" + w.getSimpleType() + "\", \"" + e.getType() + "\");").blank();
 			} else {
-				loc ("fireEvent (" + idOrNot + "" + w.getIndex() + ", \"" + w.getName() + "\", \"" + w.getSimpleType() + "\", \"" + e.getType() + "\", \"" + e.getValue() + "\");").blank();
+				loc ("fireEvent (" + idOrNot + "" + w.getIndex() + ", \"" + escapeJava(w.getName()) + "\", \"" + w.getSimpleType() + "\", \"" + e.getType() + "\", \"" + e.getValue() + "\");").blank();
 			}
 			loc ("// Testing final activity for transition " + t.getId());
 			generateTest (t.getFinalActivity());
