@@ -1,0 +1,25 @@
+#summary Info and test results for Mileage.
+#labels Phase-QA
+
+= Introduction =
+
+Mileage can be found here:
+
+http://evancharlton.com/projects/mileage/
+
+The source code can be found here:
+
+https://code.google.com/p/android-mileage/source/
+
+= Issues =
+
+The Activity name returned by Robotium is not reliable. The comparator must ignore it.
+
+= Test Results from 26 Oct 2011 =
+
+[http://code.google.com/p/gui2efg2junit/downloads/detail?name=mileage_20111026.png&can=2&q= http://gui2efg2junit.googlecode.com/files/mileage_20111026.png]
+
+ * GuiTree: http://gui2efg2junit.googlecode.com/files/mileage_guitree_20111026.xml
+ * EFG: http://gui2efg2junit.googlecode.com/files/mileage_efg_20111026.xml
+ * DOT: http://gui2efg2junit.googlecode.com/files/mileage_20111026.dot
+ * jUnit: http://gui2efg2junit.googlecode.com/files/MileageGuiTest_20111026.java
