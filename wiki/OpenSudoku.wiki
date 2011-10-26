@@ -11,7 +11,7 @@ http://code.google.com/p/opensudoku-android/
 
 [https://code.google.com/p/gui2efg2junit/downloads/detail?name=opensudoku.png&can=2&q= https://gui2efg2junit.googlecode.com/files/opensudoku.png]
 
- * GuiTree: https://gui2efg2junit.googlecode.com/files/OpensudokuGuiTest.java
+ * GuiTree: http://gui2efg2junit.googlecode.com/files/opensudoku.xml
  * EFG: https://gui2efg2junit.googlecode.com/files/opensudoku_efg.xml
  * DOT: https://gui2efg2junit.googlecode.com/files/opensudoku.dot
  * jUnit: https://gui2efg2junit.googlecode.com/files/OpensudokuGuiTest.java
