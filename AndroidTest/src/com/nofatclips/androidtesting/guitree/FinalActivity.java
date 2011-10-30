@@ -34,6 +34,7 @@ public class FinalActivity extends TestCaseActivity {
 		Document dom = originalActivity.getElement().getOwnerDocument();
 		FinalActivity newActivity = createActivity (dom);
 		newActivity.setName(originalActivity.getName());
+		newActivity.setTitle(originalActivity.getTitle());
 		newActivity.setId(originalActivity.getId());
 		newActivity.copyDescriptionFrom(originalActivity);
 		return newActivity;

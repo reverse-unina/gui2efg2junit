@@ -48,6 +48,16 @@ public class TestCaseActivity extends ElementWrapper implements ActivityState {
 	}
 
 	@Override
+	public String getTitle() {
+		return getElement().getAttribute("title");
+	}
+	
+	@Override
+	public void setTitle(String title) {
+		getElement().setAttribute("title", title);
+	}
+
+	@Override
 	public String getId() {
 		return getElement().getAttribute("id");
 	}
@@ -77,22 +87,8 @@ public class TestCaseActivity extends ElementWrapper implements ActivityState {
 		Document dom = originalActivity.getElement().getOwnerDocument();
 		TestCaseActivity newActivity = createActivity (dom);
 		newActivity.copyDescriptionFrom(originalActivity);
-//		for (WidgetState w: originalActivity) {
-//			TestCaseWidget tcw = TestCaseWidget.createWidget(dom);
-//			tcw.setIdNameType(w.getId(), w.getName(), w.getType());
-//			newActivity.addWidget (tcw);
-//		}
 		return newActivity;
 	}
-	
-//	public void copyDescriptionFrom (ActivityState originalActivity) {
-//		Document dom = this.getElement().getOwnerDocument();
-//		for (WidgetState w: originalActivity) {
-//			TestCaseWidget tcw = TestCaseWidget.createWidget(dom);
-//			tcw.setIdNameType(w.getId(), w.getName(), w.getType());
-//			this.addWidget (tcw);
-//		}
-//	}
 
 	public void copyDescriptionFrom (ActivityState originalActivity) {
 		for (WidgetState w: originalActivity) {
