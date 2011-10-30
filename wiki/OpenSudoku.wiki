@@ -21,9 +21,20 @@ Only the first 5 items in ListViews are explored, hence not all the options in t
 
 = Test Results from 26 Oct 2011 =
 
+Support for long click was added.
+
 [https://code.google.com/p/gui2efg2junit/downloads/detail?name=opensudoku.png&can=2&q= https://gui2efg2junit.googlecode.com/files/opensudoku.png]
 
  * GuiTree: http://gui2efg2junit.googlecode.com/files/opensudoku.xml
  * EFG: https://gui2efg2junit.googlecode.com/files/opensudoku_efg.xml
  * DOT: https://gui2efg2junit.googlecode.com/files/opensudoku.dot
  * jUnit: https://gui2efg2junit.googlecode.com/files/OpensudokuGuiTest.java
+
+= Test Results from 23 Oct 2011 =
+
+[http://code.google.com/p/gui2efg2junit/downloads/detail?name=opensudoku_old.png&can=2&q= http://gui2efg2junit.googlecode.com/files/opensudoku_old.png]
+
+ * GuiTree: http://gui2efg2junit.googlecode.com/files/opensudoku_old.xml
+ * EFG: http://gui2efg2junit.googlecode.com/files/opensudoku_efg_old.xml
+ * DOT: http://gui2efg2junit.googlecode.com/files/opensudoku_old.dot
+ * jUnit: http://gui2efg2junit.googlecode.com/files/OpensudokuGuiTest_old.java
