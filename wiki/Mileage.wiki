@@ -61,6 +61,7 @@ Adding new SimpleTypes (MENU and IMAGE) to the Comparator solved the issue with 
 
 = Test Results from 26 Oct 2011 =
 
+Long click support was added.
 Due to the reported issue with Robotium, the back event is not injected on the GraphicalActivity, because it's not recognized as a different activity than StatisticsView. This will be fixed in a subsequent release.
 
 [http://code.google.com/p/gui2efg2junit/downloads/detail?name=mileage_20111026.png&can=2&q= http://gui2efg2junit.googlecode.com/files/mileage_20111026.png]
@@ -69,3 +70,12 @@ Due to the reported issue with Robotium, the back event is not injected on the G
  * EFG: http://gui2efg2junit.googlecode.com/files/mileage_efg_20111026.xml
  * DOT: http://gui2efg2junit.googlecode.com/files/mileage_20111026.dot
  * jUnit: http://gui2efg2junit.googlecode.com/files/MileageGuiTest_20111026.java
+
+= Test Results from 23 Oct 2011 =
+
+[http://code.google.com/p/gui2efg2junit/downloads/detail?name=mileage.png&can=2&q= http://gui2efg2junit.googlecode.com/files/mileage.png]
+
+ * GuiTree: http://gui2efg2junit.googlecode.com/files/mileage.xml
+ * EFG: http://gui2efg2junit.googlecode.com/files/mileage_efg.xml
+ * DOT: http://gui2efg2junit.googlecode.com/files/mileage.dot
+ * jUnit: http://gui2efg2junit.googlecode.com/files/MileageGuiTest.java
