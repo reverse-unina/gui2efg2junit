@@ -11,5 +11,7 @@ public interface SimpleType {
 	public final static String LIST_VIEW = "listView";
 	public final static String SPINNER = "spinner";
 	public final static String TEXT_VIEW = "text";
+	public final static String MENU_VIEW = "menu";
+	public final static String IMAGE_VIEW = "image";	
 	
 }

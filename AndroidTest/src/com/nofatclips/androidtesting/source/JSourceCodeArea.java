@@ -43,7 +43,11 @@ public class JSourceCodeArea extends JTextArea {
 	}
 	
 	public String getDefaultFilePath () {
-		return this.getDefaultPath() + "//" + this.getDefaultFileName() + "." + this.getDefaultExtension();
+		String theRightExtension = "." + this.getDefaultExtension();
+		if (this.getDefaultFileName().endsWith(theRightExtension)) {
+			return this.getDefaultPath() + "//" + this.getDefaultFileName();
+		}
+		return this.getDefaultPath() + "//" + this.getDefaultFileName() + theRightExtension;
 	}
 	
 	public void initText (String text) {
