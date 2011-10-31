@@ -15,6 +15,19 @@ https://code.google.com/p/android-mileage/source/
 
 The Activity name returned by Robotium is not reliable. The comparator must ignore it.
 
+= Test Results from 31 Oct 2011 =
+
+Support for menus was added. Most menus are not recognized as different states due to the "activity name" issue and the absence of widgets.
+Only the first 3 items in ListViews are explored, hence not all the options in Settings are selected.
+Adding new SimpleTypes (MENU and IMAGE) to the Comparator solved the issue with GraphicalActivity experienced in the previous test.
+
+[http://code.google.com/p/gui2efg2junit/downloads/detail?name=mileage_20111031.png&can=2&q= http://gui2efg2junit.googlecode.com/files/mileage_20111031.png]
+
+ * GuiTree: http://gui2efg2junit.googlecode.com/files/mileage_20111031.xml
+ * EFG: http://gui2efg2junit.googlecode.com/files/mileage_efg_20111031.xml
+ * DOT: http://gui2efg2junit.googlecode.com/files/mileage_20111031.dot
+ * jUnit: http://gui2efg2junit.googlecode.com/files/MileageGuiTest_20111031.java
+
 = Test Results from 26 Oct 2011 =
 
 Due to the reported issue with Robotium, the back event is not injected on the GraphicalActivity, because it's not recognized as a different activity than StatisticsView. This will be fixed in a subsequent release.
