@@ -15,6 +15,37 @@ https://code.google.com/p/android-mileage/source/
 
 The Activity name returned by Robotium is not reliable. The comparator must ignore it.
 
+On long sessions, this error occurs when the Restarter launch the restart Intent. The crawling continues without further issues.
+
+{{{
+10-31 17:26:49.252: E/WindowManager(4043): Activity com.evancharlton.mileage.Mileage has leaked window com.android.internal.policy.impl.PhoneWindow$DecorView@525d2500 that was originally added here
+10-31 17:26:49.252: E/WindowManager(4043): android.view.WindowLeaked: Activity com.evancharlton.mileage.Mileage has leaked window com.android.internal.policy.impl.PhoneWindow$DecorView@525d2500 that was originally added here
+10-31 17:26:49.252: E/WindowManager(4043): 	at android.view.ViewRoot.<init>(ViewRoot.java:247)
+10-31 17:26:49.252: E/WindowManager(4043): 	at android.view.WindowManagerImpl.addView(WindowManagerImpl.java:148)
+10-31 17:26:49.252: E/WindowManager(4043): 	at android.view.WindowManagerImpl.addView(WindowManagerImpl.java:91)
+10-31 17:26:49.252: E/WindowManager(4043): 	at android.view.Window$LocalWindowManager.addView(Window.java:424)
+10-31 17:26:49.252: E/WindowManager(4043): 	at android.app.Dialog.show(Dialog.java:241)
+10-31 17:26:49.252: E/WindowManager(4043): 	at com.evancharlton.mileage.HelpDialog.create(HelpDialog.java:67)
+10-31 17:26:49.252: E/WindowManager(4043): 	at com.evancharlton.mileage.HelpDialog.create(HelpDialog.java:58)
+10-31 17:26:49.252: E/WindowManager(4043): 	at com.evancharlton.mileage.AddFillUpView.onOptionsItemSelected(AddFillUpView.java:448)
+10-31 17:26:49.252: E/WindowManager(4043): 	at android.app.Activity.onMenuItemSelected(Activity.java:2195)
+10-31 17:26:49.252: E/WindowManager(4043): 	at com.android.internal.policy.impl.PhoneWindow.onMenuItemSelected(PhoneWindow.java:730)
+10-31 17:26:49.252: E/WindowManager(4043): 	at com.android.internal.view.menu.MenuItemImpl.invoke(MenuItemImpl.java:143)
+10-31 17:26:49.252: E/WindowManager(4043): 	at com.android.internal.view.menu.MenuBuilder.performItemAction(MenuBuilder.java:855)
+10-31 17:26:49.252: E/WindowManager(4043): 	at com.android.internal.view.menu.IconMenuView.invokeItem(IconMenuView.java:532)
+10-31 17:26:49.252: E/WindowManager(4043): 	at com.android.internal.view.menu.IconMenuItemView.performClick(IconMenuItemView.java:122)
+10-31 17:26:49.252: E/WindowManager(4043): 	at android.view.View$PerformClick.run(View.java:8816)
+10-31 17:26:49.252: E/WindowManager(4043): 	at android.os.Handler.handleCallback(Handler.java:587)
+10-31 17:26:49.252: E/WindowManager(4043): 	at android.os.Handler.dispatchMessage(Handler.java:92)
+10-31 17:26:49.252: E/WindowManager(4043): 	at android.os.Looper.loop(Looper.java:123)
+10-31 17:26:49.252: E/WindowManager(4043): 	at android.app.ActivityThread.main(ActivityThread.java:4627)
+10-31 17:26:49.252: E/WindowManager(4043): 	at java.lang.reflect.Method.invokeNative(Native Method)
+10-31 17:26:49.252: E/WindowManager(4043): 	at java.lang.reflect.Method.invoke(Method.java:521)
+10-31 17:26:49.252: E/WindowManager(4043): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:868)
+10-31 17:26:49.252: E/WindowManager(4043): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:626)
+10-31 17:26:49.252: E/WindowManager(4043): 	at dalvik.system.NativeStart.main(Native Method)
+}}}
+
 = Test Results from 31 Oct 2011 =
 
 Support for menus was added. Most menus are not recognized as different states due to the "activity name" issue and the absence of widgets.
