@@ -15,7 +15,7 @@ https://code.google.com/p/android-mileage/source/
 
 The Activity name returned by Robotium is not reliable. The comparator must ignore it.
 
-On long sessions, this error occurs when the Restarter launch the restart Intent. The crawling continues without further issues.
+This error occurs when the Restarter launch the restart Intent while the "Help" or "About" dialogs are shown. The crawling continues without further issues.
 
 {{{
 10-31 17:26:49.252: E/WindowManager(4043): Activity com.evancharlton.mileage.Mileage has leaked window com.android.internal.policy.impl.PhoneWindow$DecorView@525d2500 that was originally added here
