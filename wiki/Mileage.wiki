@@ -13,7 +13,11 @@ https://code.google.com/p/android-mileage/source/
 
 = Issues =
 
+== Crawling Limitations ==
+
 The Activity name returned by Robotium is not reliable. The comparator must ignore it.
+
+== Leaked Window ==
 
 This error occurs when the Restarter launch the restart Intent while the "Help" or "About" dialogs are shown. The crawling continues without further issues.
 
@@ -45,6 +49,25 @@ This error occurs when the Restarter launch the restart Intent while the "Help" 
 10-31 17:26:49.252: E/WindowManager(4043): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:626)
 10-31 17:26:49.252: E/WindowManager(4043): 	at dalvik.system.NativeStart.main(Native Method)
 }}}
+
+== Cursor Error ==
+
+This error occurs when the Restarter launch the restart Intent during SQL Import/Export operations. The crawling continues without further issues.
+
+{{{
+I/ActivityManager(   59): Starting activity: Intent { act=android.intent.action.MAIN flg=0x14000000 cmp=com.evancharlton.mileage/.Mileage }
+E/Cursor  (18738): Finalizing a Cursor that has not been deactivated or closed. database = /data/data/com.evancharlton.mileage/databases/mileage.db, table = fillups, query = SELECT amount, restart, mileage, _id, is_partial, longitude, latitude, comment, date, vehicle_id, co
+E/Cursor  (18738): android.database.sqlite.DatabaseObjectNotClosedException: Application did not close the cursor or database object that was opened here
+E/Cursor  (18738):      at android.database.sqlite.SQLiteCursor.<init>(SQLiteCursor.java:210)
+E/Cursor  (18738):      at android.database.sqlite.SQLiteDirectCursorDriver.query(SQLiteDirectCursorDriver.java:53)
+E/Cursor  (18738):      at android.database.sqlite.SQLiteDatabase.rawQueryWithFactory(SQLiteDatabase.java:1345)
+E/Cursor  (18738):      at android.database.sqlite.SQLiteDatabase.queryWithFactory(SQLiteDatabase.java:1229)
+E/Cursor  (18738):      at android.database.sqlite.SQLiteDatabase.query(SQLiteDatabase.java:1184)
+E/Cursor  (18738):      at android.database.sqlite.SQLiteDatabase.query(SQLiteDatabase.java:1264)
+E/Cursor  (18738):      at com.evancharlton.mileage.io.output.SQLView$1.run(SQLView.java:36)
+E/Cursor  (18738):      at java.lang.Thread.run(Thread.java:1096)
+}}}
+
 
 = Test Results from 31 Oct 2011 =
 
