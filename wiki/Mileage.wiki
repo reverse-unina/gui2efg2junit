@@ -68,7 +68,7 @@ E/Cursor  (18738):      at com.evancharlton.mileage.io.output.SQLView$1.run(SQLV
 E/Cursor  (18738):      at java.lang.Thread.run(Thread.java:1096)
 }}}
 
-= Test Results from 01 Nov 2011 (r58) =
+= Test Results from 01 Nov 2011 (android-crawler:r58) =
 
 The swapTab event has now a description which is used in the DOT graph.
 The comparator uses both id and name of the widgets. (Overall coverage hasn't improved tho')
