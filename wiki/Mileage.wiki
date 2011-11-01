@@ -68,6 +68,24 @@ E/Cursor  (18738):      at com.evancharlton.mileage.io.output.SQLView$1.run(SQLV
 E/Cursor  (18738):      at java.lang.Thread.run(Thread.java:1096)
 }}}
 
+= Test Results from 01 Nov 2011 =
+
+The swapTab event has now a description which is used in the DOT graph.
+The comparator uses both id and name of the widgets. (Overall coverage hasn't improved tho')
+
+[http://code.google.com/p/gui2efg2junit/downloads/detail?name=mileage_20111101.png&can=2&q= http://gui2efg2junit.googlecode.com/files/mileage_20111101.png]
+
+OVERALL COVERAGE SUMMARY
+|| name	|| class, %	|| method, %	|| block, %	|| line, %|| 
+|| all classes	|| 62%  (74/119)	|| 51%  (293/578)	|| 51%  (7406/14463)	|| 50%  (1596,7/3212)|| 
+
+ * GuiTree: http://gui2efg2junit.googlecode.com/files/mileage_20111101.xml
+ * EFG: http://gui2efg2junit.googlecode.com/files/mileage_efg_20111101.xml
+ * DOT: http://gui2efg2junit.googlecode.com/files/mileage_20111101.dot
+ * jUnit: http://gui2efg2junit.googlecode.com/files/MileageGuiTest_20111101.java
+ * Coverage: http://gui2efg2junit.googlecode.com/files/coverage_20111101.zip
+
+
 
 = Test Results from 31 Oct 2011 =
 
