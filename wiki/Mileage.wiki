@@ -54,10 +54,16 @@ Adding new SimpleTypes (MENU and IMAGE) to the Comparator solved the issue with 
 
 [http://code.google.com/p/gui2efg2junit/downloads/detail?name=mileage_20111031.png&can=2&q= http://gui2efg2junit.googlecode.com/files/mileage_20111031.png]
 
+OVERALL COVERAGE SUMMARY
+|| name	|| class, %		|| method, %		|| block, %		|| line, %	||
+|| all classes		|| 62%  (74/119)		|| 52%  (298/578)		|| 52%  (7556/14463)		|| 51%  (1642,2/3212)	|| 
+
+
  * GuiTree: http://gui2efg2junit.googlecode.com/files/mileage_20111031.xml
  * EFG: http://gui2efg2junit.googlecode.com/files/mileage_efg_20111031.xml
  * DOT: http://gui2efg2junit.googlecode.com/files/mileage_20111031.dot
  * jUnit: http://gui2efg2junit.googlecode.com/files/MileageGuiTest_20111031.java
+ * Coverage: http://gui2efg2junit.googlecode.com/files/mileage_coverage_20111031.zip
 
 = Test Results from 26 Oct 2011 =
 
