@@ -3,6 +3,8 @@
 
 = Introduction =
 
+API Demos is included in your Android distribution.
+
 = Issues =
 
 == Purgeable Bitmap Crash ==
@@ -37,8 +39,6 @@ To reproduce the Bug:
 11-02 14:47:47.519: E/AndroidRuntime(31445): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:626)
 11-02 14:47:47.519: E/AndroidRuntime(31445): 	at dalvik.system.NativeStart.main(Native Method)
 }}}
-
-API Demos is included in your Android distribution.
 
 = Test Results from 26 Oct 2011 =
 
