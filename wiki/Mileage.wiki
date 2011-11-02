@@ -68,7 +68,7 @@ E/Cursor  (18738):      at com.evancharlton.mileage.io.output.SQLView$1.run(SQLV
 E/Cursor  (18738):      at java.lang.Thread.run(Thread.java:1096)
 }}}
 
-= Test Results from 01 Nov 2011 (r-58) =
+= Test Results from 01 Nov 2011 (v2.2.5 with r-58) =
 
 The swapTab event has now a description which is used in the DOT graph.
 The comparator uses both id and name of the widgets. (Overall coverage hasn't improved tho')
@@ -87,7 +87,7 @@ OVERALL COVERAGE SUMMARY
 
 
 
-= Test Results from 31 Oct 2011 (r-56) =
+= Test Results from 31 Oct 2011 (v2.2.5 with r-56) =
 
 Support for menus was added. Most menus are not recognized as different states due to the "activity name" issue and the absence of widgets.
 Only the first 3 items in ListViews are explored, hence not all the options in Settings are selected.
@@ -106,7 +106,7 @@ OVERALL COVERAGE SUMMARY
  * jUnit: http://gui2efg2junit.googlecode.com/files/MileageGuiTest_20111031.java
  * Coverage: http://gui2efg2junit.googlecode.com/files/mileage_coverage_20111031.zip
 
-= Test Results from 26 Oct 2011 (r-50) =
+= Test Results from 26 Oct 2011 (v2.2.5 with r-50) =
 
 Long click support was added.
 Due to the reported issue with Robotium, the back event is not injected on the GraphicalActivity, because it's not recognized as a different activity than StatisticsView. This will be fixed in a subsequent release.
@@ -118,7 +118,7 @@ Due to the reported issue with Robotium, the back event is not injected on the G
  * DOT: http://gui2efg2junit.googlecode.com/files/mileage_20111026.dot
  * jUnit: http://gui2efg2junit.googlecode.com/files/MileageGuiTest_20111026.java
 
-= Test Results from 23 Oct 2011 (r-43) =
+= Test Results from 23 Oct 2011 (v2.2.5 with r-43) =
 
 [http://code.google.com/p/gui2efg2junit/downloads/detail?name=mileage.png&can=2&q= http://gui2efg2junit.googlecode.com/files/mileage.png]
 
