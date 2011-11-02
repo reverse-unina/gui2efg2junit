@@ -1,4 +1,5 @@
 #summary Info and test results for "Wordpress for Android".
+#labels Phase-QA
 
 = Introduction =
 
@@ -83,3 +84,9 @@ W/System.err(  544):    at com.android.internal.os.ZygoteInit$MethodAndArgsCalle
 W/System.err(  544):    at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:626)
 W/System.err(  544):    at dalvik.system.NativeStart.main(Native Method)
 }}}
+
+= Test Results from 02 Nov 2011 (r-59) =
+
+The crawler crashed as a result of the Camera Error (see Issues). After a back event, activities may compare as new when they aren't because of the "activity name" issue reported above.
+
+ * GuiTree: http://gui2efg2junit.googlecode.com/files/wordpress.xml
