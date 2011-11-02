@@ -85,7 +85,7 @@ W/System.err(  544):    at com.android.internal.os.ZygoteInit.main(ZygoteInit.ja
 W/System.err(  544):    at dalvik.system.NativeStart.main(Native Method)
 }}}
 
-= Test Results from 02 Nov 2011 (r-59) =
+= Test Results from 02 Nov 2011 (v1.5.1 with r-59) =
 
 The crawler crashed as a result of the Camera Error (see Issues). After a back event, activities may compare as new when they aren't because of the "activity name" issue reported above.
 
