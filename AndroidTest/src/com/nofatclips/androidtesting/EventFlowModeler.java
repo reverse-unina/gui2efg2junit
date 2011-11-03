@@ -31,9 +31,11 @@ public class EventFlowModeler {
 			public void run() {
 				String inputFileName = (args.length == 0) ? "" : args[0]; //"C:\\Users\\mm\\Desktop\\ING.SW\\XML\\gui_tree_dtd.xml"
 				String outputFileName = (args.length > 1) ? args[1] : "";
+				String packageName = (args.length > 2) ? args[2] : "";
+				String efgFileName = (args.length > 3) ? args[3] : "";
 //				String inputFileName = "C:\\Users\\mm\\Desktop\\opensudoku.xml";
 //				String outputFileName = "C:\\Users\\mm\\Desktop\\opensudoku.java";
-				Gui2EfcFrame frame = new Gui2EfcFrame(inputFileName, outputFileName);
+				Gui2EfcFrame frame = new Gui2EfcFrame(inputFileName, outputFileName, packageName, efgFileName);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				if (frame.isWindowed()) {
 					frame.setVisible(true);
@@ -48,10 +50,12 @@ public class EventFlowModeler {
 class Gui2EfcFrame extends JFrame  {
 
 	@SuppressWarnings("serial")
-	public Gui2EfcFrame (String inputFileName, String outputFileName) {
+	public Gui2EfcFrame (String inputFileName, String outputFileName, String packageName, String efgFileName) {
 		super();
 		this.inputFileName = inputFileName;
 		this.outputFileName = outputFileName;
+		this.packageName = packageName;
+		this.efgFileName = efgFileName;
 		this.windowed = ((outputFileName.equals("")) || (inputFileName.equals("")));
 		this.someLogger = Logger.getLogger(LOGGER);
 		this.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
@@ -164,12 +168,30 @@ class Gui2EfcFrame extends JFrame  {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Pattern p = Pattern.compile("(.+)\\.[^.]+");
-		Matcher m = p.matcher(inputFileName);
-		if (m.find()) {
-			schermo.setFileName(EFG_XML, m.group(1)+"_efg");
-		}	
-		schermo.showCode(EFG_XML, xml);
+		
+		if (this.efgFileName.equals("")) {
+			Pattern p = Pattern.compile("(.+)\\.[^.]+");
+			Matcher m = p.matcher(inputFileName);
+			if (m.find()) {
+				schermo.setFileName(EFG_XML, m.group(1)+"_efg");
+			}	
+		} else {
+			schermo.setFileName(EFG_XML, this.efgFileName);
+		}
+
+		if (isWindowed()) {
+			schermo.showCode(EFG_XML, xml);
+		} else {
+			PrintWriter autput;
+			try {
+				autput = new PrintWriter (this.efgFileName);
+				autput.println(xml);
+				autput.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return true;
 	}
 
@@ -196,6 +218,9 @@ class Gui2EfcFrame extends JFrame  {
 		if (isWindowed()) {
 			schermo.showCode(JUNIT_JAVA, code);
 		} else {
+			if (!this.packageName.equals("")) {
+				code = code.replaceAll("//package your.package.here;", "package " + this.packageName);
+			}
 			PrintWriter autput;
 			try {
 				autput = new PrintWriter (this.outputFileName);
@@ -210,6 +235,8 @@ class Gui2EfcFrame extends JFrame  {
 	
 	private String inputFileName;
 	private String outputFileName;
+	private String packageName;
+	private String efgFileName;
 	private boolean windowed;
 	private GuiTree guiTree;
 	private EventFlowTree efg;
