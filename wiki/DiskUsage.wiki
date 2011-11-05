@@ -85,8 +85,8 @@ Also, not being able to browse the disk tree to select a file have several conse
 
 Additionally, the GUI specific methods (onClick, onOptionsItemSelected, ...) are never called.
 
-Additional issues are:
+Additional issues limiting the code coverage are:
 
  * some modules are never run because specific to a particular version of the Android system (Gingerbread, Eclair...);
- * changing the "filters" have no effect until the "Rescan" button is pressed, but the crawler only press the button once;
+ * changing the "filters" have no effect until the "Rescan" button is pressed, but the crawler only presses the button once;
  * some methods deal with exceptional situations such as an empty SD card, a full SD card, low memory, and so on.
