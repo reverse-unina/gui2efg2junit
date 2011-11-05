@@ -11,5 +11,6 @@ public interface InteractionType {
 	public final static String LONG_CLICK = "longClick";
 	public final static String LIST_LONG_SELECT = "longClickListItem";
 	public final static String OPEN_MENU = "openMenu";
+	public final static String SET_BAR = "setBar";
 	
 }
