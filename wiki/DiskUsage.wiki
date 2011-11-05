@@ -54,7 +54,7 @@ As usual, this occurs when restarting with a dialog on screen.
 11-05 09:30:19.274: E/WindowManager(4033): 	at dalvik.system.NativeStart.main(Native Method)
 }}}
 
-= Test Results from 05 Nov 2011 (DiskUsage v3.0alpha[rev. 68] with AndroidCrawler r-64) =
+= Test Results from 05 Nov 2011 (v3.0alpha[rev. 68] with AndroidCrawler r-64) =
 
 First test results. Comparation was done on buttons only.
 
