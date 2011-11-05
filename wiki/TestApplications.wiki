@@ -19,6 +19,8 @@ This open source applications have (more or less) successfully been tested with 
 
  * DealDroid: http://code.google.com/p/dealdroid/
 
+ * DiskUsage: http://code.google.com/p/diskusage/
+
 = Open Source Applications (Failures) =
 
 These open source applications are not compatible with the current version of the crawler.
