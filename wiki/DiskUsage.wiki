@@ -70,3 +70,23 @@ OVERALL COVERAGE SUMMARY
  * DOT: http://gui2efg2junit.googlecode.com/files/diskusage.dot
  * jUnit: http://gui2efg2junit.googlecode.com/files/DiskusageGuiTest.java
  * Coverage: http://gui2efg2junit.googlecode.com/files/diskusage_coverage.zip
+
+== Analysis ==
+
+The coverage report points out how several parts of the application are not exercised by the crawler.
+
+The main view showing the disk usage (FileSystemView, directly extends View) is a custom widget, hence its behaviour cannot be inferred. The only way to operate on it are to add the support for FileSystemView into the crawler or to use a random sequence of interactions.
+
+Also, not being able to browse the disk tree to select a file have several consequences:
+
+ * the delete function is never enabled;
+ * the show function is never enables;
+ * the functions to infer the MIME type of the selected file (and the functions defined on that type) are never used;
+
+Additionally, the GUI specific methods (onClick, onOptionsItemSelected, ...) are never called.
+
+Additional issues are:
+
+ * some modules are never run because specific to a particular version of the Android system (Gingerbread, Eclair...);
+ * changing the "filters" have no effect until the "Rescan" button is pressed, but the crawler only press the button once;
+ * some methods deal with exceptional situations such as an empty SD card, a full SD card, low memory, and so on.
