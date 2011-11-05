@@ -75,12 +75,12 @@ OVERALL COVERAGE SUMMARY
 
 The coverage report points out how several parts of the application are not exercised by the crawler.
 
-The main view showing the disk usage (FileSystemView, directly extends View) is a custom widget, hence its behaviour cannot be inferred. The only way to operate on it are to add the support for FileSystemView into the crawler or to use a random sequence of interactions.
+The main view showing the disk usage (FileSystemView, directly extends View) is a custom widget, hence its behaviour cannot be inferred. The only ways to operate on it would be add the support for FileSystemView into the crawler or to use a random sequence of interactions.
 
 Also, not being able to browse the disk tree to select a file have several consequences:
 
  * the delete function is never enabled;
- * the show function is never enables;
+ * the show function is never enabled;
  * the functions to infer the MIME type of the selected file (and the functions defined on that type) are never used;
 
 Additionally, the GUI specific methods (onClick, onOptionsItemSelected, ...) are never called.
