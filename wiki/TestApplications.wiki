@@ -1,5 +1,5 @@
 #summary Applications used to test the crawler.
-#labels Phase-QA
+#labels Phase-QA,Featured
 
 = Open Source Applications (Usable) =
 
@@ -20,6 +20,8 @@ This open source applications have (more or less) successfully been tested with 
  * DealDroid: http://code.google.com/p/dealdroid/
 
  * DiskUsage: http://code.google.com/p/diskusage/
+
+ * TippyTipper: http://code.google.com/p/tippytipper/
 
 = Open Source Applications (Failures) =
 
