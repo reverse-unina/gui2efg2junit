@@ -60,8 +60,8 @@ First test results. Comparation was done on buttons only.
 [http://code.google.com/p/gui2efg2junit/downloads/detail?name=diskusage.png&can=2&q= http://gui2efg2junit.googlecode.com/files/diskusage.png]
 
 OVERALL COVERAGE SUMMARY
-name ||	class, % ||	method, % ||	block, % ||	line, % ||
-all classes ||	64%  (94/148) ||	59%  (443/754) ||	54%  (11201/20701) ||	54%  (2343,3/4315) ||
+|| name ||	class, % ||	method, % ||	block, % ||	line, % ||
+|| all classes ||	64%  (94/148) ||	59%  (443/754) ||	54%  (11201/20701) ||	54%  (2343,3/4315) ||
 
 
  * GuiTree: http://gui2efg2junit.googlecode.com/files/diskusage.xml
