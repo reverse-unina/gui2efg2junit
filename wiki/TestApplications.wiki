@@ -23,6 +23,8 @@ This open source applications have (more or less) successfully been tested with 
 
  * TippyTipper: http://code.google.com/p/tippytipper/
 
+ * AndroidPermissions: http://code.google.com/p/androidpermissions/
+
 = Open Source Applications (Failures) =
 
 These open source applications are not compatible with the current version of the crawler.
