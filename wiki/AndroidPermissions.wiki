@@ -26,4 +26,6 @@ First test results. Comparation was done on text.
 
 == Analysis ==
 
-It's quite apparent that the crawler clicks the same option over and over, since there is no direct support for ExpandableListView: hence, after an item is selected, either the new state is not detected, or it's detected and the whole list is explored anew. The correct behaviour would be to detect the new state but only click the new items.
+It's quite apparent that the crawler clicks the same option over and over, since there is no direct support for ExpandableListView. See:
+
+https://code.google.com/p/android-crawler/issues/detail?id=19
