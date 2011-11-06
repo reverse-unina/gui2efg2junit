@@ -1,7 +1,8 @@
-#summary One-sentence summary of this page.
+#summary Info page for the crawler.
+#labels Phase-Support
 
 = Introduction =
 
-A Crawler of Android GUIs for testing purposes:
+A Crawler of Android GUIs for testing purposes based on the [http://code.google.com/p/robotium/ Robotium] framework:
 
 https://code.google.com/p/android-crawler/
