@@ -1,0 +1,29 @@
+#summary Info and test results for Permissions.
+#labels Phase-QA
+
+= Introduction =
+
+Android Permissions can be found here:
+
+http://code.google.com/p/androidpermissions/
+
+The application is too simple, being composed by a single class, but it's the only app found so far using the ExpandableListView.
+
+= Issues =
+
+Crawling the Expandable List View as a normal List View leads to inefficient (or ineffective, depending on the comparation strategy) exploration.
+
+= Test Results from 06 Nov 2011 (v1.1 with AndCrawler r-70) =
+
+First test results. Comparation was done on text.
+
+[http://code.google.com/p/gui2efg2junit/downloads/detail?name=permission.png&can=2&q= http://gui2efg2junit.googlecode.com/files/permission.png]
+
+ * GuiTree: http://gui2efg2junit.googlecode.com/files/permissions.xml
+ * EFG: http://gui2efg2junit.googlecode.com/files/permissions_efg.xml
+ * DOT: http://gui2efg2junit.googlecode.com/files/permissions.dot
+ * http://gui2efg2junit.googlecode.com/files/PermissionsGuiTest.java
+
+== Analysis ==
+
+It's quite apparent that the crawler clicks the same option over and over, since there is no direct support for ExpandableListView: hence, after an item is selected, either the new state is not detected, or it's detected and the whole list is explored anew. The correct behaviour would be to detect the new state but only click the new items.
