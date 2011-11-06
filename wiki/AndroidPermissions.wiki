@@ -11,7 +11,9 @@ The application is too simple, being composed by a single class, but it's the on
 
 = Issues =
 
-Crawling the Expandable List View as a normal List View leads to inefficient (or ineffective, depending on the comparation strategy) exploration.
+Crawling the Expandable List View as a normal List View leads to inefficient (or ineffective, depending on the comparation strategy) exploration. See:
+
+https://code.google.com/p/android-crawler/issues/detail?id=19
 
 = Test Results from 06 Nov 2011 (v1.1 with AndCrawler r-70) =
 
