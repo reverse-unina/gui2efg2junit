@@ -88,7 +88,9 @@ W/System.err(  544):    at dalvik.system.NativeStart.main(Native Method)
 = Test Results from 07 Nov 2011 (v1.5.1 with AndCrawler r-72) =
 
 Comparation is done on buttons and editText only.
+
 A bug in the Comparator gives false positives when different activities have widget with the same ID. This has been fixed in the subsequent release of the crawler ~~which will be used to measure coverage~~. (Testing aborted due to unexpected crash at the startup of the instrumented apk.)
+
 The crawler doesn't explore the "Add photo" dialog in order to avoid the crash (see previous results).
 
 [http://code.google.com/p/gui2efg2junit/downloads/detail?name=wordpress_20111107.png&can=2&q= http://gui2efg2junit.googlecode.com/files/wordpress_20111107.png]
