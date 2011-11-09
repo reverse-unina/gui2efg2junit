@@ -15,5 +15,6 @@ public interface SimpleType {
 	public final static String IMAGE_VIEW = "image";
 	public final static String DIALOG_VIEW = "dialog";
 	public final static String SEEK_BAR = "seekBar";
+	public final static String LINEAR_LAYOUT = "linearLayout";
 	
 }
