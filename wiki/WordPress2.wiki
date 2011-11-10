@@ -27,7 +27,7 @@ Rev. 412 suffers a crash when the following sequence of events is played in rapi
  * Press the BACK button
  * Click _Read_
  * Press the MENU button
- * Click _Open in Browser_
+ * Click _View in Browser_
 
 {{{
 11-10 20:27:24.251: W/dalvikvm(12946): threadid=1: thread exiting with uncaught exception (group=0x40015560)
