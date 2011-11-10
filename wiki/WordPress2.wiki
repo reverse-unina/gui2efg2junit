@@ -15,6 +15,50 @@ See also: WordpressForAndroid
 
 = Issues =
 
+== Refresh and Open in Browser ==
+
+==== Refreshing the web view then opening it in an external browser yields crash ====
+
+Rev. 412 suffers a crash when the following sequence of events is played in rapid succession:
+
+ * Click _Read_
+ * Press the MENU button
+ * Click _Refresh_
+ * Press the BACK button
+ * Click _Read_
+ * Press the MENU button
+ * Click _Open in Browser_
+
+{{{
+11-10 20:27:24.251: W/dalvikvm(12946): threadid=1: thread exiting with uncaught exception (group=0x40015560)
+11-10 20:27:24.271: E/AndroidRuntime(12946): FATAL EXCEPTION: main
+11-10 20:27:24.271: E/AndroidRuntime(12946): android.content.ActivityNotFoundException: No Activity found to handle Intent { act=android.intent.action.VIEW dat=data:text/html;UTF-8,%3Chead%3E%3Cscript%20type=%22text/javascript%22%3Efunction%20submitform(){document.loginform.submit();}%20%3C/script%3E%3C/head%3E%3Cbody%20onload=%22submitform()%22%3E%3Cform%20style=%22visibility:hidden;%22%20name=%22loginform%22%20id=%22loginform%22%20action=%22https://androidcrawler.wordpress.com/wp-login.php%22%20method=%22post%22%3E%3Cinput%20type=%22text%22%20name=%22log%22%20id=%22user_login%22%20value=%22androidcrawler69%22/%3E%3C/label%3E%3Cinput%20type=%22password%22%20name=%22pwd%22%20id=%22user_pass%22%20value=%22paran01d75%22%20/%3E%3C/label%3E%3Cinput%20type=%22submit%22%20name=%22wp-submit%22%20id=%22wp-submit%22%20value=%22Log%20In%22%20/%3E%3Cinput%20type=%22hidden%22%20name=%22redirect_to%22%20value=%22http://en.wordpress.com/reader/mobile/v2%22%20/%3E%3C/form%3E%3C/body%3E }
+11-10 20:27:24.271: E/AndroidRuntime(12946): 	at android.app.Instrumentation.checkStartActivityResult(Instrumentation.java:1409)
+11-10 20:27:24.271: E/AndroidRuntime(12946): 	at android.app.Instrumentation.execStartActivity(Instrumentation.java:1379)
+11-10 20:27:24.271: E/AndroidRuntime(12946): 	at android.app.Activity.startActivityForResult(Activity.java:2827)
+11-10 20:27:24.271: E/AndroidRuntime(12946): 	at android.app.Activity.startActivity(Activity.java:2933)
+11-10 20:27:24.271: E/AndroidRuntime(12946): 	at org.wordpress.android.Read.onOptionsItemSelected(Read.java:130)
+11-10 20:27:24.271: E/AndroidRuntime(12946): 	at android.app.Activity.onMenuItemSelected(Activity.java:2205)
+11-10 20:27:24.271: E/AndroidRuntime(12946): 	at com.android.internal.policy.impl.PhoneWindow.onMenuItemSelected(PhoneWindow.java:748)
+11-10 20:27:24.271: E/AndroidRuntime(12946): 	at com.android.internal.view.menu.MenuItemImpl.invoke(MenuItemImpl.java:143)
+11-10 20:27:24.271: E/AndroidRuntime(12946): 	at com.android.internal.view.menu.MenuBuilder.performItemAction(MenuBuilder.java:855)
+11-10 20:27:24.271: E/AndroidRuntime(12946): 	at com.android.internal.view.menu.IconMenuView.invokeItem(IconMenuView.java:532)
+11-10 20:27:24.271: E/AndroidRuntime(12946): 	at com.android.internal.view.menu.IconMenuItemView.performClick(IconMenuItemView.java:122)
+11-10 20:27:24.271: E/AndroidRuntime(12946): 	at android.view.View$PerformClick.run(View.java:9080)
+11-10 20:27:24.271: E/AndroidRuntime(12946): 	at android.os.Handler.handleCallback(Handler.java:587)
+11-10 20:27:24.271: E/AndroidRuntime(12946): 	at android.os.Handler.dispatchMessage(Handler.java:92)
+11-10 20:27:24.271: E/AndroidRuntime(12946): 	at android.os.Looper.loop(Looper.java:123)
+11-10 20:27:24.271: E/AndroidRuntime(12946): 	at android.app.ActivityThread.main(ActivityThread.java:3683)
+11-10 20:27:24.271: E/AndroidRuntime(12946): 	at java.lang.reflect.Method.invokeNative(Native Method)
+11-10 20:27:24.271: E/AndroidRuntime(12946): 	at java.lang.reflect.Method.invoke(Method.java:507)
+11-10 20:27:24.271: E/AndroidRuntime(12946): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:839)
+11-10 20:27:24.271: E/AndroidRuntime(12946): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:597)
+11-10 20:27:24.271: E/AndroidRuntime(12946): 	at dalvik.system.NativeStart.main(Native Method)
+11-10 20:27:24.291: W/ActivityManager(61): Error in app org.wordpress.android running instrumentation ComponentInfo{com.nofatclips.crawler/android.test.InstrumentationTestRunner}:
+11-10 20:27:24.291: W/ActivityManager(61):   android.content.ActivityNotFoundException
+11-10 20:27:24.291: W/ActivityManager(61):   android.content.ActivityNotFoundException: No Activity found to handle Intent { act=android.intent.action.VIEW dat=data:text/html;UTF-8,%3Chead%3E%3Cscript%20type=%22text/javascript%22%3Efunction%20submitform(){document.loginform.submit();}%20%3C/script%3E%3C/head%3E%3Cbody%20onload=%22submitform()%22%3E%3Cform%20style=%22visibility:hidden;%22%20name=%22loginform%22%20id=%22loginform%22%20action=%22https://androidcrawler.wordpress.com/wp-login.php%22%20method=%22post%22%3E%3Cinput%20type=%22text%22%20name=%22log%22%20id=%22user_login%22%20value=%22androidcrawler69%22/%3E%3C/label%3E%3Cinput%20type=%22password%22%20name=%22pwd%22%20id=%22user_pass%22%20value=%22paran01d75%22%20/%3E%3C/label%3E%3Cinput%20type=%22submit%22%20name=%22wp-submit%22%20id=%22wp-submit%22%20value=%22Log%20In%22%20/%3E%3Cinput%20type=%22hidden%22%20name=%22redirect_to%22%20value=%22http://en.wordpress.com/reader/mobile/v2%22%20/%3E%3C/form%3E%3C/body%3E }
+}}}
+
 == Stats and Back ==
 
 ==== Bad Token Exception when dismissing stats too fast ====
