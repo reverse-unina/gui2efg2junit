@@ -53,7 +53,9 @@ The rev. 394 crashes when trying to open the default post. To reproduce the bug,
 11-09 21:38:43.496: E/AndroidRuntime(870): 	at dalvik.system.NativeStart.main(Native Method)
 }}}
 
-== Cursor Error when trying to edit a page ==
+== Edit Page ==
+
+=== Cursor Error when trying to edit a page ===
 
 The rev. 398 crashes when trying to edit a post for the second time. To reproduce the bug, setup a new blog, then:
 
@@ -94,14 +96,14 @@ The rev. 398 crashes when trying to edit a post for the second time. To reproduc
 
 = Test Results from 10 Nov 2011 (Changeset 398 with AndCrawler r-76) =
 
-The test stopped due to the "Cursor Error" issue report above. Incomplete GUI Tree (40 traces) and a log for the last trace (#48) are provided:
+The test stopped due to the [#Edit_Page Edit Page] issue report above. Incomplete GUI Tree (40 traces) and a log for the last trace (#48) are provided:
 
  * Gui Tree: http://gui2efg2junit.googlecode.com/files/wordpress2_20111110.xml
  * Log: http://gui2efg2junit.googlecode.com/files/wordpress2_crashlog_20111110.txt
 
 = Test Results from 09 Nov 2011 (Changeset 394 with AndCrawler r-75) =
 
-The test stopped due to the [#Hello_world "Hello World!"] issue reported above. Complete log is provided:
+The test stopped due to the [#Hello_World Hello World!] issue reported above. Complete log is provided:
 
 http://gui2efg2junit.googlecode.com/files/wordpress2_crashlog_20111109.txt
 
