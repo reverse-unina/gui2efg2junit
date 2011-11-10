@@ -15,6 +15,42 @@ See also: WordpressForAndroid
 
 = Issues =
 
+== Stats and Back ==
+
+==== Bad Token Exception when dismissing stats too fast ====
+
+Rev. 412 suffers a crash when the Stats page is opened and closed in rapid succession. To reproduce the bug:
+
+ * Click Stats
+ * Click the BACK button even before the throbber appears
+ * Wait
+
+{{{
+11-10 14:28:40.664: W/dalvikvm(388): threadid=1: thread exiting with uncaught exception (group=0x40015560)
+11-10 14:28:40.673: E/AndroidRuntime(388): FATAL EXCEPTION: main
+11-10 14:28:40.673: E/AndroidRuntime(388): android.view.WindowManager$BadTokenException: Unable to add window -- token android.os.BinderProxy@4065a618 is not valid; is your activity running?
+11-10 14:28:40.673: E/AndroidRuntime(388): 	at android.view.ViewRoot.setView(ViewRoot.java:527)
+11-10 14:28:40.673: E/AndroidRuntime(388): 	at android.view.WindowManagerImpl.addView(WindowManagerImpl.java:177)
+11-10 14:28:40.673: E/AndroidRuntime(388): 	at android.view.WindowManagerImpl.addView(WindowManagerImpl.java:91)
+11-10 14:28:40.673: E/AndroidRuntime(388): 	at android.view.Window$LocalWindowManager.addView(Window.java:424)
+11-10 14:28:40.673: E/AndroidRuntime(388): 	at android.app.Dialog.show(Dialog.java:241)
+11-10 14:28:40.673: E/AndroidRuntime(388): 	at android.app.Activity.showDialog(Activity.java:2566)
+11-10 14:28:40.673: E/AndroidRuntime(388): 	at android.app.Activity.showDialog(Activity.java:2524)
+11-10 14:28:40.673: E/AndroidRuntime(388): 	at org.wordpress.android.ViewStats$statsUserDataTask.onPostExecute(ViewStats.java:1012)
+11-10 14:28:40.673: E/AndroidRuntime(388): 	at org.wordpress.android.ViewStats$statsUserDataTask.onPostExecute(ViewStats.java:1)
+11-10 14:28:40.673: E/AndroidRuntime(388): 	at android.os.AsyncTask.finish(AsyncTask.java:417)
+11-10 14:28:40.673: E/AndroidRuntime(388): 	at android.os.AsyncTask.access$300(AsyncTask.java:127)
+11-10 14:28:40.673: E/AndroidRuntime(388): 	at android.os.AsyncTask$InternalHandler.handleMessage(AsyncTask.java:429)
+11-10 14:28:40.673: E/AndroidRuntime(388): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-10 14:28:40.673: E/AndroidRuntime(388): 	at android.os.Looper.loop(Looper.java:123)
+11-10 14:28:40.673: E/AndroidRuntime(388): 	at android.app.ActivityThread.main(ActivityThread.java:3683)
+11-10 14:28:40.673: E/AndroidRuntime(388): 	at java.lang.reflect.Method.invokeNative(Native Method)
+11-10 14:28:40.673: E/AndroidRuntime(388): 	at java.lang.reflect.Method.invoke(Method.java:507)
+11-10 14:28:40.673: E/AndroidRuntime(388): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:839)
+11-10 14:28:40.673: E/AndroidRuntime(388): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:597)
+11-10 14:28:40.673: E/AndroidRuntime(388): 	at dalvik.system.NativeStart.main(Native Method)
+}}}
+
 == Crash On Edit Page ==
 
 ==== Cursor Error when trying to edit a page ====
@@ -94,6 +130,13 @@ The rev. 394 crashes when trying to open the default post. To reproduce the bug,
 11-09 21:38:43.496: E/AndroidRuntime(870): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:597)
 11-09 21:38:43.496: E/AndroidRuntime(870): 	at dalvik.system.NativeStart.main(Native Method)
 }}}
+
+= Test Results from 10 Nov 2011 (Changeset 412 with AndCrawler r-76) =
+
+The test stopped due to the [#Stats_And_Back Stats and Back] issue reported above.
+Complete log is provided:
+
+ * Log: http://gui2efg2junit.googlecode.com/files/wordpress2_crashlog_20111110_bis.txt
 
 = Test Results from 10 Nov 2011 (Changeset 398 with AndCrawler r-76) =
 
