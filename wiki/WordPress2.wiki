@@ -63,7 +63,7 @@ The rev. 398 crashes when trying to edit a post for the second time. To reproduc
  * Click _About_
  * Click the edit button (the notepad right after the title)
  * Push the BACK button
- * Click _About_
+ * Click the edit button again
 
 {{{
 11-10 12:07:02.163: E/AndroidRuntime(521): FATAL EXCEPTION: main
