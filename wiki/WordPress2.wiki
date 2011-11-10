@@ -21,7 +21,7 @@ See also: WordpressForAndroid
 
 Rev. 412 suffers a crash when the Stats page is opened and closed in rapid succession. To reproduce the bug:
 
- * Click Stats
+ * Click _Stats_
  * Click the BACK button even before the throbber appears
  * Wait
 
@@ -133,7 +133,7 @@ The rev. 394 crashes when trying to open the default post. To reproduce the bug,
 
 = Test Results from 10 Nov 2011 (Changeset 412 with AndCrawler r-76) =
 
-The test stopped due to the [#Stats_And_Back Stats and Back] issue reported above.
+The test stopped due to the [#Stats_and_Back Stats and Back] issue reported above.
 Complete log is provided:
 
  * Log: http://gui2efg2junit.googlecode.com/files/wordpress2_crashlog_20111110_bis.txt
