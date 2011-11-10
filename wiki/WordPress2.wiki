@@ -101,7 +101,7 @@ The test stopped due to the "Cursor Error" issue report above. Incomplete GUI Tr
 
 = Test Results from 09 Nov 2011 (Changeset 394 with AndCrawler r-75) =
 
-The test stopped due to the [#Hello-world] issue report above. Complete log is provided:
+The test stopped due to the [#Hello_world "Hello World!"] issue reported above. Complete log is provided:
 
 http://gui2efg2junit.googlecode.com/files/wordpress2_crashlog_20111109.txt
 
