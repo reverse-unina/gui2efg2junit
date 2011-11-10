@@ -96,7 +96,8 @@ The rev. 398 crashes when trying to edit a post for the second time. To reproduc
 
 = Test Results from 10 Nov 2011 (Changeset 398 with AndCrawler r-76) =
 
-The test stopped due to the [#Edit_Page Edit Page] issue report above. Incomplete GUI Tree (40 traces) and a log for the last trace (#48) are provided:
+The test stopped due to the [#Edit_Page Edit Page] issue reported above.
+Incomplete GUI Tree (40 traces) and a log for the last trace (#48) are provided:
 
  * Gui Tree: http://gui2efg2junit.googlecode.com/files/wordpress2_20111110.xml
  * Log: http://gui2efg2junit.googlecode.com/files/wordpress2_crashlog_20111110.txt
