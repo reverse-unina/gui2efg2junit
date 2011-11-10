@@ -15,7 +15,9 @@ See also: WordpressForAndroid
 
 = Issues =
 
-== Unable to open default "Hello World!" post ==
+== Hello World ==
+
+=== Unable to open default "Hello World!" post ===
 
 The rev. 394 crashes when trying to open the default post. To reproduce the bug, setup a new blog, then:
 
@@ -99,7 +101,7 @@ The test stopped due to the "Cursor Error" issue report above. Incomplete GUI Tr
 
 = Test Results from 09 Nov 2011 (Changeset 394 with AndCrawler r-75) =
 
-The test stopped due to the "Hello world" issue report above. Complete log is provided:
+The test stopped due to the [#Hello-world] issue report above. Complete log is provided:
 
 http://gui2efg2junit.googlecode.com/files/wordpress2_crashlog_20111109.txt
 
