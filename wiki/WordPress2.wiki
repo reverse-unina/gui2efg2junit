@@ -19,7 +19,7 @@ See also: WordpressForAndroid
 
 ==== Refreshing the web view then opening it in an external browser yields crash ====
 
-Rev. 412 suffers a crash when the following sequence of events is played in rapid succession:
+All rev.s from 412 to 418 suffer a crash when the following sequence of events is played in rapid succession:
 
  * Click _Read_
  * Press the MENU button
