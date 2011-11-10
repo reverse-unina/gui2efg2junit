@@ -1,0 +1,58 @@
+#summary Info and test results for Wordpress 2.
+#labels Phase-QA
+
+= Introduction =
+
+Wordpress 2 is being developed at the moment. Here's the Trac repository.
+
+https://android.trac.wordpress.org/
+
+The source code can be found here:
+
+http://android.svn.wordpress.org/
+
+See also: WordpressForAndroid
+
+= Issues =
+
+== Unable to open default "Hello World!" post ==
+
+The rev. 394 crashes when trying to open the default post. To reproduce the bug, setup a new blog, then:
+
+ * Click _Posts_
+ * Click _Hello World!_
+
+{{{
+11-09 21:38:43.496: E/AndroidRuntime(870): FATAL EXCEPTION: main
+11-09 21:38:43.496: E/AndroidRuntime(870): java.lang.StringIndexOutOfBoundsException
+11-09 21:38:43.496: E/AndroidRuntime(870): 	at java.lang.String.substring(String.java:1651)
+11-09 21:38:43.496: E/AndroidRuntime(870): 	at org.wordpress.android.util.HtmlToSpannedConverter.characters(WPHtml.java:928)
+11-09 21:38:43.496: E/AndroidRuntime(870): 	at org.ccil.cowan.tagsoup.Parser.pcdata(Parser.java:994)
+11-09 21:38:43.496: E/AndroidRuntime(870): 	at org.ccil.cowan.tagsoup.HTMLScanner.scan(HTMLScanner.java:522)
+11-09 21:38:43.496: E/AndroidRuntime(870): 	at org.ccil.cowan.tagsoup.Parser.parse(Parser.java:449)
+11-09 21:38:43.496: E/AndroidRuntime(870): 	at org.wordpress.android.util.HtmlToSpannedConverter.convert(WPHtml.java:455)
+11-09 21:38:43.496: E/AndroidRuntime(870): 	at org.wordpress.android.util.WPHtml.fromHtml(WPHtml.java:154)
+11-09 21:38:43.496: E/AndroidRuntime(870): 	at org.wordpress.android.util.WPHtml.fromHtml(WPHtml.java:117)
+11-09 21:38:43.496: E/AndroidRuntime(870): 	at org.wordpress.android.ViewPostFragment.loadPost(ViewPostFragment.java:98)
+11-09 21:38:43.496: E/AndroidRuntime(870): 	at org.wordpress.android.ViewPostFragment.onActivityCreated(ViewPostFragment.java:26)
+11-09 21:38:43.496: E/AndroidRuntime(870): 	at android.support.v4.app.FragmentManagerImpl.moveToState(FragmentManager.java:760)
+11-09 21:38:43.496: E/AndroidRuntime(870): 	at android.support.v4.app.FragmentManagerImpl.moveToState(FragmentManager.java:933)
+11-09 21:38:43.496: E/AndroidRuntime(870): 	at android.support.v4.app.BackStackRecord.run(BackStackRecord.java:578)
+11-09 21:38:43.496: E/AndroidRuntime(870): 	at android.support.v4.app.FragmentManagerImpl.execPendingActions(FragmentManager.java:1219)
+11-09 21:38:43.496: E/AndroidRuntime(870): 	at android.support.v4.app.FragmentManagerImpl$1.run(FragmentManager.java:380)
+11-09 21:38:43.496: E/AndroidRuntime(870): 	at android.os.Handler.handleCallback(Handler.java:587)
+11-09 21:38:43.496: E/AndroidRuntime(870): 	at android.os.Handler.dispatchMessage(Handler.java:92)
+11-09 21:38:43.496: E/AndroidRuntime(870): 	at android.os.Looper.loop(Looper.java:123)
+11-09 21:38:43.496: E/AndroidRuntime(870): 	at android.app.ActivityThread.main(ActivityThread.java:3683)
+11-09 21:38:43.496: E/AndroidRuntime(870): 	at java.lang.reflect.Method.invokeNative(Native Method)
+11-09 21:38:43.496: E/AndroidRuntime(870): 	at java.lang.reflect.Method.invoke(Method.java:507)
+11-09 21:38:43.496: E/AndroidRuntime(870): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:839)
+11-09 21:38:43.496: E/AndroidRuntime(870): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:597)
+11-09 21:38:43.496: E/AndroidRuntime(870): 	at dalvik.system.NativeStart.main(Native Method)
+}}}
+
+= Test Results from 09 Nov 2011 (Changeset 394 with AndCrawler r-75) =
+
+The test stopped due to the "Hello world" issue report above. Complete log is provided:
+
+http://gui2efg2junit.googlecode.com/files/wordpress2_crashlog_20111109.txt
