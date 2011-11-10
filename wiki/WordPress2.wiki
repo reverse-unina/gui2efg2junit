@@ -15,16 +15,12 @@ See also: WordpressForAndroid
 
 = Issues =
 
-== Refresh and Open in Browser ==
+== View in Browser ==
 
 ==== Refreshing the web view then opening it in an external browser yields crash ====
 
 Rev. 412 suffers a crash when the following sequence of events is played in rapid succession:
 
- * Click _Read_
- * Press the MENU button
- * Click _Refresh_
- * Press the BACK button
  * Click _Read_
  * Press the MENU button
  * Click _View in Browser_
@@ -174,6 +170,16 @@ The rev. 394 crashes when trying to open the default post. To reproduce the bug,
 11-09 21:38:43.496: E/AndroidRuntime(870): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:597)
 11-09 21:38:43.496: E/AndroidRuntime(870): 	at dalvik.system.NativeStart.main(Native Method)
 }}}
+
+= Test Results from 10 Nov 2011 (Changeset 412 with AndCrawler r-77) =
+
+[http://code.google.com/p/gui2efg2junit/downloads/detail?name=wordpress2.png&can=2&q= http://gui2efg2junit.googlecode.com/files/wordpress2.png]
+
+The test stopped due to the [#View_in_Browser View in Browser] issue reported above.
+Gui tree for the first 80 traces and the log for the remaining 2 traces are provided:
+
+ * Gui Tree: http://gui2efg2junit.googlecode.com/files/wordpress2_crash4.xml
+ * Log: http://gui2efg2junit.googlecode.com/files/wordpress2_crash4_log.txt
 
 = Test Results from 10 Nov 2011 (Changeset 412 with AndCrawler r-76) =
 
