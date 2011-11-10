@@ -59,10 +59,11 @@ The rev. 394 crashes when trying to open the default post. To reproduce the bug,
 
 The rev. 398 crashes when trying to edit a post for the second time. To reproduce the bug, setup a new blog, then:
 
- * Click _Posts_
- * Click _Hello World!_
+ * Click _Pages_
+ * Click _About_
+ * Click the edit button (the notepad right after the title)
  * Push the BACK button
- * Click _Hello World!_
+ * Click _About_
 
 {{{
 11-10 12:07:02.163: E/AndroidRuntime(521): FATAL EXCEPTION: main
