@@ -51,6 +51,52 @@ The rev. 394 crashes when trying to open the default post. To reproduce the bug,
 11-09 21:38:43.496: E/AndroidRuntime(870): 	at dalvik.system.NativeStart.main(Native Method)
 }}}
 
+== Cursor Error when trying to edit a page ==
+
+The rev. 398 crashes when trying to edit a post for the second time. To reproduce the bug, setup a new blog, then:
+
+ * Click _Posts_
+ * Click _Hello World!_
+ * Push the BACK button
+ * Click _Hello World!_
+
+{{{
+11-10 12:07:02.163: E/AndroidRuntime(521): FATAL EXCEPTION: main
+11-10 12:07:02.163: E/AndroidRuntime(521): java.lang.RuntimeException: Unable to start activity ComponentInfo{org.wordpress.android/org.wordpress.android.EditPost}: android.database.CursorIndexOutOfBoundsException: Index 0 requested, with a size of 0
+11-10 12:07:02.163: E/AndroidRuntime(521): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:1647)
+11-10 12:07:02.163: E/AndroidRuntime(521): 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:1663)
+11-10 12:07:02.163: E/AndroidRuntime(521): 	at android.app.ActivityThread.access$1500(ActivityThread.java:117)
+11-10 12:07:02.163: E/AndroidRuntime(521): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:931)
+11-10 12:07:02.163: E/AndroidRuntime(521): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-10 12:07:02.163: E/AndroidRuntime(521): 	at android.os.Looper.loop(Looper.java:123)
+11-10 12:07:02.163: E/AndroidRuntime(521): 	at android.app.ActivityThread.main(ActivityThread.java:3683)
+11-10 12:07:02.163: E/AndroidRuntime(521): 	at java.lang.reflect.Method.invokeNative(Native Method)
+11-10 12:07:02.163: E/AndroidRuntime(521): 	at java.lang.reflect.Method.invoke(Method.java:507)
+11-10 12:07:02.163: E/AndroidRuntime(521): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:839)
+11-10 12:07:02.163: E/AndroidRuntime(521): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:597)
+11-10 12:07:02.163: E/AndroidRuntime(521): 	at dalvik.system.NativeStart.main(Native Method)
+11-10 12:07:02.163: E/AndroidRuntime(521): Caused by: android.database.CursorIndexOutOfBoundsException: Index 0 requested, with a size of 0
+11-10 12:07:02.163: E/AndroidRuntime(521): 	at android.database.AbstractCursor.checkPosition(AbstractCursor.java:580)
+11-10 12:07:02.163: E/AndroidRuntime(521): 	at android.database.AbstractWindowedCursor.checkPosition(AbstractWindowedCursor.java:214)
+11-10 12:07:02.163: E/AndroidRuntime(521): 	at android.database.AbstractWindowedCursor.getString(AbstractWindowedCursor.java:41)
+11-10 12:07:02.163: E/AndroidRuntime(521): 	at org.wordpress.android.WordPressDB.loadPost(WordPressDB.java:1153)
+11-10 12:07:02.163: E/AndroidRuntime(521): 	at org.wordpress.android.models.Post.<init>(Post.java:85)
+11-10 12:07:02.163: E/AndroidRuntime(521): 	at org.wordpress.android.EditPost.onCreate(EditPost.java:191)
+11-10 12:07:02.163: E/AndroidRuntime(521): 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1047)
+11-10 12:07:02.163: E/AndroidRuntime(521): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:1611)
+11-10 12:07:02.163: E/AndroidRuntime(521): 	... 11 more
+11-10 12:07:02.183: W/ActivityManager(61): Error in app org.wordpress.android running instrumentation ComponentInfo{com.nofatclips.crawler/android.test.InstrumentationTestRunner}:
+11-10 12:07:02.183: W/ActivityManager(61):   android.database.CursorIndexOutOfBoundsException
+11-10 12:07:02.183: W/ActivityManager(61):   android.database.CursorIndexOutOfBoundsException: Index 0 requested, with a size of 0
+}}}
+
+= Test Results from 10 Nov 2011 (Changeset 398 with AndCrawler r-76) =
+
+The test stopped due to the "Cursor Error" issue report above. Incomplete GUI Tree (40 traces) and a log for the last trace (#48) are provided:
+
+ * Gui Tree: http://gui2efg2junit.googlecode.com/files/wordpress2_20111110.xml
+ * Log: http://gui2efg2junit.googlecode.com/files/wordpress2_crashlog_20111110.txt
+
 = Test Results from 09 Nov 2011 (Changeset 394 with AndCrawler r-75) =
 
 The test stopped due to the "Hello world" issue report above. Complete log is provided:
