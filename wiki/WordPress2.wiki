@@ -103,6 +103,12 @@ Incomplete GUI Tree (40 traces) and a log for the last trace (#48) are provided:
  * Gui Tree: http://gui2efg2junit.googlecode.com/files/wordpress2_20111110.xml
  * Log: http://gui2efg2junit.googlecode.com/files/wordpress2_crashlog_20111110.txt
 
+A bug report was filed:
+
+https://android.trac.wordpress.org/ticket/207
+
+The bug has been fixed in [https://android.trac.wordpress.org/changeset/412 Changeset 412].
+
 = Test Results from 09 Nov 2011 (Changeset 394 with AndCrawler r-75) =
 
 The test stopped due to the [#Hello_World Hello World!] issue reported above. Complete log is provided:
