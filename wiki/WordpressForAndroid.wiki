@@ -11,6 +11,8 @@ The source code can be found here:
 
 http://android.svn.wordpress.org/
 
+See also: WordPress2
+
 = Issues =
 
 == Crawling Limitations ==
@@ -18,6 +20,8 @@ http://android.svn.wordpress.org/
 The Activity name returned by Robotium is not reliable. The comparator must ignore it.
 
 == Camera Error ==
+
+This is an issue due to lack of camera support of the Android Froyo Emulator.
 
 To reproduce the bug:
  * swap tab to "Pages"
