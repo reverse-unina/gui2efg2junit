@@ -201,7 +201,7 @@
 			solo.enterText((EditText)v, value);
 		} else if (widgetType == CLICK) {
 			click (v);
-		} else if (inputType.equals(SET_BAR)) {
+		} else if (widgetType.equals(SET_BAR)) {
 			solo.setProgressBar((ProgressBar)v, Integer.parseInt(value));
 		}
 	}
