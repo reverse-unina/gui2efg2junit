@@ -247,6 +247,12 @@ Complete log is provided:
 
  * Log: http://gui2efg2junit.googlecode.com/files/wordpress2_crashlog_20111110_bis.txt
 
+A bug report was filed:
+
+https://android.trac.wordpress.org/ticket/208
+
+The bug has been fixed in [https://android.trac.wordpress.org/changeset/420 Changeset 420].
+
 = Test Results from 10 Nov 2011 (Changeset 398 with AndCrawler r-76) =
 
 The test stopped due to the [#Crash_On_Edit_Page Edit Page] issue reported above.
