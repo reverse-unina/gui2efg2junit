@@ -240,6 +240,8 @@ Complete log for the session is provided:
 
  * Log: http://gui2efg2junit.googlecode.com/files/wordpress2_crashlog_20111111.txt
 
+The bug has been fixed in [https://android.trac.wordpress.org/changeset/421 Changeset 421].
+
 = Test Results from 10 Nov 2011 (Changeset 412 with AndCrawler r-77) =
 
 [http://code.google.com/p/gui2efg2junit/downloads/detail?name=wordpress2.png&can=2&q= http://gui2efg2junit.googlecode.com/files/wordpress2.png]
