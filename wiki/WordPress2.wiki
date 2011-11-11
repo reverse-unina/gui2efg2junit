@@ -215,7 +215,7 @@ Gui Tree for the first 20 traces and a log of the remaining four are provided al
  * Log: http://gui2efg2junit.googlecode.com/files/wordpress2_crashlog2_20111111.txt%20.txt
  * jUnit: http://gui2efg2junit.googlecode.com/files/AndroidGuiTest.java
 
-The jUnit suite made possible to see the bug happening and reproduce it manually. Details are listed in the [Ghost_Page Ghost Page] section.
+The jUnit suite made possible to see the bug happening and reproduce it manually. Details are listed in the [#Ghost_Page Ghost Page] section.
 
 = Test Results from 11 Nov 2011 (Changeset 419 with AndCrawler r-77) =
 
