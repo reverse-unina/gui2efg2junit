@@ -181,6 +181,12 @@ Gui tree for the first 80 traces and the log for the remaining 2 traces are prov
  * Gui Tree: http://gui2efg2junit.googlecode.com/files/wordpress2_crash4.xml
  * Log: http://gui2efg2junit.googlecode.com/files/wordpress2_crash4_log.txt
 
+A bug report was filed:
+
+https://android.trac.wordpress.org/ticket/209
+
+The bug has been fixed in [https://android.trac.wordpress.org/changeset/419 Changeset 419].
+
 = Test Results from 10 Nov 2011 (Changeset 412 with AndCrawler r-76) =
 
 The test stopped due to the [#Stats_and_Back Stats and Back] issue reported above.
