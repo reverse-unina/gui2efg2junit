@@ -227,6 +227,12 @@ Gui Tree for the first 20 traces and a log of the remaining four are provided al
 
 The jUnit suite made possible to see the bug happening and reproduce it manually. Details are listed in the [#Ghost_Page Ghost Page] section.
 
+A bug report was filed:
+
+https://android.trac.wordpress.org/ticket/210
+
+The bug has been fixed in [https://android.trac.wordpress.org/changeset/421 Changeset 421].
+
 = Test Results from 11 Nov 2011 (Changeset 419 with AndCrawler r-77) =
 
 The test stopped due to a bug which was not possible to reproduce manually. (see [#Ghost_Page])
