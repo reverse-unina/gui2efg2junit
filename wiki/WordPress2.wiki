@@ -15,6 +15,41 @@ See also: WordpressForAndroid
 
 = Issues =
 
+== Ghost Page ==
+
+==== Attempt to open a non existing page when clicking on the headers of the list ====
+
+Rev 419 crashes when clicking on the _Pages_ label in the pages list. The crash seems to be dependent to the last opened page.
+To reproduce the bug, make sure to have a Local draft saved, then:
+ 
+ * Click _Pages_
+ * Press the home button (in the upper right corner)
+ * Press the BACK key
+ * Press the _Pages_ label
+
+{{{
+11-11 14:46:32.763: E/AndroidRuntime(557): FATAL EXCEPTION: main
+11-11 14:46:32.763: E/AndroidRuntime(557): android.database.CursorIndexOutOfBoundsException: Index 0 requested, with a size of 0
+11-11 14:46:32.763: E/AndroidRuntime(557): 	at android.database.AbstractCursor.checkPosition(AbstractCursor.java:580)
+11-11 14:46:32.763: E/AndroidRuntime(557): 	at android.database.AbstractWindowedCursor.checkPosition(AbstractWindowedCursor.java:214)
+11-11 14:46:32.763: E/AndroidRuntime(557): 	at android.database.AbstractWindowedCursor.getString(AbstractWindowedCursor.java:41)
+11-11 14:46:32.763: E/AndroidRuntime(557): 	at org.wordpress.android.WordPressDB.loadPost(WordPressDB.java:1169)
+11-11 14:46:32.763: E/AndroidRuntime(557): 	at org.wordpress.android.models.Post.<init>(Post.java:84)
+11-11 14:46:32.763: E/AndroidRuntime(557): 	at org.wordpress.android.ViewPosts$2.onItemClick(ViewPosts.java:316)
+11-11 14:46:32.763: E/AndroidRuntime(557): 	at android.widget.AdapterView.performItemClick(AdapterView.java:284)
+11-11 14:46:32.763: E/AndroidRuntime(557): 	at android.widget.ListView.performItemClick(ListView.java:3513)
+11-11 14:46:32.763: E/AndroidRuntime(557): 	at android.widget.AbsListView$PerformClick.run(AbsListView.java:1812)
+11-11 14:46:32.763: E/AndroidRuntime(557): 	at android.os.Handler.handleCallback(Handler.java:587)
+11-11 14:46:32.763: E/AndroidRuntime(557): 	at android.os.Handler.dispatchMessage(Handler.java:92)
+11-11 14:46:32.763: E/AndroidRuntime(557): 	at android.os.Looper.loop(Looper.java:123)
+11-11 14:46:32.763: E/AndroidRuntime(557): 	at android.app.ActivityThread.main(ActivityThread.java:3683)
+11-11 14:46:32.763: E/AndroidRuntime(557): 	at java.lang.reflect.Method.invokeNative(Native Method)
+11-11 14:46:32.763: E/AndroidRuntime(557): 	at java.lang.reflect.Method.invoke(Method.java:507)
+11-11 14:46:32.763: E/AndroidRuntime(557): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:839)
+11-11 14:46:32.763: E/AndroidRuntime(557): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:597)
+11-11 14:46:32.763: E/AndroidRuntime(557): 	at dalvik.system.NativeStart.main(Native Method)
+}}}
+
 == View in Browser ==
 
 ==== Refreshing the web view then opening it in an external browser yields crash ====
@@ -22,7 +57,7 @@ See also: WordpressForAndroid
 All rev.s from 412 to 418 suffer a crash when the following sequence of events is played in rapid succession:
 
  * Click _Read_
- * Press the MENU button
+ * Press the MENU key
  * Click _View in Browser_
 
 {{{
@@ -62,7 +97,7 @@ All rev.s from 412 to 418 suffer a crash when the following sequence of events i
 Rev. 412 suffers a crash when the Stats page is opened and closed in rapid succession. To reproduce the bug:
 
  * Click _Stats_
- * Click the BACK button even before the throbber appears
+ * Click the BACK key even before the throbber appears
  * Wait
 
 {{{
@@ -100,7 +135,7 @@ All rev.s from 398 to 409 crash when trying to edit a post for the second time. 
  * Click _Pages_
  * Click _About_
  * Click the edit button (the notepad right after the title)
- * Push the BACK button
+ * Push the BACK key
  * Click the edit button again
 
 {{{
@@ -179,6 +214,8 @@ Gui Tree for the first 20 traces and a log of the remaining four are provided al
  * Gui Tree: http://gui2efg2junit.googlecode.com/files/wordpress2_20111111.xml
  * Log: http://gui2efg2junit.googlecode.com/files/wordpress2_crashlog2_20111111.txt%20.txt
  * jUnit: http://gui2efg2junit.googlecode.com/files/AndroidGuiTest.java
+
+The jUnit suite made possible to see the bug happening and reproduce it manually. Details are listed in the [Ghost_Page Ghost Page] section.
 
 = Test Results from 11 Nov 2011 (Changeset 419 with AndCrawler r-77) =
 
