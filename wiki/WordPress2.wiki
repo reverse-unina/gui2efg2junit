@@ -50,6 +50,8 @@ To reproduce the bug, make sure to have a Local draft saved, then:
 11-11 14:46:32.763: E/AndroidRuntime(557): 	at dalvik.system.NativeStart.main(Native Method)
 }}}
 
+See: https://android.trac.wordpress.org/ticket/210
+
 == View in Browser ==
 
 ==== Refreshing the web view then opening it in an external browser yields crash ====
@@ -90,6 +92,8 @@ All rev.s from 412 to 418 suffer a crash when the following sequence of events i
 11-10 20:27:24.291: W/ActivityManager(61):   android.content.ActivityNotFoundException: No Activity found to handle Intent { act=android.intent.action.VIEW dat=data:text/html;UTF-8,%3Chead%3E%3Cscript%20type=%22text/javascript%22%3Efunction%20submitform(){document.loginform.submit();}%20%3C/script%3E%3C/head%3E%3Cbody%20onload=%22submitform()%22%3E%3Cform%20style=%22visibility:hidden;%22%20name=%22loginform%22%20id=%22loginform%22%20action=%22https://androidcrawler.wordpress.com/wp-login.php%22%20method=%22post%22%3E%3Cinput%20type=%22text%22%20name=%22log%22%20id=%22user_login%22%20value=%22androidcrawler69%22/%3E%3C/label%3E%3Cinput%20type=%22password%22%20name=%22pwd%22%20id=%22user_pass%22%20value=%22paran01d75%22%20/%3E%3C/label%3E%3Cinput%20type=%22submit%22%20name=%22wp-submit%22%20id=%22wp-submit%22%20value=%22Log%20In%22%20/%3E%3Cinput%20type=%22hidden%22%20name=%22redirect_to%22%20value=%22http://en.wordpress.com/reader/mobile/v2%22%20/%3E%3C/form%3E%3C/body%3E }
 }}}
 
+See: https://android.trac.wordpress.org/ticket/209
+
 == Stats and Back ==
 
 ==== Bad Token Exception when dismissing stats too fast ====
@@ -125,6 +129,8 @@ Rev. 412 suffers a crash when the Stats page is opened and closed in rapid succe
 11-10 14:28:40.673: E/AndroidRuntime(388): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:597)
 11-10 14:28:40.673: E/AndroidRuntime(388): 	at dalvik.system.NativeStart.main(Native Method)
 }}}
+
+See: https://android.trac.wordpress.org/ticket/208
 
 == Crash On Edit Page ==
 
@@ -168,6 +174,8 @@ All rev.s from 398 to 409 crash when trying to edit a post for the second time. 
 11-10 12:07:02.183: W/ActivityManager(61):   android.database.CursorIndexOutOfBoundsException: Index 0 requested, with a size of 0
 }}}
 
+See: https://android.trac.wordpress.org/ticket/207
+
 == Hello World ==
 
 ==== Unable to open default "Hello World!" post ====
@@ -205,6 +213,8 @@ The rev. 394 crashes when trying to open the default post. To reproduce the bug,
 11-09 21:38:43.496: E/AndroidRuntime(870): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:597)
 11-09 21:38:43.496: E/AndroidRuntime(870): 	at dalvik.system.NativeStart.main(Native Method)
 }}}
+
+See: https://android.trac.wordpress.org/ticket/206
 
 = Test Results from 11 Nov 2011 (Changeset 419 with AndCrawler r-78) =
 
