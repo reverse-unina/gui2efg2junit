@@ -171,6 +171,22 @@ The rev. 394 crashes when trying to open the default post. To reproduce the bug,
 11-09 21:38:43.496: E/AndroidRuntime(870): 	at dalvik.system.NativeStart.main(Native Method)
 }}}
 
+= Test Results from 11 Nov 2011 (Changeset 419 with AndCrawler r-78) =
+
+The test stopped again with the same bug as the previous session.
+Gui Tree for the first 20 traces and a log of the remaining four are provided along with complete jUnit test suite (the test cases for the cases 20 to 23 have been wrote manually):
+
+ * Gui Tree: http://gui2efg2junit.googlecode.com/files/wordpress2_20111111.xml
+ * Log: http://gui2efg2junit.googlecode.com/files/wordpress2_crashlog2_20111111.txt%20.txt
+ * jUnit: http://gui2efg2junit.googlecode.com/files/AndroidGuiTest.java
+
+= Test Results from 11 Nov 2011 (Changeset 419 with AndCrawler r-77) =
+
+The test stopped due to a bug which was not possible to reproduce manually.
+Complete log for the session is provided:
+
+ * Log: http://gui2efg2junit.googlecode.com/files/wordpress2_crashlog_20111111.txt
+
 = Test Results from 10 Nov 2011 (Changeset 412 with AndCrawler r-77) =
 
 [http://code.google.com/p/gui2efg2junit/downloads/detail?name=wordpress2.png&can=2&q= http://gui2efg2junit.googlecode.com/files/wordpress2.png]
