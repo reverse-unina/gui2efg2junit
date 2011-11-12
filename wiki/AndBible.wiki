@@ -7,6 +7,10 @@ And Bible can be found here:
 
 http://code.google.com/p/and-bible/
 
+The main reposirtory for the source code is here:
+
+https://github.com/mjdenham/and-bible
+
 = Issues =
 
 The splash screen sometimes takes longer than 10 seconds to switch off.
