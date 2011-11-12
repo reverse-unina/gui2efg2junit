@@ -43,8 +43,9 @@ To reproduce the Bug:
 = Test Results from 12 Nov 2011 (w\ AndCrawler 80) =
 
 OVERALL COVERAGE SUMMARY
- || name || class, %	 || method, %	 || block, %	 || line, % || 
-all classes	 || 82%  (469/572)	 || 60%  (1257/2087)	 || 76%  (45286/59975)	 || 64%  (5907/9231) || 
+|| name || class, %	 || method, %	 || block, %	 || line, % || 
+
+|| all classes	 || 82%  (469/572)	 || 60%  (1257/2087)	 || 76%  (45286/59975)	 || 64%  (5907/9231) || 
 
 Test limited to the first 800 traces. The "Purgeable Bitmap" activity has not been explored since a bug in its content crashes the application.
 
