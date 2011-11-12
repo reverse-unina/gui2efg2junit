@@ -55,7 +55,7 @@ To reproduce the bug:
 11-11 17:35:08.457: E/AndroidRuntime(2113): 	... 11 more
 }}}
 
-See: https://android.trac.wordpress.org/ticket/211
+See: [https://android.trac.wordpress.org/ticket/211 Ticket 211]
 
 == Ghost Page ==
 
@@ -95,7 +95,7 @@ To reproduce the bug, make sure to have a Local draft saved, then:
 The crash is caused by the click on the header of the list, which is not supposed to trigger an event, but which does.
 The solution was to ignore clicks on the headers.
 
-[https://android.trac.wordpress.org/ticket/210 Ticket 210] - [https://android.trac.wordpress.org/changeset/421 Changeset 421]
+See: [https://android.trac.wordpress.org/ticket/210 Ticket 210] - [https://android.trac.wordpress.org/changeset/421 Changeset 421]
 
 == View in Browser ==
 
