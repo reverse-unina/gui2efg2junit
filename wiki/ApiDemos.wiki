@@ -40,13 +40,23 @@ To reproduce the Bug:
 11-02 14:47:47.519: E/AndroidRuntime(31445): 	at dalvik.system.NativeStart.main(Native Method)
 }}}
 
-= Test Results from 26 Oct 2011 =
+= Test Results from 12 Nov 2011 (w\ AndCrawler 80) =
+
+OVERALL COVERAGE SUMMARY
+ || name || class, %	 || method, %	 || block, %	 || line, % || 
+all classes	 || 82%  (469/572)	 || 60%  (1257/2087)	 || 76%  (45286/59975)	 || 64%  (5907/9231) || 
+
+Test limited to the first 800 traces. The "Purgeable Bitmap" activity has not been explored since a bug in its content crashes the application.
+
+[http://gui2efg2junit.googlecode.com/files/apidemos_20111112.zip Download]
+
+= Test Results from 26 Oct 2011 (w\ AndCrawler 50) =
 
 Test limited to the first 400 traces. The "Purgeable Bitmap" activity has not been explored since a bug in its content crashes the application.
 
 [http://gui2efg2junit.googlecode.com/files/apidemos_20111026.zip Download] - [http://code.google.com/p/gui2efg2junit/downloads/detail?name=apidemos_20111026.png&can=2&q= Image]
 
-= Test Results from 20 Oct 2011 =
+= Test Results from 20 Oct 2011 (w\ AndCrawler 34) =
 
 Test limited to the first 400 traces. The Session ends after 240 traces due to a crash of the tested application in the "Purgeable Bitmap" activity. This is an actual repeatable crash of the API Demos app.
 
