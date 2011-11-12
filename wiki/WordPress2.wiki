@@ -262,7 +262,7 @@ See: https://android.trac.wordpress.org/ticket/206
 
 [http://code.google.com/p/gui2efg2junit/downloads/detail?name=wordpress2_20111111.png&can=2&q= http://gui2efg2junit.googlecode.com/files/wordpress2_20111111.png]
 
-The test stopped after 137 traces due to the [Geotag #Geotag_Crash] issue reported above. Gui Tree for the first 135 traces and the log for the remaining two are provided:
+The test stopped after 137 traces due to the [#Geotag_Crash Geotag] issue reported above. Gui Tree for the first 135 traces and the log for the remaining two are provided:
 
  * Gui Tree: http://gui2efg2junit.googlecode.com/files/wordpress2_20111111_2.xml
  * Log: http://gui2efg2junit.googlecode.com/files/wp2_20111111_2log.txt
