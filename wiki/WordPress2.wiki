@@ -15,6 +15,48 @@ See also: WordpressForAndroid
 
 = Issues =
 
+== Geotag Crash ==
+
+==== Geotagging enabled leads to a crash while editing a page ====
+
+Rev. 421 crashes when attempting to edit a page with geotagging enabled. The problem is likely to be with an element in the layout and not with the geotag function in itself since it happens while creating the UI widgets.
+
+To reproduce the bug:
+
+ * Click Settings
+ * Click Geotag Posts
+ * Click Save
+ * Click Pages
+ * Click "About" (or any other page)
+ * Click the Edit imagebutton (the notepad icon in the upper right corner)
+
+{{{
+11-11 17:35:08.427: D/AndroidRuntime(2113): Shutting down VM
+11-11 17:35:08.427: W/dalvikvm(2113): threadid=1: thread exiting with uncaught exception (group=0x40015560)
+11-11 17:35:08.457: E/AndroidRuntime(2113): FATAL EXCEPTION: main
+11-11 17:35:08.457: E/AndroidRuntime(2113): java.lang.RuntimeException: Unable to start activity ComponentInfo{org.wordpress.android/org.wordpress.android.EditPost}: java.lang.NullPointerException
+11-11 17:35:08.457: E/AndroidRuntime(2113): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:1647)
+11-11 17:35:08.457: E/AndroidRuntime(2113): 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:1663)
+11-11 17:35:08.457: E/AndroidRuntime(2113): 	at android.app.ActivityThread.access$1500(ActivityThread.java:117)
+11-11 17:35:08.457: E/AndroidRuntime(2113): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:931)
+11-11 17:35:08.457: E/AndroidRuntime(2113): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-11 17:35:08.457: E/AndroidRuntime(2113): 	at android.os.Looper.loop(Looper.java:123)
+11-11 17:35:08.457: E/AndroidRuntime(2113): 	at android.app.ActivityThread.main(ActivityThread.java:3683)
+11-11 17:35:08.457: E/AndroidRuntime(2113): 	at java.lang.reflect.Method.invokeNative(Native Method)
+11-11 17:35:08.457: E/AndroidRuntime(2113): 	at java.lang.reflect.Method.invoke(Method.java:507)
+11-11 17:35:08.457: E/AndroidRuntime(2113): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:839)
+11-11 17:35:08.457: E/AndroidRuntime(2113): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:597)
+11-11 17:35:08.457: E/AndroidRuntime(2113): 	at dalvik.system.NativeStart.main(Native Method)
+11-11 17:35:08.457: E/AndroidRuntime(2113): Caused by: java.lang.NullPointerException
+11-11 17:35:08.457: E/AndroidRuntime(2113): 	at org.wordpress.android.EditPost.enableLBSButtons(EditPost.java:510)
+11-11 17:35:08.457: E/AndroidRuntime(2113): 	at org.wordpress.android.EditPost.onCreate(EditPost.java:393)
+11-11 17:35:08.457: E/AndroidRuntime(2113): 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1047)
+11-11 17:35:08.457: E/AndroidRuntime(2113): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:1611)
+11-11 17:35:08.457: E/AndroidRuntime(2113): 	... 11 more
+}}}
+
+See: https://android.trac.wordpress.org/ticket/211
+
 == Ghost Page ==
 
 ==== Attempt to open a non existing page when clicking on the headers of the list ====
