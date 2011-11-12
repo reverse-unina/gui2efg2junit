@@ -258,6 +258,15 @@ The rev. 394 crashes when trying to open the default post. To reproduce the bug,
 
 See: https://android.trac.wordpress.org/ticket/206
 
+= Test Results from 11 Nov 2011 (Changeset 421 w\ AndCrawler r-78) =
+
+[http://code.google.com/p/gui2efg2junit/downloads/detail?name=wordpress2_20111111.png&can=2&q= http://gui2efg2junit.googlecode.com/files/wordpress2_20111111.png]
+
+The test stopped after 137 traces due to the [Geotag #Geotag_Crash] issue reported above. Gui Tree for the first 135 traces and the log for the remaining two are provided:
+
+ * Gui Tree: http://gui2efg2junit.googlecode.com/files/wordpress2_20111111_2.xml
+ * Log: http://gui2efg2junit.googlecode.com/files/wp2_20111111_2log.txt
+
 = Test Results from 11 Nov 2011 (Changeset 419 with AndCrawler r-78) =
 
 The test stopped again with the same bug as the previous session.
