@@ -92,7 +92,10 @@ To reproduce the bug, make sure to have a Local draft saved, then:
 11-11 14:46:32.763: E/AndroidRuntime(557): 	at dalvik.system.NativeStart.main(Native Method)
 }}}
 
-See: https://android.trac.wordpress.org/ticket/210
+The crash is caused by the click on the header of the list, which is not supposed to trigger an event, but which does.
+The solution was to ignore clicks on the headers.
+
+[https://android.trac.wordpress.org/ticket/210 Ticket 210] - [https://android.trac.wordpress.org/changeset/421 Changeset 421]
 
 == View in Browser ==
 
@@ -134,7 +137,10 @@ All rev.s from 412 to 418 suffer a crash when the following sequence of events i
 11-10 20:27:24.291: W/ActivityManager(61):   android.content.ActivityNotFoundException: No Activity found to handle Intent { act=android.intent.action.VIEW dat=data:text/html;UTF-8,%3Chead%3E%3Cscript%20type=%22text/javascript%22%3Efunction%20submitform(){document.loginform.submit();}%20%3C/script%3E%3C/head%3E%3Cbody%20onload=%22submitform()%22%3E%3Cform%20style=%22visibility:hidden;%22%20name=%22loginform%22%20id=%22loginform%22%20action=%22https://androidcrawler.wordpress.com/wp-login.php%22%20method=%22post%22%3E%3Cinput%20type=%22text%22%20name=%22log%22%20id=%22user_login%22%20value=%22androidcrawler69%22/%3E%3C/label%3E%3Cinput%20type=%22password%22%20name=%22pwd%22%20id=%22user_pass%22%20value=%22paran01d75%22%20/%3E%3C/label%3E%3Cinput%20type=%22submit%22%20name=%22wp-submit%22%20id=%22wp-submit%22%20value=%22Log%20In%22%20/%3E%3Cinput%20type=%22hidden%22%20name=%22redirect_to%22%20value=%22http://en.wordpress.com/reader/mobile/v2%22%20/%3E%3C/form%3E%3C/body%3E }
 }}}
 
-See: https://android.trac.wordpress.org/ticket/209
+The problem arises when the user choose to open the blog in the browser before it's been loaded in the app (that is, while the progress bar is still shown in the title bar.)
+It's been solved by ignoring the command until the login to the blog succeeded.
+
+See: [https://android.trac.wordpress.org/ticket/209 Ticket 209] - [https://android.trac.wordpress.org/changeset/420 Changeset 420]
 
 == Stats and Back ==
 
@@ -172,7 +178,11 @@ Rev. 412 suffers a crash when the Stats page is opened and closed in rapid succe
 11-10 14:28:40.673: E/AndroidRuntime(388): 	at dalvik.system.NativeStart.main(Native Method)
 }}}
 
-See: https://android.trac.wordpress.org/ticket/208
+The problem arises when the user closes the ViewStats activity before anything happens on screen.
+The crash was caused by the lack of a check on the state of the activity: the stats are loaded asynchronously and displayed when the task is finished. If the Stats activity gets closed before the async task finishes, the application crashes.
+It was solved by checking that the ViewStats activity is not in the "finishing" state, before showing or dismissing the statistics.
+
+See: [https://android.trac.wordpress.org/ticket/208 Ticket 208] - [https://android.trac.wordpress.org/changeset/420 Changeset 420]
 
 == Crash On Edit Page ==
 
@@ -216,7 +226,9 @@ All rev.s from 398 to 409 crash when trying to edit a post for the second time. 
 11-10 12:07:02.183: W/ActivityManager(61):   android.database.CursorIndexOutOfBoundsException: Index 0 requested, with a size of 0
 }}}
 
-See: https://android.trac.wordpress.org/ticket/207
+The problem was solved by adding additional information in the Intent launched to perform the task. Since the same code is used both for pages and posts, metadata are required to distinguish the two cases.
+
+See: [https://android.trac.wordpress.org/ticket/207 Ticket 207] - [https://android.trac.wordpress.org/changeset/412 Changeset 412]
 
 == Hello World ==
 
@@ -256,7 +268,9 @@ The rev. 394 crashes when trying to open the default post. To reproduce the bug,
 11-09 21:38:43.496: E/AndroidRuntime(870): 	at dalvik.system.NativeStart.main(Native Method)
 }}}
 
-See: https://android.trac.wordpress.org/ticket/206
+The bug was caused by the lack of control on the length of a substring extracted from the body of the post when an unsupported HTML tag is found. This led to the discovery of an additional bug, since the OL tag was not recognized as standard HTML.
+
+See: [https://android.trac.wordpress.org/ticket/206 Ticket 206] - [https://android.trac.wordpress.org/changeset/398 Changeset 398]
 
 = Test Results from 11 Nov 2011 (Changeset 421 w\ AndCrawler r-78) =
 
