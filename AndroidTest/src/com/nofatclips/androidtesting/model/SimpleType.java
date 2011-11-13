@@ -6,6 +6,7 @@ public interface SimpleType {
 	public final static String EDIT_TEXT = "editText";
 	public final static String RADIO = "radio";
 	public final static String CHECKBOX = "check";
+	public final static String TOGGLE_BUTTON = "toggle";
 	public final static String TAB_HOST = "tabHost";
 	public final static String NULL = "null";
 	public final static String LIST_VIEW = "listView";
