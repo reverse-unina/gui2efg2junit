@@ -55,7 +55,10 @@ To reproduce the bug:
 11-11 17:35:08.457: E/AndroidRuntime(2113): 	... 11 more
 }}}
 
-See: [https://android.trac.wordpress.org/ticket/211 Ticket 211]
+The crash is due to the fact that the geolocation widget is only defined in the layout for editing posts, not in the page editor.
+The solution was to make sure that that function is bypassed when we're editing a page.
+
+See: [https://android.trac.wordpress.org/ticket/211 Ticket 211] - [https://android.trac.wordpress.org/changeset/422 Changeset 422]
 
 == Ghost Page ==
 
@@ -280,6 +283,12 @@ The test stopped after 137 traces due to the [#Geotag_Crash Geotag] issue report
 
  * Gui Tree: http://gui2efg2junit.googlecode.com/files/wordpress2_20111111_2.xml
  * Log: http://gui2efg2junit.googlecode.com/files/wp2_20111111_2log.txt
+
+A bug report was filed:
+
+https://android.trac.wordpress.org/ticket/211
+
+The bug has been fixed in [https://android.trac.wordpress.org/changeset/422 Changeset 422].
 
 = Test Results from 11 Nov 2011 (Changeset 419 with AndCrawler r-78) =
 
