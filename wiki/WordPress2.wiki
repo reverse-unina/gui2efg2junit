@@ -13,6 +13,8 @@ http://android.svn.wordpress.org/
 
 See also: WordpressForAndroid
 
+<wiki:toc max_depth="2" />
+
 = Issues =
 
 == Wrong Login and Stats ==
