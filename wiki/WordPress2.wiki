@@ -352,7 +352,7 @@ See: [https://android.trac.wordpress.org/ticket/206 Ticket 206] - [https://andro
 
 = Test Results from 14 Nov 2011 (Changeset 424 w\ AndCrawler r-91) =
 
-This test was mainly conducted to test the new feature of rev.91 but also to provide a complete log which we weren't able to save in the previous session. The crawler stopped after 17 traces (time: 218 s) due to the [#Wrong_Login_and_Stats Stats with Wrong Login] issue.
+This test was mainly conducted to test the new feature of AndCrawler rev.91 but also to provide a complete log which we weren't able to save in the previous session. The crawler stopped after 17 traces (time: 218 s) due to the [#Wrong_Login_and_Stats Stats with Wrong Login] issue.
 
  * Complete log: http://gui2efg2junit.googlecode.com/files/wordpress2_20111114_complete_log.txt
 
