@@ -309,6 +309,14 @@ The bug was caused by the lack of control on the length of a substring extracted
 
 See: [https://android.trac.wordpress.org/ticket/206 Ticket 206] - [https://android.trac.wordpress.org/changeset/398 Changeset 398]
 
+= Test Results from 14 Nov 2011 (Changeset 424 w\ AndCrawler r-90) =
+
+The test stopped after 31 traces (time: approx 20 min.) due to the [#Wrong_Login_and_Stats Stats with Wrong Login] issue reported above. Gui Tree for the first 20 traces and log for the last one are provided:
+
+ * Gui Tree: http://gui2efg2junit.googlecode.com/files/wordpress2_20111114.xml
+ * Log: http://gui2efg2junit.googlecode.com/files/wordpress2_20111114_log2.txt
+
+
 = Test Results from 14 Nov 2011 (Changeset 422 w\ AndCrawler r-90) =
 
 The test stopped after 18 traces (time: 243 s) due to the [#Refresh_Stats_Crash Refresh Stats] issue reported above. Complete log is provided:
