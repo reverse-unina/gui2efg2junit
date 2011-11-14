@@ -17,15 +17,15 @@ See also: WordpressForAndroid
 
 == Refresh Stats Crash ==
 
-==== The app crashes when the refresh button is pressed while in the Stats activity ====
+==== The app crashes when the Go button is pressed in the Stats activity ====
 
-Rev. 422 crashes when attempting to refresh while in the Stats activity.
+Rev. 422 crashes when attempting to reload the Stats.
 
 To reproduce the bug:
 
  * Click Stats
  * Wait for the stats loading
- * Click the refresh button (double arrow in the upper right corner)
+ * Click Go
 
 {{{
 11-14 13:36:33.609: W/dalvikvm(372): threadid=1: thread exiting with uncaught exception (group=0x40015560)
@@ -44,6 +44,10 @@ To reproduce the bug:
 11-14 13:36:33.619: E/AndroidRuntime(372): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:597)
 11-14 13:36:33.619: E/AndroidRuntime(372): 	at dalvik.system.NativeStart.main(Native Method)
 }}}
+
+The issue apparently had something to do with the spinning wheel dialog. It was solved using the animated double arrow in the upper right corner instead of the dialog.
+
+See: [https://android.trac.wordpress.org/ticket/212 Ticket 212] - [https://android.trac.wordpress.org/changeset/423 Changeset 423]
 
 == Geotag Crash ==
 
@@ -310,6 +314,12 @@ See: [https://android.trac.wordpress.org/ticket/206 Ticket 206] - [https://andro
 The test stopped after 18 traces (time: 243 s) due to the [#Refresh_Stats_Crash Refresh Stats] issue reported above. Complete log is provided:
 
  * Log: http://gui2efg2junit.googlecode.com/files/wordpress_20111114_log.txt
+
+A bug report was filed:
+
+https://android.trac.wordpress.org/ticket/212
+
+The bug has been fixed in [https://android.trac.wordpress.org/changeset/423 Changeset 423].
 
 = Test Results from 11 Nov 2011 (Changeset 421 w\ AndCrawler r-78) =
 
