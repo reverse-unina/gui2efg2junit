@@ -357,6 +357,7 @@ The test stopped after 31 traces (time: approx 20 min.) due to the [#Wrong_Login
  * Gui Tree: http://gui2efg2junit.googlecode.com/files/wordpress2_20111114.xml
  * Log: http://gui2efg2junit.googlecode.com/files/wordpress2_20111114_log2.txt
 
+Note that the user name had already been changed in the previous crawling session. Starting with the correct login and changing it leads the current version of the crawler to crash (see [https://code.google.com/p/android-crawler/issues/detail?id=7 Issue 7]).
 
 = Test Results from 14 Nov 2011 (Changeset 422 w\ AndCrawler r-90) =
 
