@@ -15,6 +15,47 @@ See also: WordpressForAndroid
 
 = Issues =
 
+== Wrong Login and Stats ==
+
+==== The app crashes when refreshing the Stats if a wrong user/pass pair was provided in the Settings ====
+
+Revision 424 crash when the user tries to refresh the Stats, if a wrong user/pass pair was provided in the Settings. 
+
+To reproduce the bug:
+
+ * Click Settings
+ * Change the user name and/or the password
+ * Push the BACK key
+ * Click Stats
+ * Wait for the login request
+ * Press the refresh button (double arrows) 
+
+{{{
+11-14 14:40:23.975: E/AndroidRuntime(1460): FATAL EXCEPTION: Thread-82
+11-14 14:40:23.975: E/AndroidRuntime(1460): android.view.ViewRoot$CalledFromWrongThreadException: Only the original thread that created a view hierarchy can touch its views.
+11-14 14:40:23.975: E/AndroidRuntime(1460): 	at android.view.ViewRoot.checkThread(ViewRoot.java:2932)
+11-14 14:40:23.975: E/AndroidRuntime(1460): 	at android.view.ViewRoot.requestLayout(ViewRoot.java:629)
+11-14 14:40:23.975: E/AndroidRuntime(1460): 	at android.view.View.requestLayout(View.java:8267)
+11-14 14:40:23.975: E/AndroidRuntime(1460): 	at android.view.View.requestLayout(View.java:8267)
+11-14 14:40:23.975: E/AndroidRuntime(1460): 	at android.view.View.requestLayout(View.java:8267)
+11-14 14:40:23.975: E/AndroidRuntime(1460): 	at android.widget.RelativeLayout.requestLayout(RelativeLayout.java:257)
+11-14 14:40:23.975: E/AndroidRuntime(1460): 	at android.view.View.requestLayout(View.java:8267)
+11-14 14:40:23.975: E/AndroidRuntime(1460): 	at android.widget.RelativeLayout.requestLayout(RelativeLayout.java:257)
+11-14 14:40:23.975: E/AndroidRuntime(1460): 	at android.view.View.requestLayout(View.java:8267)
+11-14 14:40:23.975: E/AndroidRuntime(1460): 	at android.widget.RelativeLayout.requestLayout(RelativeLayout.java:257)
+11-14 14:40:23.975: E/AndroidRuntime(1460): 	at android.view.View.requestLayout(View.java:8267)
+11-14 14:40:23.975: E/AndroidRuntime(1460): 	at android.widget.RelativeLayout.requestLayout(RelativeLayout.java:257)
+11-14 14:40:23.975: E/AndroidRuntime(1460): 	at android.view.View.requestLayout(View.java:8267)
+11-14 14:40:23.975: E/AndroidRuntime(1460): 	at android.view.View.requestLayout(View.java:8267)
+11-14 14:40:23.975: E/AndroidRuntime(1460): 	at android.widget.ImageView.setImageDrawable(ImageView.java:322)
+11-14 14:40:23.975: E/AndroidRuntime(1460): 	at org.wordpress.android.util.WPTitleBar.stopRotatingRefreshIcon(WPTitleBar.java:400)
+11-14 14:40:23.975: E/AndroidRuntime(1460): 	at org.wordpress.android.ViewStats.getStatsData(ViewStats.java:798)
+11-14 14:40:23.975: E/AndroidRuntime(1460): 	at org.wordpress.android.ViewStats.access$1(ViewStats.java:322)
+11-14 14:40:23.975: E/AndroidRuntime(1460): 	at org.wordpress.android.ViewStats$2$1.run(ViewStats.java:174)
+}}}
+
+When the login fails, the app asks for the correct user name and password, and expects the user to either provide them or cancel the operation. The click on the refresh button is probably unhandled.
+
 == Refresh Stats Crash ==
 
 ==== The app crashes when the Go button is pressed in the Stats activity ====
