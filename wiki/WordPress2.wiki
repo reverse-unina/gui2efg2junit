@@ -352,13 +352,15 @@ The bug was caused by the lack of control on the length of a substring extracted
 
 See: [https://android.trac.wordpress.org/ticket/206 Ticket 206] - [https://android.trac.wordpress.org/changeset/398 Changeset 398]
 
-= Test Results from 14 Nov 2011 (Changeset 424 w\ AndCrawler r-91) =
+= Test Results =
+
+== Test Results from 14 Nov 2011 (Changeset 424 w\ AndCrawler r-91) ==
 
 This test was mainly conducted to test the new feature of AndCrawler rev.91 but also to provide a complete log which we weren't able to save in the previous session. The crawler stopped after 17 traces (time: 218 s) due to the [#Wrong_Login_and_Stats Stats with Wrong Login] issue.
 
  * Complete log: http://gui2efg2junit.googlecode.com/files/wordpress2_20111114_complete_log.txt
 
-= Test Results from 14 Nov 2011 (Changeset 424 w\ AndCrawler r-90) =
+== Test Results from 14 Nov 2011 (Changeset 424 w\ AndCrawler r-90) ==
 
 The test stopped after 31 traces (time: approx 20 min.) due to the [#Wrong_Login_and_Stats Stats with Wrong Login] issue reported above. Gui Tree for the first 20 traces and log for the last one are provided:
 
@@ -367,7 +369,7 @@ The test stopped after 31 traces (time: approx 20 min.) due to the [#Wrong_Login
 
 Note that the user name had already been changed in the previous crawling session. Starting with the correct login and changing it leads the current version of the crawler to crash (see [https://code.google.com/p/android-crawler/issues/detail?id=7 Issue 7]).
 
-= Test Results from 14 Nov 2011 (Changeset 422 w\ AndCrawler r-90) =
+== Test Results from 14 Nov 2011 (Changeset 422 w\ AndCrawler r-90) ==
 
 The test stopped after 18 traces (time: 243 s) due to the [#Refresh_Stats_Crash Refresh Stats] issue reported above. Complete log is provided:
 
@@ -379,7 +381,7 @@ https://android.trac.wordpress.org/ticket/212
 
 The bug has been fixed in [https://android.trac.wordpress.org/changeset/423 Changeset 423].
 
-= Test Results from 11 Nov 2011 (Changeset 421 w\ AndCrawler r-78) =
+== Test Results from 11 Nov 2011 (Changeset 421 w\ AndCrawler r-78) ==
 
 [http://code.google.com/p/gui2efg2junit/downloads/detail?name=wordpress2_20111111.png&can=2&q= http://gui2efg2junit.googlecode.com/files/wordpress2_20111111.png]
 
@@ -394,7 +396,7 @@ https://android.trac.wordpress.org/ticket/211
 
 The bug has been fixed in [https://android.trac.wordpress.org/changeset/422 Changeset 422].
 
-= Test Results from 11 Nov 2011 (Changeset 419 with AndCrawler r-78) =
+== Test Results from 11 Nov 2011 (Changeset 419 with AndCrawler r-78) ==
 
 The test stopped again with the same bug as the previous session.
 Gui Tree for the first 20 traces and a log of the remaining four are provided along with complete jUnit test suite (the test cases for the cases 20 to 23 have been wrote manually):
@@ -411,7 +413,7 @@ https://android.trac.wordpress.org/ticket/210
 
 The bug has been fixed in [https://android.trac.wordpress.org/changeset/421 Changeset 421].
 
-= Test Results from 11 Nov 2011 (Changeset 419 with AndCrawler r-77) =
+== Test Results from 11 Nov 2011 (Changeset 419 with AndCrawler r-77) ==
 
 The test stopped due to a bug which was not possible to reproduce manually. (see [#Ghost_Page])
 Complete log for the session is provided:
@@ -420,7 +422,7 @@ Complete log for the session is provided:
 
 The bug has been fixed in [https://android.trac.wordpress.org/changeset/421 Changeset 421].
 
-= Test Results from 10 Nov 2011 (Changeset 412 with AndCrawler r-77) =
+== Test Results from 10 Nov 2011 (Changeset 412 with AndCrawler r-77) ==
 
 [http://code.google.com/p/gui2efg2junit/downloads/detail?name=wordpress2.png&can=2&q= http://gui2efg2junit.googlecode.com/files/wordpress2.png]
 
@@ -436,7 +438,7 @@ https://android.trac.wordpress.org/ticket/209
 
 The bug has been fixed in [https://android.trac.wordpress.org/changeset/419 Changeset 419].
 
-= Test Results from 10 Nov 2011 (Changeset 412 with AndCrawler r-76) =
+== Test Results from 10 Nov 2011 (Changeset 412 with AndCrawler r-76) ==
 
 The test stopped due to the [#Stats_and_Back Stats and Back] issue reported above.
 Complete log is provided:
@@ -449,7 +451,7 @@ https://android.trac.wordpress.org/ticket/208
 
 The bug has been fixed in [https://android.trac.wordpress.org/changeset/420 Changeset 420].
 
-= Test Results from 10 Nov 2011 (Changeset 398 with AndCrawler r-76) =
+== Test Results from 10 Nov 2011 (Changeset 398 with AndCrawler r-76) ==
 
 The test stopped due to the [#Crash_On_Edit_Page Edit Page] issue reported above.
 Incomplete GUI Tree (40 traces) and a log for the last trace (#48) are provided:
@@ -463,7 +465,7 @@ https://android.trac.wordpress.org/ticket/207
 
 The bug has been fixed in [https://android.trac.wordpress.org/changeset/412 Changeset 412].
 
-= Test Results from 09 Nov 2011 (Changeset 394 with AndCrawler r-75) =
+== Test Results from 09 Nov 2011 (Changeset 394 with AndCrawler r-75) ==
 
 The test stopped due to the [#Hello_World Hello World!] issue reported above. Complete log is provided:
 
