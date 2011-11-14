@@ -15,6 +15,36 @@ See also: WordpressForAndroid
 
 = Issues =
 
+== Refresh Stats Crash ==
+
+==== The app crashes when the refresh button is pressed while in the Stats activity ====
+
+Rev. 422 crashes when attempting to refresh while in the Stats activity.
+
+To reproduce the bug:
+
+ * Click Stats
+ * Wait for the stats loading
+ * Click the refresh button (double arrow in the upper right corner)
+
+{{{
+11-14 13:36:33.609: W/dalvikvm(372): threadid=1: thread exiting with uncaught exception (group=0x40015560)
+11-14 13:36:33.619: E/AndroidRuntime(372): FATAL EXCEPTION: main
+11-14 13:36:33.619: E/AndroidRuntime(372): java.lang.NullPointerException
+11-14 13:36:33.619: E/AndroidRuntime(372): 	at org.wordpress.android.ViewStats$2.onClick(ViewStats.java:174)
+11-14 13:36:33.619: E/AndroidRuntime(372): 	at android.view.View.performClick(View.java:2485)
+11-14 13:36:33.619: E/AndroidRuntime(372): 	at android.view.View$PerformClick.run(View.java:9080)
+11-14 13:36:33.619: E/AndroidRuntime(372): 	at android.os.Handler.handleCallback(Handler.java:587)
+11-14 13:36:33.619: E/AndroidRuntime(372): 	at android.os.Handler.dispatchMessage(Handler.java:92)
+11-14 13:36:33.619: E/AndroidRuntime(372): 	at android.os.Looper.loop(Looper.java:123)
+11-14 13:36:33.619: E/AndroidRuntime(372): 	at android.app.ActivityThread.main(ActivityThread.java:3683)
+11-14 13:36:33.619: E/AndroidRuntime(372): 	at java.lang.reflect.Method.invokeNative(Native Method)
+11-14 13:36:33.619: E/AndroidRuntime(372): 	at java.lang.reflect.Method.invoke(Method.java:507)
+11-14 13:36:33.619: E/AndroidRuntime(372): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:839)
+11-14 13:36:33.619: E/AndroidRuntime(372): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:597)
+11-14 13:36:33.619: E/AndroidRuntime(372): 	at dalvik.system.NativeStart.main(Native Method)
+}}}
+
 == Geotag Crash ==
 
 ==== Geotagging enabled leads to a crash while editing a page ====
@@ -274,6 +304,12 @@ The rev. 394 crashes when trying to open the default post. To reproduce the bug,
 The bug was caused by the lack of control on the length of a substring extracted from the body of the post when an unsupported HTML tag is found. This led to the discovery of an additional bug, since the OL tag was not recognized as standard HTML.
 
 See: [https://android.trac.wordpress.org/ticket/206 Ticket 206] - [https://android.trac.wordpress.org/changeset/398 Changeset 398]
+
+= Test Results from 14 Nov 2011 (Changeset 422 w\ AndCrawler r-90) =
+
+The test stopped after 18 traces due to the [#Refresh_Stats_Crash Refresh Stats] issue reported above. Complete log is provided:
+
+ * Log: http://gui2efg2junit.googlecode.com/files/wordpress_20111114_log.txt
 
 = Test Results from 11 Nov 2011 (Changeset 421 w\ AndCrawler r-78) =
 
