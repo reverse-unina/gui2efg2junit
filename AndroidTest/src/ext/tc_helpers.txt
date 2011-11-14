@@ -1,4 +1,5 @@
 	public void afterRestart() {
+		solo.setActivityOrientation(Solo.PORTRAIT);
 		solo.sleep(SLEEP_AFTER_RESTART);
 		waitOnThrobber();
 		Log.d("nofatclips", "Ready to operate after restarting...");
