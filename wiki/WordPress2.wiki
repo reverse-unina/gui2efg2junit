@@ -19,7 +19,7 @@ See also: WordpressForAndroid
 
 ==== The app crashes when refreshing the Stats if the user/pass pair is wrong ====
 
-Changeset 424 crash when the user tries to refresh the Stats, if a wrong user/pass pair was provided in the Settings. 
+Changeset 424 crashes when the user tries to refresh the Stats, if a wrong user/pass pair was provided in the Settings. 
 
 To reproduce the bug:
 
