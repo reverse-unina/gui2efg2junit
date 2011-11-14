@@ -307,7 +307,7 @@ See: [https://android.trac.wordpress.org/ticket/206 Ticket 206] - [https://andro
 
 = Test Results from 14 Nov 2011 (Changeset 422 w\ AndCrawler r-90) =
 
-The test stopped after 18 traces due to the [#Refresh_Stats_Crash Refresh Stats] issue reported above. Complete log is provided:
+The test stopped after 18 traces (time: 243 s) due to the [#Refresh_Stats_Crash Refresh Stats] issue reported above. Complete log is provided:
 
  * Log: http://gui2efg2junit.googlecode.com/files/wordpress_20111114_log.txt
 
