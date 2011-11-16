@@ -29,19 +29,40 @@ public class TestCaseTrace extends ElementWrapper implements Trace {
 	}
 	
 	public String getId () {
-		return getElement().getAttribute("id");
+		return getAttribute("id");
 	}
 
 	public void setId (String id) {
-		getElement().setAttribute("id",id);
+		setAttribute("id",id);
 	}
 
+	@Override
+	public boolean isFailed() {
+		if (!hasAttribute("fail")) return true;
+		return (getAttribute("fail").equals("true"));
+	}
+
+	@Override
+	public void setFailed(boolean failure) {
+		setAttribute("fail", (failure)?"true":"false");
+	}
+
+	public void setFailed(String failure) {
+		setAttribute("fail", failure);
+	}
+
+	protected String getFailed() {
+		return getAttribute("fail");
+	}
+
+	@Override
 	public TestCaseTrace getWrapper(Element e) {
 		return new TestCaseTrace (e);
 	}
 	
 	// Iterator Methods
 
+	@Override
 	public Iterator<Transition> transitions () {
 		Element t = getElement();
 		if (t.getNodeName()=="TRACE") {
@@ -50,21 +71,24 @@ public class TestCaseTrace extends ElementWrapper implements Trace {
 		return null;		
 	}
 	
+	@Override
 	public Iterator<Transition> iterator() {
 		return transitions();
 	}
 
 	@Override
 	public void addTransition(Transition tail) {
-		getElement().appendChild(tail.getElement());
+		appendChild(tail.getElement());
 	}
 	
+	@Override
 	public TestCaseTrace clone () {
-		TestCaseTrace t = new TestCaseTrace (this.getElement().getOwnerDocument());
+		TestCaseTrace t = new TestCaseTrace (getElement().getOwnerDocument());
 		for (Transition child: this) {
 			TestCaseTransition newChild = ((TestCaseTransition)child).clone();
 			t.addTransition(newChild);
 		}
+		t.setFailed(getFailed());
 		return t;
 	}
 

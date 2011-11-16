@@ -91,5 +91,21 @@ public class WidgetAdapter implements WidgetState {
 
 	@Override
 	public void setClickable(String c) {}
+
+	@Override
+	public String getValue() {
+		return "";
+	}
+
+	@Override
+	public void setValue(String v) {}
+
+	@Override
+	public boolean isLongClickable() {
+		return false;
+	}
+
+	@Override
+	public void setLongClickable(String lc) {}
 	
 }

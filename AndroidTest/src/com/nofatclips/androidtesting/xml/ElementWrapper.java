@@ -31,6 +31,18 @@ public abstract class ElementWrapper implements WrapperInterface {
 		return this.element;
 	}
 	
+	public void setAttribute(String name, String value) {
+		getElement().setAttribute(name, value);
+	}
+	
+	public String getAttribute (String name) {
+		return getElement().getAttribute(name);
+	}
+
+	public boolean hasAttribute (String name) {
+		return getElement().hasAttribute(name);
+	}
+
 	public void appendChild (Element child) {
 		getElement().appendChild(child);
 	}

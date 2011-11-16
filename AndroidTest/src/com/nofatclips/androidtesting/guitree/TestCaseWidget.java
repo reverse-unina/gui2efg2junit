@@ -22,29 +22,40 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 	}
 
 	public String getId() {
-		return getElement().getAttribute("id");
+		return getAttribute("id");
 	}
 
 	public String getName() {
-		return getElement().getAttribute("name");
+		return getAttribute("name");
 	}
 	
 	@Override
 	public boolean isAvailable() {
-		if (!getElement().hasAttribute("available")) return true;
-		return (getElement().getAttribute("available").equals("true"));
+		if (!hasAttribute("available")) return true;
+		return (getAttribute("available").equals("true"));
 	}
 
 	@Override
 	public boolean isClickable() {
-		if (!getElement().hasAttribute("clickable")) return true;
-		return (getElement().getAttribute("clickable").equals("true"));
+		if (!hasAttribute("clickable")) return true;
+		return (getAttribute("clickable").equals("true"));
+	}
+
+	@Override
+	public boolean isLongClickable() {
+		if (!hasAttribute("long_clickable")) return true;
+		return (getAttribute("long_clickable").equals("true"));
 	}
 
 	@Override
 	public int getCount() {
-		if (!getElement().hasAttribute("count")) return 1;
-		return Integer.parseInt(getElement().getAttribute("count"));
+		if (!hasAttribute("count")) return 1;
+		return Integer.parseInt(getAttribute("count"));
+	}
+	
+	@Override
+	public String getValue() {
+		return getAttribute("value");
 	}
 
 	public String getType() {
@@ -52,59 +63,68 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 	}
 	
 	public int getIndex() {
-		if (!getElement().hasAttribute("index")) return 0;
-		return Integer.parseInt(getElement().getAttribute("index"));
+		if (!hasAttribute("index")) return 0;
+		return Integer.parseInt(getAttribute("index"));
 	}
 	
 	public void setIndex (int index) {
-		getElement().setAttribute("index", String.valueOf(index));
+		setAttribute("index", String.valueOf(index));
 	}
 
 	@Override
 	public String getTextType() {
-		return getElement().getAttribute("text_type");
+		return getAttribute("text_type");
 	}
 	
 	public String guessType() {
-		String s = getElement().getAttribute("type");
+		String s = getAttribute("type");
 		return (s.indexOf('@')==-1)?s:s.substring(0, s.indexOf('@'));
 	}
 
 	public void setId(String id) {
-		getElement().setAttribute("id", id);
+		setAttribute("id", id);
 		
 	}
 
 	public void setName(String name) {
-		getElement().setAttribute("name",name);
+		setAttribute("name",name);
+	}
+	
+	public void setValue (String value) {
+		setAttribute("value", value);
 	}
 	
 	@Override
 	public void setAvailable (String a) {
-		getElement().setAttribute("available", a);
+		setAttribute("available", a);
 	}
 
 	@Override
 	public void setClickable (String c) {
-		getElement().setAttribute("clickable", c);
+		setAttribute("clickable", c);
+	}
+
+	@Override
+	public void setLongClickable (String c) {
+		setAttribute("long_clickable", c);
 	}
 
 	public void setType(String type) {
-		getElement().setAttribute("type",type);
+		setAttribute("type",type);
 	}
 
 	public void setSimpleType(String type) {
-		getElement().setAttribute("simple_type",type);
+		setAttribute("simple_type",type);
 	}
 
 	@Override
 	public void setTextType(String inputType) {
-		getElement().setAttribute("text_type",inputType);
+		setAttribute("text_type",inputType);
 	}
 
 	@Override
 	public void setCount(int count) {
-		getElement().setAttribute("count", String.valueOf(count));
+		setAttribute("count", String.valueOf(count));
 	}
 
 	public void setIdNameType (String id, String name, String type) {
@@ -130,7 +150,9 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 		newOne.setSimpleType(this.getSimpleType());
 		newOne.setAvailable(this.getAvailable());
 		newOne.setClickable(this.getClickable());
+		newOne.setLongClickable(this.getLongClickable());
 		newOne.setIndex(this.getIndex());
+		newOne.setValue(this.getValue());
 		if (this.getCount() != 1) {
 			newOne.setCount(this.getCount());
 		}
@@ -146,16 +168,19 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 	}
 	
 	protected String getAvailable () {
-		return getElement().getAttribute("available");
+		return getAttribute("available");
 	}
 
 	protected String getClickable() {
-		return getElement().getAttribute("clickable");
+		return getAttribute("clickable");
+	}
+
+	protected String getLongClickable() {
+		return getAttribute("long_clickable");
 	}
 
 	public String getSimpleType() {
-		Boolean flag = getElement().hasAttribute("simple_type");
-		return (flag)?getElement().getAttribute("simple_type"):guessSimpleType();
+		return (hasAttribute("simple_type"))?getAttribute("simple_type"):guessSimpleType();
 	}
 
 	public String guessSimpleType() {

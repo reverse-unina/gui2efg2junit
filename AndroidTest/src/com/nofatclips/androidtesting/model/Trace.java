@@ -10,5 +10,7 @@ public interface Trace extends Iterable<Transition>, WrapperInterface {
 	public void addTransition(Transition tail);
 	public void setFinalActivity(ActivityState theActivity);
 	public Transition getFinalTransition ();
+	public boolean isFailed();
+	public void setFailed (boolean failure);
 	
 }

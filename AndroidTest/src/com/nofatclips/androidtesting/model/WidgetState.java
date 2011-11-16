@@ -19,6 +19,10 @@ public interface WidgetState extends WrapperInterface {
 	public void setAvailable (String a);
 	public boolean isClickable();
 	public void setClickable (String c);
+	public boolean isLongClickable();
+	public void setLongClickable (String lc);
 	public int getIndex();
+	public String getValue();
+	public void setValue (String v);
 	
 }
