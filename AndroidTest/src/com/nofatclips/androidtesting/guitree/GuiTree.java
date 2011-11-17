@@ -143,6 +143,24 @@ public class GuiTree extends XmlGraph implements Session, Testable {
 	public void addTrace (Trace t) {
 		getDom().getDocumentElement().appendChild(t.getElement());
 	}
+	
+	public void addCrashedTrace (Trace t) {
+		addFailedTrace (t,"crash");
+	}
+
+	public void addFailedTrace (Trace t) {
+		addFailedTrace (t,"fail");
+	}
+	
+	protected void addFailedTrace (Trace t, String failType) {
+		t.setFailed(true);
+		FinalActivity fail = FinalActivity.createActivity(this);
+		fail.setName(failType);
+		fail.setId(failType);
+		fail.setTitle(failType);
+		t.getFinalTransition().setFinalActivity(fail);
+		addTrace(t);
+	}
 
 	public void removeTrace (Trace t) {
 		getDom().getDocumentElement().removeChild(t.getElement());
