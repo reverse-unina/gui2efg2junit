@@ -1,19 +1,20 @@
 package com.nofatclips.androidtesting.guitree;
 import java.io.File;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.xml.parsers.ParserConfigurationException;
-
 import org.w3c.dom.*;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import com.nofatclips.androidtesting.model.ActivityState;
 import com.nofatclips.androidtesting.model.Session;
-import com.nofatclips.androidtesting.Testable;
 import com.nofatclips.androidtesting.model.Trace;
+import com.nofatclips.androidtesting.Testable;
 import com.nofatclips.androidtesting.junit.TestCaseFromSession;
 import com.nofatclips.androidtesting.xml.NodeListWrapper;
 import com.nofatclips.androidtesting.xml.XmlGraph;
@@ -21,9 +22,9 @@ import com.nofatclips.androidtesting.xml.XmlGraph;
 public class GuiTree extends XmlGraph implements Session, Testable {
 		
 	public GuiTree () throws ParserConfigurationException {
-		super ("guitree.dtd", "SESSION");
+		super ("guitree.dtd", TAG);
 		this.guiTree = getBuilder().newDocument();
-		Element rootElement = this.guiTree.createElement("SESSION");
+		Element rootElement = this.guiTree.createElement(TAG);
 		this.guiTree.appendChild(rootElement);
 	}
 	
@@ -35,7 +36,22 @@ public class GuiTree extends XmlGraph implements Session, Testable {
 	public void parse(File f) throws SAXException, IOException, ParserConfigurationException {
 		this.guiTree = getBuilder().parse(f);
 	}
-	
+
+	public void parse(String xml) {
+		try {
+			this.guiTree = getBuilder().parse((new InputSource(new StringReader(xml))));
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	// Sets attributes for the whole graph (not the nodes!) They are stored as attributes of the root node
 	public void setAttribute (String key, String value) {
 		this.getDom().getDocumentElement().setAttribute(key, value);
@@ -170,7 +186,7 @@ public class GuiTree extends XmlGraph implements Session, Testable {
 	
 	public Iterator<Trace> traces() {
 		Element session = getDom().getDocumentElement();
-		if (session.getNodeName()=="SESSION") {
+		if (session.getNodeName().equals(TAG)) {
 			return new NodeListWrapper<Trace> (session, new TestCaseTrace());
 		}
 		return null;		
@@ -181,5 +197,6 @@ public class GuiTree extends XmlGraph implements Session, Testable {
 	}
 	
 	private Document guiTree;
+	public final static String TAG = "SESSION";
 	
 }

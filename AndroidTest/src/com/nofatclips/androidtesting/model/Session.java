@@ -17,5 +17,7 @@ public interface Session extends Iterable<Trace> {
 	public String getSleepOnThrobber();
 	public void addFailedTrace(Trace theTask);
 	public void addCrashedTrace (Trace theTask);
+	
+	public void parse (String xml);
 
 }

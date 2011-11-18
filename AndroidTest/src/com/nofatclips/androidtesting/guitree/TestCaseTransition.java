@@ -14,6 +14,8 @@ import com.nofatclips.androidtesting.xml.NodeListWrapper;
 
 public class TestCaseTransition extends ElementWrapper implements Transition {
 
+	public final static String TAG = "TRANSITION";
+	
 	public TestCaseTransition () {
 		super();
 	}
@@ -23,7 +25,7 @@ public class TestCaseTransition extends ElementWrapper implements Transition {
 	}
 	
 	public TestCaseTransition (Document dom) {
-		super (dom, "TRANSITION");
+		super (dom, TAG);
 	}
 
 	@Override

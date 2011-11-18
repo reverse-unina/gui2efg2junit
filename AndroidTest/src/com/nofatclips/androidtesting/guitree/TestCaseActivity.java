@@ -31,7 +31,7 @@ public class TestCaseActivity extends ElementWrapper implements ActivityState {
 	}
 	
 	public Iterator<WidgetState> iterator() {
-		if (this.description.getNodeName()==DESC_TAG) {
+		if (this.description.getNodeName().equals(DESC_TAG)) {
 			return new NodeListWrapper<WidgetState> (this.description, new TestCaseWidget());
 		}
 		return null;

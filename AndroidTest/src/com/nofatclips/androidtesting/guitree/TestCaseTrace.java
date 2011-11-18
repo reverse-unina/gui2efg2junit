@@ -12,6 +12,8 @@ import com.nofatclips.androidtesting.xml.NodeListWrapper;
 
 public class TestCaseTrace extends ElementWrapper implements Trace {
 	
+	public final static String TAG = "TRACE";
+	
 	public TestCaseTrace () {
 		super();
 	}
@@ -25,7 +27,7 @@ public class TestCaseTrace extends ElementWrapper implements Trace {
 	}
 	
 	public TestCaseTrace (Document dom) {
-		super (dom, "TRACE");
+		super (dom, TAG);
 	}
 	
 	public String getId () {
@@ -38,7 +40,7 @@ public class TestCaseTrace extends ElementWrapper implements Trace {
 
 	@Override
 	public boolean isFailed() {
-		if (!hasAttribute("fail")) return true;
+		if (!hasAttribute("fail")) return false;
 		return (getAttribute("fail").equals("true"));
 	}
 
@@ -65,7 +67,7 @@ public class TestCaseTrace extends ElementWrapper implements Trace {
 	@Override
 	public Iterator<Transition> transitions () {
 		Element t = getElement();
-		if (t.getNodeName()=="TRACE") {
+		if (t.getNodeName().equals(TAG)) {
 			return new NodeListWrapper<Transition> (t, new TestCaseTransition());
 		}
 		return null;		
