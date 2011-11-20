@@ -84,6 +84,8 @@ class Gui2EfcFrame extends JFrame  {
 		dotCode.setDefaultExtension("dot");
 		JSourceCodeArea jUnitCode = new JSourceCodeArea();
 		jUnitCode.setDefaultExtension("java");
+		JSourceCodeArea testReport = new JSourceCodeArea();
+		testReport.setDefaultExtension("txt");
 		if (!outputFileName.equals("")) {
 			jUnitCode.setDefaultFileName(outputFileName);
 		}
@@ -93,6 +95,7 @@ class Gui2EfcFrame extends JFrame  {
 		schermo.addDisabled(EFG_XML, null, xmlCode);
 		schermo.addDisabled(EFG_DOT, null, dotCode);
 		schermo.addDisabled(JUNIT_JAVA, null, jUnitCode);
+		schermo.addDisabled(TEST_REPORT, null, testReport);
 
 		this.add(schermo);
 		this.someLogger.setLevel(Level.FINER);
@@ -130,6 +133,7 @@ class Gui2EfcFrame extends JFrame  {
 			e.printStackTrace();
 		}
 		showTest(); // Can try to show test even if efg failed
+		showReport();
 	}
 	
 	public boolean isWindowed () {
@@ -231,6 +235,12 @@ class Gui2EfcFrame extends JFrame  {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	private void showReport() {
+		schermo.setFileName(TEST_REPORT, "report");
+		ReportGenerator r = new ReportGenerator(this.guiTree);
+		schermo.showCode(TEST_REPORT, r.getReport());
 	}
 	
 	private String inputFileName;

@@ -13,6 +13,7 @@ public class Resources {
 	public final static String EFG_XML = "Event Flow Tree (XML)";
 	public final static String EFG_DOT = "Event Flow Tree (Dot)";
 	public final static String JUNIT_JAVA = "JUnit Test";
+	public final static String TEST_REPORT = "Test Report";
 	public final static String GUI_TREE_FILE_TYPE = "XML Gui Tree";
 	public final static String LOGGER = "dek.xml.test";
 	
