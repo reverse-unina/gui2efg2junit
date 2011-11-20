@@ -56,7 +56,9 @@ To reproduce the bug:
 11-20 16:13:19.770: W/ActivityManager(61):   Force finishing activity org.wordpress.android/.EditPost
 }}}
 
-MORE INFO HERE
+The issue is likely due to the attempt to operate on a GUI element (retrieved via findViewById) that was not correctly defined in the XML layout for the activity.
+
+See: [https://android.trac.wordpress.org/ticket/218 Ticket 218]
 
 == Wrong Login and Stats ==
 
