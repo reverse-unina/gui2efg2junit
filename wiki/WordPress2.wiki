@@ -17,6 +17,47 @@ See also: WordpressForAndroid
 
 = Issues =
 
+== Share with Wordpress ==
+
+==== The app crashes when trying to share a page via Wordpress ====
+
+Changeset 394 crashes when the user opens a page and tries to share it via Wordpress. Sharing via SMS messaging works.
+
+To reproduce the bug:
+
+ * Click Pages
+ * Open an item in the list
+ * Click the share button (double arrow between the pencil and the trashcan)
+ * Click Wordpress
+
+{{{
+11-20 16:13:19.709: D/AndroidRuntime(4238): Shutting down VM
+11-20 16:13:19.709: W/dalvikvm(4238): threadid=1: thread exiting with uncaught exception (group=0x40015560)
+11-20 16:13:19.729: E/AndroidRuntime(4238): FATAL EXCEPTION: main
+11-20 16:13:19.729: E/AndroidRuntime(4238): java.lang.RuntimeException: Unable to start activity ComponentInfo{org.wordpress.android/org.wordpress.android.EditPost}: java.lang.NullPointerException
+11-20 16:13:19.729: E/AndroidRuntime(4238): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:1647)
+11-20 16:13:19.729: E/AndroidRuntime(4238): 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:1663)
+11-20 16:13:19.729: E/AndroidRuntime(4238): 	at android.app.ActivityThread.access$1500(ActivityThread.java:117)
+11-20 16:13:19.729: E/AndroidRuntime(4238): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:931)
+11-20 16:13:19.729: E/AndroidRuntime(4238): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-20 16:13:19.729: E/AndroidRuntime(4238): 	at android.os.Looper.loop(Looper.java:123)
+11-20 16:13:19.729: E/AndroidRuntime(4238): 	at android.app.ActivityThread.main(ActivityThread.java:3683)
+11-20 16:13:19.729: E/AndroidRuntime(4238): 	at java.lang.reflect.Method.invokeNative(Native Method)
+11-20 16:13:19.729: E/AndroidRuntime(4238): 	at java.lang.reflect.Method.invoke(Method.java:507)
+11-20 16:13:19.729: E/AndroidRuntime(4238): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:839)
+11-20 16:13:19.729: E/AndroidRuntime(4238): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:597)
+11-20 16:13:19.729: E/AndroidRuntime(4238): 	at dalvik.system.NativeStart.main(Native Method)
+11-20 16:13:19.729: E/AndroidRuntime(4238): Caused by: java.lang.NullPointerException
+11-20 16:13:19.729: E/AndroidRuntime(4238): 	at org.wordpress.android.EditPost.setContent(EditPost.java:941)
+11-20 16:13:19.729: E/AndroidRuntime(4238): 	at org.wordpress.android.EditPost.onCreate(EditPost.java:166)
+11-20 16:13:19.729: E/AndroidRuntime(4238): 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1047)
+11-20 16:13:19.729: E/AndroidRuntime(4238): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:1611)
+11-20 16:13:19.729: E/AndroidRuntime(4238): 	... 11 more
+11-20 16:13:19.770: W/ActivityManager(61):   Force finishing activity org.wordpress.android/.EditPost
+}}}
+
+MORE INFO HERE
+
 == Wrong Login and Stats ==
 
 ==== The app crashes when refreshing the Stats if the user/pass pair is wrong ====
@@ -353,6 +394,14 @@ The bug was caused by the lack of control on the length of a substring extracted
 See: [https://android.trac.wordpress.org/ticket/206 Ticket 206] - [https://android.trac.wordpress.org/changeset/398 Changeset 398]
 
 = Test Results =
+
+== Test Results from 20 Nov 2011 (Changeset 394 w\ AndCrawler r-97) ==
+
+This test on an older version of WP was conducted to try the new resuming feature of AndCrawler rev.97 in order to find out how many of the issues found so far we're able to detect with a single smoke test session. Settings and results are provided:
+
+ * Complete test result package: https://gui2efg2junit.googlecode.com/files/wordpress2_20111120.zip
+
+Crashes found by this session: [#Share_with_Wordpress Share with Wordpress].
 
 == Test Results from 14 Nov 2011 (Changeset 424 w\ AndCrawler r-91) ==
 
