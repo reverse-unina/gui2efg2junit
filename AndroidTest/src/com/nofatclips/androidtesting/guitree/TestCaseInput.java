@@ -93,15 +93,15 @@ public class TestCaseInput extends ElementWrapper implements UserInput {
 	public static TestCaseInput createInput(Document theSession) {
 		return new TestCaseInput(theSession);
 	}
-
+	
 	public TestCaseInput clone () {
 		TestCaseInput i = createInput(getElement().getOwnerDocument());
-		i.setId (this.getId());
-		i.setWidgetId(this.getWidgetId());
 		i.setName(this.getName());
-		i.setType(this.getType());
-		i.setWidgetType(this.getWidgetType());
+		i.setWidgetId(this.getWidgetId());
+		i.setWidgetType(this.getWidgetType());				
 		i.setValue(this.getValue());
+		i.setType(this.getType());		
+		i.setId (this.getId());
 		return i;
 	}
 
