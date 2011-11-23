@@ -17,6 +17,41 @@ See also: WordpressForAndroid
 
 = Issues =
 
+== Stats Crash ==
+
+==== Crash when hit the Stats button on the dashboard ====
+
+To reproduce the bug:
+
+ * Click _Stats_
+
+{{{
+11-23 19:25:37.920: D/AndroidRuntime(811): Shutting down VM
+11-23 19:25:37.950: W/dalvikvm(811): threadid=1: thread exiting with uncaught exception (group=0x40015560)
+11-23 19:25:37.970: E/AndroidRuntime(811): FATAL EXCEPTION: main
+11-23 19:25:37.970: E/AndroidRuntime(811): java.lang.RuntimeException: Unable to start activity ComponentInfo{org.wordpress.android/org.wordpress.android.ViewStats}: java.lang.NullPointerException
+11-23 19:25:37.970: E/AndroidRuntime(811): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:1647)
+11-23 19:25:37.970: E/AndroidRuntime(811): 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:1663)
+11-23 19:25:37.970: E/AndroidRuntime(811): 	at android.app.ActivityThread.access$1500(ActivityThread.java:117)
+11-23 19:25:37.970: E/AndroidRuntime(811): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:931)
+11-23 19:25:37.970: E/AndroidRuntime(811): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-23 19:25:37.970: E/AndroidRuntime(811): 	at android.os.Looper.loop(Looper.java:123)
+11-23 19:25:37.970: E/AndroidRuntime(811): 	at android.app.ActivityThread.main(ActivityThread.java:3683)
+11-23 19:25:37.970: E/AndroidRuntime(811): 	at java.lang.reflect.Method.invokeNative(Native Method)
+11-23 19:25:37.970: E/AndroidRuntime(811): 	at java.lang.reflect.Method.invoke(Method.java:507)
+11-23 19:25:37.970: E/AndroidRuntime(811): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:839)
+11-23 19:25:37.970: E/AndroidRuntime(811): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:597)
+11-23 19:25:37.970: E/AndroidRuntime(811): 	at dalvik.system.NativeStart.main(Native Method)
+11-23 19:25:37.970: E/AndroidRuntime(811): Caused by: java.lang.NullPointerException
+11-23 19:25:37.970: E/AndroidRuntime(811): 	at org.wordpress.android.ViewStats.initStats(ViewStats.java:310)
+11-23 19:25:37.970: E/AndroidRuntime(811): 	at org.wordpress.android.ViewStats.onCreate(ViewStats.java:114)
+11-23 19:25:37.970: E/AndroidRuntime(811): 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1047)
+11-23 19:25:37.970: E/AndroidRuntime(811): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:1611)
+11-23 19:25:37.970: E/AndroidRuntime(811): 	... 11 more
+}}}
+
+See: [https://android.trac.wordpress.org/ticket/215 Ticket 215] - [https://android.trac.wordpress.org/changeset/437 Changeset 437]
+
 == Ghost Spam Comment ==
 
 ==== Caching issues on deleted spam comment ====
@@ -445,6 +480,18 @@ The bug was caused by the lack of control on the length of a substring extracted
 See: [https://android.trac.wordpress.org/ticket/206 Ticket 206] - [https://android.trac.wordpress.org/changeset/398 Changeset 398]
 
 = Test Results =
+
+== Test Results from 23 Nov 2011 (Changeset 434 w\ AndCrawler r-99) ==
+
+This test was conducted to find out if the [#Ghost_Spam_Comment Ghost Spam Comment] was fixed in the latest available revision. A different crash occurence was found instead: [#Stats_Crash Stats Crash]. Since resuming was disabled, the session stopped.
+
+ * Complete test result package: http://gui2efg2junit.googlecode.com/files/wordpress2_20111123.zip
+
+The bug was already known:
+
+https://android.trac.wordpress.org/ticket/215
+
+It has been fixed in [https://android.trac.wordpress.org/changeset/437 Changeset 437].
 
 == Test Results from 20 Nov 2011 (Changeset 394 w\ AndCrawler r-97) ==
 
