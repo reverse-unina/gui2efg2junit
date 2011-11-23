@@ -33,6 +33,7 @@ public class ReportGenerator {
 
 	private int widgetCount = 0;
 	private int widgetSupport = 0;
+	private Map<String,Integer> widgetTypes;
 	private Map<String,Integer> widgets;
 	private Map<String,Integer> widgetStates;
 	
@@ -42,6 +43,7 @@ public class ReportGenerator {
 		this.activityStates = new HashSet<String>();
 		this.events = new HashSet<String>();
 		this.inputs = new HashSet<String>();
+		this.widgetTypes = new Hashtable<String, Integer>();
 		this.widgets = new Hashtable<String,Integer>();
 		this.widgetStates = new Hashtable<String,Integer>();
 	}
@@ -88,13 +90,10 @@ public class ReportGenerator {
 						this.widgetCount++;
 						localCount++;
 						if (! (w.getSimpleType().equals("") || w.getSimpleType().equals(NULL)) ) {
+							inc (this.widgetTypes, w.getSimpleType());
 							this.widgetSupport++;
 						}
 					}
-//					if (this.widgets.containsKey(key)) {
-//						localCount = Math.max(localCount,this.widgets.get(key));
-//					}
-//					localCount = max(localCount,this.widgets.get(key));
 					this.widgets.put(key, max(localCount,this.widgets.get(key)));
 					this.widgetStates.put(key2, max(localCount,this.widgetStates.get(key2)));
 				}
@@ -106,13 +105,10 @@ public class ReportGenerator {
 						this.widgetCount++;
 						localCount2++;
 						if (! (w.getSimpleType().equals("") || w.getSimpleType().equals(NULL)) ) {
+							inc (this.widgetTypes, w.getSimpleType());
 							this.widgetSupport++;
 						}
 					}
-//					if (this.widgets.containsKey(key)) {
-//						localCount2 = Math.max(localCount2,this.widgets.get(key));
-//					}
-//					localCount2 = max(localCount2,this.widgets.get(key));
 					this.widgets.put(key, max(localCount2,this.widgets.get(key)));
 					this.widgetStates.put(key2, max(localCount2,this.widgetStates.get(key2)));
 				}
@@ -125,10 +121,6 @@ public class ReportGenerator {
 	
 	public String getReport () {
 		evaluate();
-//		int sum = 0;
-//		for (Integer i: this.widgets.values()) {
-//			sum+=i;
-//		}
 		return "Traces: " + this.traces + NEW_LINE + 
 				TAB + "success: " + this.tracesSuccessful + NEW_LINE + 
 				TAB + "fail: " + this.tracesFailed + NEW_LINE + 
@@ -146,6 +138,7 @@ public class ReportGenerator {
 				BREAK + 
 				"Views and widget: " + this.widgetCount + NEW_LINE + 
 				TAB + "supported widgets: " + this.widgetSupport + NEW_LINE + 
+				expandMap(this.widgetTypes) +
 				TAB + "different widgets: " + sum(this.widgets) + " <-> " + sum(this.widgetStates)
 				;
 	}
@@ -165,6 +158,22 @@ public class ReportGenerator {
 			sum+=i;
 		}
 		return sum;
+	}
+	
+	public static void inc (Map<String,Integer> table, String key) {
+		if (table.containsKey(key)) {
+			table.put(key, table.get(key)+1);
+		} else {
+			table.put(key, 1);
+		}
+	}
+	
+	public static String expandMap (Map<String,Integer> map) {
+		StringBuilder s = new StringBuilder();
+		for (Map.Entry<String,Integer> e:map.entrySet()) {
+			s.append(TAB + TAB + e.getKey() + ": " + e.getValue() + NEW_LINE);
+		}
+		return s.toString();
 	}
 
 }

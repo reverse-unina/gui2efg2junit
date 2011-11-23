@@ -44,7 +44,6 @@ public class TestCaseTrace extends ElementWrapper implements Trace {
 		return (getAttribute("fail").equals("true"));
 	}
 
-	@Override
 	public void setFailed(boolean failure) {
 		setAttribute("fail", (failure)?"true":"false");
 	}
@@ -64,7 +63,6 @@ public class TestCaseTrace extends ElementWrapper implements Trace {
 	
 	// Iterator Methods
 
-	@Override
 	public Iterator<Transition> transitions () {
 		Element t = getElement();
 		if (t.getNodeName().equals(TAG)) {
@@ -73,12 +71,10 @@ public class TestCaseTrace extends ElementWrapper implements Trace {
 		return null;		
 	}
 	
-	@Override
 	public Iterator<Transition> iterator() {
 		return transitions();
 	}
 
-	@Override
 	public void addTransition(Transition tail) {
 		appendChild(tail.getElement());
 	}
@@ -94,7 +90,6 @@ public class TestCaseTrace extends ElementWrapper implements Trace {
 		return t;
 	}
 
-	@Override
 	public void setFinalActivity(ActivityState theActivity) {
 		Transition lastTransition = getFinalTransition();
 		if (lastTransition != null) {
@@ -102,13 +97,20 @@ public class TestCaseTrace extends ElementWrapper implements Trace {
 		}
 	}
 	
-	@Override
 	public Transition getFinalTransition() {
 		Transition lastTransition = null;
 		for (Transition t: this) {
 			lastTransition = t;
 		}
 		return lastTransition;
+	}
+	
+	public void setDateTime (String time) {
+		setAttribute("date_time", time);
+	}
+	
+	public String getDateTime () {
+		return getAttribute("date_time");
 	}
 		
 }
