@@ -1,10 +1,9 @@
 package com.nofatclips.androidtesting;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.Set;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import com.nofatclips.androidtesting.guitree.GuiTree;
 import com.nofatclips.androidtesting.model.*;
@@ -37,6 +36,8 @@ public class ReportGenerator {
 	private Map<String,Integer> widgets;
 	private Map<String,Integer> widgetStates;
 	
+	private long runtime = 0;
+	
 	public ReportGenerator(GuiTree guiTree) {
 		this.session = guiTree;
 		this.activity = new HashSet<String>();
@@ -50,8 +51,35 @@ public class ReportGenerator {
 
 	public void evaluate() {
 		String s;
+		DateFormat millis = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.UK); //    yyyy
+//		millis.setCalendar(new GregorianCalendar());
+		Date start = null;
+		Date end = null;
+		int count = 0;
+		boolean noTime = false;
+		try {
+			start = millis.parse(this.session.getDateTime());
+//			System.out.println(start.getTime());
+		} catch (ParseException e) {
+			noTime = true;
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		for (Trace theTrace: this.session) {
-			
+
+			// Runtime
+			if (!(noTime || theTrace.getDateTime().equals(""))) {
+				try {
+					end = millis.parse(theTrace.getDateTime());
+//					System.out.println(end.getTime());
+					count = this.traces;
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
 			// Trace count
 			this.traces++;
 			s = theTrace.getFinalTransition().getFinalActivity().getId();
@@ -60,6 +88,7 @@ public class ReportGenerator {
 			else this.tracesSuccessful++;
 			
 			boolean first = true;
+			
 			for (Transition step: theTrace) {
 				
 				// Transition count
@@ -117,11 +146,17 @@ public class ReportGenerator {
 
 			}
 		}
+		
+		if (!noTime && (end!=null) && (start!=null)) {
+			this.runtime = (end.getTime() - start.getTime())/count*this.traces;
+		}
+
 	}
 	
 	public String getReport () {
 		evaluate();
-		return "Traces: " + this.traces + NEW_LINE + 
+		return "Time elapsed: " + ((this.runtime==0)?"N.D.":printTime(this.runtime)) + NEW_LINE + NEW_LINE +
+				"Traces processed: " + this.traces + NEW_LINE + 
 				TAB + "success: " + this.tracesSuccessful + NEW_LINE + 
 				TAB + "fail: " + this.tracesFailed + NEW_LINE + 
 				TAB + "crash: " + this.tracesCrashed +
@@ -136,7 +171,7 @@ public class ReportGenerator {
 				TAB + "inputs: " + this.inputCount + NEW_LINE +
 				TAB + "different inputs: " + this.inputs.size() + 
 				BREAK + 
-				"Views and widget: " + this.widgetCount + NEW_LINE + 
+				"Views and widgets: " + this.widgetCount + NEW_LINE + 
 				TAB + "supported widgets: " + this.widgetSupport + NEW_LINE + 
 				expandMap(this.widgetTypes) +
 				TAB + "different widgets: " + sum(this.widgets) + " <-> " + sum(this.widgetStates)
@@ -174,6 +209,14 @@ public class ReportGenerator {
 			s.append(TAB + TAB + e.getKey() + ": " + e.getValue() + NEW_LINE);
 		}
 		return s.toString();
+	}
+	
+	public static String printTime (long millis) {
+		long s = millis/1000;
+		long hh = s/3600;
+		s-=(hh*3600);
+		long mm = s/60;
+		return ((hh>0)?(hh+"h "):"") + mm + "'";
 	}
 
 }
