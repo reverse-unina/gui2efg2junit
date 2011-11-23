@@ -21,7 +21,7 @@ See also: WordpressForAndroid
 
 ==== Crash when hit the Stats button on the dashboard ====
 
-To reproduce the bug:
+Affects changeset 434 and subsequent. To reproduce the bug:
 
  * Click _Stats_
 
