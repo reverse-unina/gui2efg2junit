@@ -452,7 +452,11 @@ This test on an older version of WP was conducted to try the new resuming featur
 
  * Complete test result package: https://gui2efg2junit.googlecode.com/files/wordpress2_20111120.zip
 
-Crashes found by this session: [#Share_with_Wordpress Share with Wordpress], [#Crash_On_Edit_Page Edit Page]. Other bugs found: [#Ghost_Spam_Comment Ghost Spam Comment].
+Crashes found by this session:
+
+ * [#Share_with_Wordpress Share with Wordpress]
+ * [#Crash_On_Edit_Page Edit Page]
+ * [#Ghost_Spam_Comment Ghost Spam Comment].
 
 == Test Results from 14 Nov 2011 (Changeset 424 w\ AndCrawler r-91) ==
 
