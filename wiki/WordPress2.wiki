@@ -99,7 +99,9 @@ This error is shown in the log:
 
 The app won't crash, but a dialog with a 404 error pops up leading the crawling to failure.
 
-See: [https://android.trac.wordpress.org/ticket/231 Ticket 231]
+The bug has been fixed by removing the comments table from the cache when it's empty.
+
+See: [https://android.trac.wordpress.org/ticket/232 Ticket 232] - [https://android.trac.wordpress.org/changeset/435 Changeset 435] - [https://android.trac.wordpress.org/changeset/441 Changeset 441]
 
 == Share with Wordpress ==
 
