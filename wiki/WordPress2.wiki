@@ -355,7 +355,7 @@ All rev.s from 412 to 418 suffer a crash when the following sequence of events i
 The problem arises when the user choose to open the blog in the browser before it's been loaded in the app (that is, while the progress bar is still shown in the title bar.)
 It's been solved by ignoring the command until the login to the blog succeeded.
 
-See: [https://android.trac.wordpress.org/ticket/209 Ticket 209] - [https://android.trac.wordpress.org/changeset/420 Changeset 420]
+See: [https://android.trac.wordpress.org/ticket/209 Ticket 209] - [https://android.trac.wordpress.org/changeset/419 Changeset 419]
 
 == Stats and Back ==
 
