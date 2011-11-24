@@ -108,6 +108,7 @@ See: [https://android.trac.wordpress.org/ticket/232 Ticket 232] - [https://andro
 ==== The app crashes when trying to share a page via Wordpress ====
 
 Changeset 394 crashes when the user opens a page and tries to share it via Wordpress. Sharing via SMS messaging works.
+The crash tipically occurs when there's only one blog added to the app.
 
 To reproduce the bug:
 
@@ -142,9 +143,9 @@ To reproduce the bug:
 11-20 16:13:19.770: W/ActivityManager(61):   Force finishing activity org.wordpress.android/.EditPost
 }}}
 
-The issue is likely due to the attempt to operate on a GUI element (retrieved via findViewById) that was not correctly defined in the XML layout for the activity.
+The bug was solved by calling the EditPost.setContent() method after the content view is set for the activity.
 
-See: [https://android.trac.wordpress.org/ticket/218 Ticket 218]
+See: [https://android.trac.wordpress.org/ticket/218 Ticket 218] - [https://android.trac.wordpress.org/changeset/446 Changeset 446]
 
 == Wrong Login and Stats ==
 
@@ -506,6 +507,8 @@ Crashes found by this session:
  * [#Share_with_Wordpress Share with Wordpress]
  * [#Crash_On_Edit_Page Edit Page]
  * [#Ghost_Spam_Comment Ghost Spam Comment].
+
+Information on the fix are found in the respective sections.
 
 == Test Results from 14 Nov 2011 (Changeset 424 w\ AndCrawler r-91) ==
 
