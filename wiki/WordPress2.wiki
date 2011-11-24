@@ -188,6 +188,11 @@ To reproduce the bug:
 
 When the login fails, the app asks for the correct user name and password, and expects the user to either provide them or cancel the operation. The click on the refresh button is probably unhandled.
 
+The bug disappeared when the stats loading was changed to use an AsyncTask.
+
+See: [https://android.trac.wordpress.org/ticket/217 Ticket 217] - [https://android.trac.wordpress.org/changeset/447 Changeset 447]
+
+
 == Refresh Stats Crash ==
 
 ==== The app crashes when the Go button is pressed in the Stats activity ====
