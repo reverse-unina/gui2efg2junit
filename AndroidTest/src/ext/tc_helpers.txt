@@ -184,6 +184,7 @@
 	}
 	
 	private void fireEventOnView (View v, String eventType, String value) {
+	/*
 		if (eventType.equals(CLICK)) {
 			click (v);
 		} else if (eventType.equals(LONG_CLICK)) {
@@ -207,23 +208,49 @@
 		} else {
 			return;
 		}
+		*/
+		injectInteraction(v, eventType, value);
 		solo.sleep(SLEEP_AFTER_EVENT);
 		waitOnThrobber();
 		refreshCurrentActivity();
 	}
 	
-	public void setInput (int widgetId, String widgetType, String value) {
+	public void setInput (int widgetId, String inputType, String value) {
 		View v = getWidget(widgetId);
 		if (v == null) {
 			v = theActivity.findViewById(widgetId);
 		}
-		if (widgetType == TYPE_TEXT) {
-			solo.enterText((EditText)v, value);
-		} else if (widgetType == CLICK) {
+		injectInteraction(v, inputType, value);	
+	}
+	
+	private void injectInteraction (View v, String interactionType, String value) {
+		if (interactionType.equals(CLICK)) {
 			click (v);
-		} else if (widgetType.equals(SET_BAR)) {
+		} else if (interactionType.equals(LONG_CLICK)) {
+			longClick(v);
+		} else if (interactionType.equals(BACK)) {
+			solo.goBack();
+		} else if (interactionType.equals(OPEN_MENU)) {
+			solo.sendKey(Solo.MENU);
+		} else if (interactionType.equals(SCROLL_DOWN)) {
+			solo.scrollDown();
+		} else if (interactionType.equals(SWAP_TAB) && (value!=null)) {
+			if (v instanceof TabHost) {
+				swapTab ((TabHost)v, value);
+			} else {
+				swapTab (this.tabs, value);
+			}
+		} else if (interactionType.equals(LIST_SELECT)) {
+			selectListItem((ListView)v, value);
+		} else if (interactionType.equals(LIST_LONG_SELECT)) {
+			selectListItem((ListView)v, value, true);
+		} else if (interactionType.equals(TYPE_TEXT)) {
+			solo.enterText((EditText)v, value);
+		} else if (interactionType.equals(SET_BAR)) {
 			solo.setProgressBar((ProgressBar)v, Integer.parseInt(value));
-		}
+		} else {
+			return;
+		}		
 	}
 	
 	private void swapTab (TabHost t, String tab) {
