@@ -82,15 +82,17 @@
 	
 	public boolean checkWidgetEquivalence (View testee, int theId, String theType, String theName) {
 		Log.i("nofatclips", "Retrieved from return list id=" + testee.getId());
+		String testeeSimpleType = getSimpleType(testee);
 		String testeeType = testee.getClass().getName();
 		Log.i("nofatclips", "Testing for type (" + testeeType + ") against the original (" + theType + ")");
 		String testeeName = (testee instanceof TextView)?((TextView) testee).getText().toString():"";
 		Log.i("nofatclips", "Testing for name (" + testeeName + ") against the original (" + theName + ")");
-		if ( (theType.equals(testeeType)) && (theName.equals(testeeName)) && (theId == testee.getId()) ) {
+		if ( ((theType.equals(testeeType)) || (theType.equals(testeeSimpleType)) ) && (theName.equals(testeeName)) && (theId == testee.getId()) ) {
 			return true;
 		}
 		return false;
 	}
+	
 
 	public ArrayList<View> getWidgetsById (int id) {
 		ArrayList<View> theList = new ArrayList<View>();
@@ -355,6 +357,51 @@
 	private void refreshCurrentActivity() {
 		this.theActivity = solo.getCurrentActivity();
 		Log.i("nofatclips", "Current activity is " + getActivity().getLocalClassName());
+	}
+	
+	public String getSimpleType(View v) {
+		String type = v.getClass().getName(); 
+		if (type.endsWith("null"))
+			return NULL;
+		if (type.endsWith("RadioButton"))
+			return RADIO;
+		if (type.endsWith("CheckBox") || type.endsWith("CheckedTextView"))
+			return CHECKBOX;
+		if (type.endsWith("ToggleButton"))
+			return TOGGLE_BUTTON;
+		if (type.endsWith("IconMenuView"))
+			return MENU_VIEW;
+		if (type.endsWith("DatePicker"))
+			return DATE_PICKER;
+		if (type.endsWith("TimePicker"))
+			return TIME_PICKER;
+		if (type.endsWith("IconMenuItemView"))
+			return BUTTON;
+		if (type.endsWith("DialogTitle"))
+			return DIALOG_VIEW;
+		if (type.endsWith("Button"))
+			return BUTTON;
+		if (type.endsWith("EditText"))
+			return EDIT_TEXT;
+		if (type.endsWith("Spinner"))
+			return SPINNER;
+		if (type.endsWith("SeekBar"))
+			return SEEK_BAR;
+		if (v instanceof RatingBar && (!((RatingBar)v).isIndicator()))
+			return RATING_BAR;
+		if (type.endsWith("TabHost"))
+			return TAB_HOST;
+		if (type.endsWith("ListView") || type.endsWith("ExpandedMenuView"))
+			return LIST_VIEW;
+		if (type.endsWith("TextView"))
+			return TEXT_VIEW;
+		if (type.endsWith("ImageView"))
+			return IMAGE_VIEW;
+		if (type.endsWith("LinearLayout"))
+			return LINEAR_LAYOUT;
+		if ((v instanceof WebView) || type.endsWith("WebView"))
+			return WEB_VIEW;
+		return "";
 	}
 	
 	public void debug (String msg) {
