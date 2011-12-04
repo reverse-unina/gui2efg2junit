@@ -489,6 +489,19 @@ See: [https://android.trac.wordpress.org/ticket/206 Ticket 206] - [https://andro
 
 = Test Results =
 
+== Test Results from 29 Nov 2011 (Changeset 452 w\ AndCrawler r-104) ==
+
+
+This test was performed on the latest and more stable release of Wordpress in order to evaluate the code coverage that the current version of the crawler manages to achieve.
+
+OVERALL COVERAGE SUMMARY
+|| name	|| class, %	|| method, %	|| block, %	|| line, % || 
+|| all classes	|| 57%  (139/246)	|| 54%  (519/965)	|| 49%  (16587/33693)	|| 48%  (3686,1/7737) || 
+
+Input and output of the test are provided in this package:
+
+https://gui2efg2junit.googlecode.com/files/wordpress2beta_20111129.zip
+
 == Test Results from 23 Nov 2011 (Changeset 434 w\ AndCrawler r-99) ==
 
 This test was conducted to find out if the [#Ghost_Spam_Comment Ghost Spam Comment] was fixed in the latest available revision. A different crash occurence was found instead: [#Stats_Crash Stats Crash]. Since resuming was disabled, the session stopped.
