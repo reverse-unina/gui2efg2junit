@@ -500,7 +500,8 @@ OVERALL COVERAGE SUMMARY
 
 Input and output of the test are provided in this package:
 
-https://gui2efg2junit.googlecode.com/files/wordpress2beta_20111129.zip
+ * Parameters and outputs: https://gui2efg2junit.googlecode.com/files/wordpress2beta_20111129.zip
+ * Report: http://gui2efg2junit.googlecode.com/files/wordpress2_20111129.xhtml
 
 == Test Results from 23 Nov 2011 (Changeset 434 w\ AndCrawler r-99) ==
 
