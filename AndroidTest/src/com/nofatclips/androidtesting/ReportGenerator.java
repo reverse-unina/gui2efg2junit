@@ -166,6 +166,7 @@ public class ReportGenerator {
 				TAB + "different activities found: " + this.activity.size() +
 				BREAK +
 				"Interactions: " + (this.eventCount+this.inputCount) + NEW_LINE +
+				TAB + "different interactions: " + (this.events.size() + this.inputs.size()) + NEW_LINE +
 				TAB + "events: " + this.eventCount + NEW_LINE +
 				TAB + "different events: " + this.events.size() + NEW_LINE +
 				TAB + "inputs: " + this.inputCount + NEW_LINE +
