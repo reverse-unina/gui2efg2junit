@@ -20,6 +20,7 @@ public class ReportGenerator {
 	private int tracesSuccessful = 0;
 	private int tracesFailed = 0;
 	private int tracesCrashed = 0;
+	private int tracesAsync = 0;
 	
 	private int transitions = 0;
 	private Set<String> activity ;
@@ -86,6 +87,7 @@ public class ReportGenerator {
 			if (s.equals("fail")) this.tracesFailed++;
 			else if (s.equals("crash")) this.tracesCrashed++;
 			else this.tracesSuccessful++;
+			if (theTrace.isAsync()) this.tracesAsync++;
 			
 			boolean first = true;
 			
@@ -159,7 +161,8 @@ public class ReportGenerator {
 				"Traces processed: " + this.traces + NEW_LINE + 
 				TAB + "success: " + this.tracesSuccessful + NEW_LINE + 
 				TAB + "fail: " + this.tracesFailed + NEW_LINE + 
-				TAB + "crash: " + this.tracesCrashed +
+				TAB + "crash: " + this.tracesCrashed + NEW_LINE +
+				"Non repeatable issues:" + this.tracesAsync + 
 				BREAK +
 				"Transitions: " + this.transitions + NEW_LINE + 
 				TAB + "different activity states found: " + this.activityStates.size() + NEW_LINE + 

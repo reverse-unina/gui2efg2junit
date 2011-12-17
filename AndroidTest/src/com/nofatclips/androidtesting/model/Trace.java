@@ -12,6 +12,8 @@ public interface Trace extends Iterable<Transition>, WrapperInterface {
 	public Transition getFinalTransition ();
 	public boolean isFailed();
 	public void setFailed (boolean failure);
+	public boolean isAsync();
+	public void setAsync (boolean failure);
 	public String getDateTime ();
 	public void setDateTime (String time);
 	
