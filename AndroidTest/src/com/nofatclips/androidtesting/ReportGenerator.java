@@ -113,36 +113,25 @@ public class ReportGenerator {
 				}
 				
 				// Widgets count
+				countWidgets(step, first);
 				if (first) {
-					int localCount = 0;
-					String key = step.getStartActivity().getName();
-					String key2 = step.getStartActivity().getId();
-					for (WidgetState w: step.getStartActivity()) {
-						this.widgetCount++;
-						localCount++;
-						if (! (w.getSimpleType().equals("") || w.getSimpleType().equals(NULL)) ) {
-							inc (this.widgetTypes, w.getSimpleType());
-							this.widgetSupport++;
-						}
-					}
-					this.widgets.put(key, max(localCount,this.widgets.get(key)));
-					this.widgetStates.put(key2, max(localCount,this.widgetStates.get(key2)));
+					countWidgets(step);
 				}
-				if (!(step.getFinalActivity().getId().equals("fail") || step.getFinalActivity().getId().equals("crash"))) {
-					int localCount2 = 0;
-					String key = step.getFinalActivity().getName();
-					String key2 = step.getFinalActivity().getId();
-					for (WidgetState w: step.getFinalActivity()) {
-						this.widgetCount++;
-						localCount2++;
-						if (! (w.getSimpleType().equals("") || w.getSimpleType().equals(NULL)) ) {
-							inc (this.widgetTypes, w.getSimpleType());
-							this.widgetSupport++;
-						}
-					}
-					this.widgets.put(key, max(localCount2,this.widgets.get(key)));
-					this.widgetStates.put(key2, max(localCount2,this.widgetStates.get(key2)));
-				}
+//				if (!(step.getFinalActivity().getId().equals("fail") || step.getFinalActivity().getId().equals("crash"))) {
+//					int localCount2 = 0;
+//					String key = step.getFinalActivity().getName();
+//					String key2 = step.getFinalActivity().getId();
+//					for (WidgetState w: step.getFinalActivity()) {
+//						this.widgetCount++;
+//						localCount2++;
+//						if (! (w.getSimpleType().equals("") || w.getSimpleType().equals(NULL)) ) {
+//							inc (this.widgetTypes, w.getSimpleType());
+//							this.widgetSupport++;
+//						}
+//					}
+//					this.widgets.put(key, max(localCount2,this.widgets.get(key)));
+//					this.widgetStates.put(key2, max(localCount2,this.widgetStates.get(key2)));
+//				}
 
 				first = false;
 
@@ -221,6 +210,29 @@ public class ReportGenerator {
 		s-=(hh*3600);
 		long mm = s/60;
 		return ((hh>0)?(hh+"h "):"") + mm + "'";
+	}
+
+	public void countWidgets (Transition step) {
+		countWidgets(step, false);
+	}
+
+	public void countWidgets (Transition step, boolean first) {
+		int localCount = 0;
+		ActivityState a = (first)?step.getStartActivity():step.getFinalActivity();
+		String key = a.getName();
+		String key2 = a.getId();
+		if (a.getId().equals("fail") || a.getId().equals("crash")) return;
+		
+		for (WidgetState w: a) {
+			this.widgetCount++;
+			localCount++;
+			if (! (w.getSimpleType().equals("") || w.getSimpleType().equals(NULL)) ) {
+				inc (this.widgetTypes, w.getSimpleType());
+				this.widgetSupport++;
+			}
+		}
+		this.widgets.put(key, max(localCount,this.widgets.get(key)));
+		this.widgetStates.put(key2, max(localCount,this.widgetStates.get(key2)));
 	}
 
 }
