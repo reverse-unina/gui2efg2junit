@@ -96,13 +96,13 @@ public class ReportGenerator {
 				// Transition count
 				this.transitions++;
 				
-				// Activity and states count
-				this.activity.add(step.getStartActivity().getName());
-				this.activityStates.add(step.getStartActivity().getId());
-				if (!(step.getFinalActivity().getId().equals("fail") || step.getFinalActivity().getId().equals("crash"))) {
-					this.activity.add(step.getFinalActivity().getName());
-					this.activityStates.add(step.getFinalActivity().getId());
-				}
+//				// Activity and states count
+//				this.activity.add(step.getStartActivity().getName());
+//				this.activityStates.add(step.getStartActivity().getId());
+//				if (!(step.getFinalActivity().getId().equals("fail") || step.getFinalActivity().getId().equals("crash"))) {
+//					this.activity.add(step.getFinalActivity().getName());
+//					this.activityStates.add(step.getFinalActivity().getId());
+//				}
 				
 				// Events and input count
 				this.events.add(step.getEvent().getId());
@@ -113,26 +113,10 @@ public class ReportGenerator {
 				}
 				
 				// Widgets count
-				countWidgets(step, first);
 				if (first) {
-					countWidgets(step);
+					countWidgets(step.getStartActivity());
 				}
-//				if (!(step.getFinalActivity().getId().equals("fail") || step.getFinalActivity().getId().equals("crash"))) {
-//					int localCount2 = 0;
-//					String key = step.getFinalActivity().getName();
-//					String key2 = step.getFinalActivity().getId();
-//					for (WidgetState w: step.getFinalActivity()) {
-//						this.widgetCount++;
-//						localCount2++;
-//						if (! (w.getSimpleType().equals("") || w.getSimpleType().equals(NULL)) ) {
-//							inc (this.widgetTypes, w.getSimpleType());
-//							this.widgetSupport++;
-//						}
-//					}
-//					this.widgets.put(key, max(localCount2,this.widgets.get(key)));
-//					this.widgetStates.put(key2, max(localCount2,this.widgetStates.get(key2)));
-//				}
-
+				countWidgets(step.getFinalActivity());
 				first = false;
 
 			}
@@ -212,18 +196,13 @@ public class ReportGenerator {
 		return ((hh>0)?(hh+"h "):"") + mm + "'";
 	}
 
-	public void countWidgets (Transition step) {
-		countWidgets(step, false);
-	}
-
-	public void countWidgets (Transition step, boolean first) {
+	public void countWidgets (ActivityState activity) {
 		int localCount = 0;
-		ActivityState a = (first)?step.getStartActivity():step.getFinalActivity();
-		String key = a.getName();
-		String key2 = a.getId();
-		if (a.getId().equals("fail") || a.getId().equals("crash")) return;
+		String key = activity.getName();
+		String key2 = activity.getId();
+		if (activity.getId().equals("fail") || activity.getId().equals("crash")) return;
 		
-		for (WidgetState w: a) {
+		for (WidgetState w: activity) {
 			this.widgetCount++;
 			localCount++;
 			if (! (w.getSimpleType().equals("") || w.getSimpleType().equals(NULL)) ) {
@@ -231,7 +210,9 @@ public class ReportGenerator {
 				this.widgetSupport++;
 			}
 		}
+		this.activity.add(key);
 		this.widgets.put(key, max(localCount,this.widgets.get(key)));
+		this.activityStates.add(key2);
 		this.widgetStates.put(key2, max(localCount,this.widgetStates.get(key2)));
 	}
 
