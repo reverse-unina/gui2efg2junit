@@ -30,6 +30,7 @@ public class TestCaseFromSession implements Testable {
 		String sleepAfterEvent = this.aGuiTree.getSleepAfterEvent ();
 		String sleepAfterRestart = this.aGuiTree.getSleepAfterRestart ();
 		String sleepOnThrobber = this.aGuiTree.getSleepOnThrobber();
+		String inAndOutFocus = this.aGuiTree.getInAndOutFocus();
 		
 		this.j.setClassName(testClassName);
 		this.j.includeSnippet("tc_imports.txt");
@@ -40,7 +41,8 @@ public class TestCaseFromSession implements Testable {
 		loc ("public final static int SLEEP_AFTER_RESTART = " + (sleepAfterRestart.equals("")?2000:sleepAfterRestart) + ";");
 		loc ("public final static int SLEEP_ON_THROBBER = " + (sleepOnThrobber.equals("")?10000:sleepOnThrobber) + ";");
 		loc ("public final static boolean FORCE_RESTART = false;").blank();
-
+		loc ("public final static boolean IN_AND_OUT_FOCUS= " + inAndOutFocus +";").blank();
+		
 		for (Field f: InteractionType.class.getFields()) {
 //			String fieldType = f.getType().getSimpleName();
 //			String fieldName = f.getName();

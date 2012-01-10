@@ -15,6 +15,7 @@ public interface Session extends Iterable<Trace> {
 	public String getSleepAfterRestart();
 	public String getSleepAfterEvent();
 	public String getSleepOnThrobber();
+	public String getInAndOutFocus();
 	public void addFailedTrace(Trace theTask);
 	public void addCrashedTrace (Trace theTask);
 	

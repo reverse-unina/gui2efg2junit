@@ -98,12 +98,17 @@ public class GuiTree extends XmlGraph implements Session, Testable {
 	public void setSleepAfterRestart (String millis) {
 		getDom().getDocumentElement().setAttribute("restart_sleep",millis);
 	}
+
+	public String getInAndOutFocus () {
+		boolean hasClassName = getDom().getDocumentElement().hasAttribute("in_and_out_focus");
+		return (hasClassName)?getDom().getDocumentElement().getAttribute("in_and_out_focus"):("false");
+	}	
 	
 	public String getSleepOnThrobber () {
-		if (!getDom().getDocumentElement().hasAttribute("throbber_sleep")) return "";
+		if (!getDom().getDocumentElement().hasAttribute("")) return "";
 		return this.getDom().getDocumentElement().getAttribute("throbber_sleep");
 	}
-
+	
 	public void setSleepOnThrobber (int millis) {
 		setSleepOnThrobber (String.valueOf(millis));
 	}
@@ -140,6 +145,10 @@ public class GuiTree extends XmlGraph implements Session, Testable {
 	public void setPackageName(String pname) {
 		getDom().getDocumentElement().setAttribute("package_name", pname);
 	}
+	
+	public void setInAndOutFocus(String val) {
+		getDom().getDocumentElement().setAttribute("in_and_out_focus", val);
+	}	
 
 	public ActivityState getBaseActivity () {
 		return traces().next().transitions().next().getStartActivity();
