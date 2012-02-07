@@ -105,7 +105,7 @@ public class GuiTree extends XmlGraph implements Session, Testable {
 	}	
 	
 	public String getSleepOnThrobber () {
-		if (!getDom().getDocumentElement().hasAttribute("")) return "";
+		if (!getDom().getDocumentElement().hasAttribute("throbber_sleep")) return "";
 		return this.getDom().getDocumentElement().getAttribute("throbber_sleep");
 	}
 	
