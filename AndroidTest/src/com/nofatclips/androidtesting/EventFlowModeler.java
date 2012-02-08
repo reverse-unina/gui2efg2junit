@@ -239,7 +239,7 @@ class Gui2EfcFrame extends JFrame  {
 	
 	private void showReport() {
 		schermo.setFileName(TEST_REPORT, "report");
-		ReportGenerator r = new ReportGenerator(this.guiTree);
+		ReportGenerator r = new ReportGenerator(this.guiTree,this.efg);
 		schermo.showCode(TEST_REPORT, r.getReport());
 	}
 	

@@ -5,13 +5,21 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Element;
+
+import com.nofatclips.androidtesting.efg.EventFlowTree;
 import com.nofatclips.androidtesting.guitree.GuiTree;
 import com.nofatclips.androidtesting.model.*;
+import com.nofatclips.androidtesting.xml.NodeListIterator;
+
 import static com.nofatclips.androidtesting.model.SimpleType.*;
 
 public class ReportGenerator {
 	
 	private GuiTree session;
+	private EventFlowTree efg;
 	public final static String NEW_LINE = System.getProperty("line.separator");
 	public final static String BREAK = NEW_LINE + NEW_LINE;
 	public static final String TAB = "\t";
@@ -37,9 +45,17 @@ public class ReportGenerator {
 	private Map<String,Integer> widgets;
 	private Map<String,Integer> widgetStates;
 	
-	private long runtime = 0;
+	// Data inferred from the Event Flow Tree
+	private int actualTraces=0;
+	private int actualTransitions=0;
 	
+	private long runtime = 0;
+
 	public ReportGenerator(GuiTree guiTree) {
+		this (guiTree,null);
+	}
+
+	public ReportGenerator(GuiTree guiTree, EventFlowTree efg) {
 		this.session = guiTree;
 		this.activity = new HashSet<String>();
 		this.activityStates = new HashSet<String>();
@@ -48,6 +64,16 @@ public class ReportGenerator {
 		this.widgetTypes = new Hashtable<String, Integer>();
 		this.widgets = new Hashtable<String,Integer>();
 		this.widgetStates = new Hashtable<String,Integer>();
+		if (efg!=null) {
+			this.efg=efg;
+		} else {
+			try {
+				this.efg=EventFlowTree.fromSession(guiTree);
+			} catch (ParserConfigurationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public void evaluate() {
@@ -125,9 +151,28 @@ public class ReportGenerator {
 		if (!noTime && (end!=null) && (start!=null)) {
 			this.runtime = (end.getTime() - start.getTime())/count*this.traces;
 		}
+		
+		countLeaves();
 
 	}
 	
+	private void countLeaves() {
+		Element efg = (Element) this.efg.getDom().getChildNodes().item(0);
+		this.countLeaves (efg,0);
+	}
+	
+	private void countLeaves(Element evento, int depth) {
+		boolean atLeastOneChild = false;
+		for (Element e: new NodeListIterator (evento)) {
+			atLeastOneChild = true;
+			this.countLeaves(e,depth+1);
+		}
+		if (!atLeastOneChild) {
+			this.actualTraces++;
+			this.actualTransitions+=depth;
+		}
+	}
+
 	public String getReport () {
 		evaluate();
 		return "Time elapsed: " + ((this.runtime==0)?"N.D.":printTime(this.runtime)) + NEW_LINE + NEW_LINE +
@@ -135,7 +180,8 @@ public class ReportGenerator {
 				TAB + "success: " + this.tracesSuccessful + NEW_LINE + 
 				TAB + "fail: " + this.tracesFailed + NEW_LINE + 
 				TAB + "crash: " + this.tracesCrashed + NEW_LINE +
-				"Non repeatable issues:" + this.tracesAsync + 
+				"Non repeatable issues:" + this.tracesAsync + NEW_LINE +
+				"Actual traces: " + this.actualTraces + " (for " + this.actualTransitions + " transitions)" + NEW_LINE +
 				BREAK +
 				"Transitions: " + this.transitions + NEW_LINE + 
 				TAB + "different activity states found: " + this.activityStates.size() + NEW_LINE + 
