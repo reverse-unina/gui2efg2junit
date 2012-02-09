@@ -51,6 +51,10 @@ public class TestCaseInput extends ElementWrapper implements UserInput {
 		return getElement().getAttribute("input_value");
 	}
 	
+	public boolean hasValue() {
+		return hasAttribute("input_value");
+	}
+	
 	public void setWidget(WidgetState w) {
 		setName (w.getType());
 		setWidgetId(w.getId());
@@ -99,8 +103,8 @@ public class TestCaseInput extends ElementWrapper implements UserInput {
 		i.setName(this.getName());
 		i.setWidgetId(this.getWidgetId());
 		i.setWidgetType(this.getWidgetType());				
-		i.setValue(this.getValue());
-		i.setType(this.getType());		
+		if (hasValue()) i.setValue(this.getValue());
+		i.setType(this.getType());
 		i.setId (this.getId());
 		return i;
 	}
