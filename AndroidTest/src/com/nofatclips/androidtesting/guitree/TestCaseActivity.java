@@ -39,32 +39,32 @@ public class TestCaseActivity extends ElementWrapper implements ActivityState {
 
 	@Override
 	public String getName() {
-		return getElement().getAttribute("name");
+		return getAttribute("name");
 	}
 	
 	@Override
 	public void setName(String name) {
-		getElement().setAttribute("name",name);
+		setAttribute("name",name);
 	}
 
 	@Override
 	public String getTitle() {
-		return getElement().getAttribute("title");
+		return getAttribute("title");
 	}
 	
 	@Override
 	public void setTitle(String title) {
-		getElement().setAttribute("title", title);
+		setAttribute("title", title);
 	}
 
 	@Override
 	public String getId() {
-		return getElement().getAttribute("id");
+		return getAttribute("id");
 	}
 
 	@Override
 	public void setId(String id) {
-		getElement().setAttribute("id",id);		
+		setAttribute("id",id);		
 	}
 
 	public static TestCaseActivity createActivity (Document dom, String tag) {
@@ -94,6 +94,21 @@ public class TestCaseActivity extends ElementWrapper implements ActivityState {
 		for (WidgetState w: originalActivity) {
 			this.addWidget (w.clone());
 		}
+	}
+	
+	public void resetDescription () {
+		for (WidgetState w: this) {
+			this.description.removeChild(w.getElement());
+		}
+	}
+	
+	public void setDescriptionId (String id) {
+		this.description.setAttribute("id", id);
+	}
+	
+	public String getDescriptionId() {
+		if (!this.description.hasAttribute("id")) return "";
+		return this.description.getAttribute("id");
 	}
 
 	public TestCaseActivity clone () {

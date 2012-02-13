@@ -103,10 +103,19 @@ public class GuiTree extends XmlGraph implements Session, Testable {
 		boolean hasClassName = getDom().getDocumentElement().hasAttribute("in_and_out_focus");
 		return (hasClassName)?getDom().getDocumentElement().getAttribute("in_and_out_focus"):("false");
 	}	
-	
+
+	public String getStateFileName () {
+		if (!getDom().getDocumentElement().hasAttribute("state_file")) return "";
+		return getDom().getDocumentElement().getAttribute("state_file");
+	}
+
+	public void setStateFileName (String file) {
+		getDom().getDocumentElement().setAttribute("state_file",file);
+	}
+
 	public String getSleepOnThrobber () {
 		if (!getDom().getDocumentElement().hasAttribute("throbber_sleep")) return "";
-		return this.getDom().getDocumentElement().getAttribute("throbber_sleep");
+		return getDom().getDocumentElement().getAttribute("throbber_sleep");
 	}
 	
 	public void setSleepOnThrobber (int millis) {
