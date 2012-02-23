@@ -14,10 +14,15 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.*;
 import android.util.Log;
+import android.view.Display;
+import android.view.WindowManager;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import android.test.ActivityInstrumentationTestCase2;
+
+import static android.content.Context.WINDOW_SERVICE;
+import static android.view.Surface.*;
 
 @SuppressWarnings("rawtypes")
 public class %TEST_CLASS_NAME% extends ActivityInstrumentationTestCase2 {

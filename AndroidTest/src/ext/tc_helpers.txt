@@ -187,31 +187,6 @@
 	}
 	
 	private void fireEventOnView (View v, String eventType, String value) {
-	/*
-		if (eventType.equals(CLICK)) {
-			click (v);
-		} else if (eventType.equals(LONG_CLICK)) {
-			longClick(v);
-		} else if (eventType.equals(BACK)) {
-			solo.goBack();
-		} else if (eventType.equals(SCROLL_DOWN)) {
-			solo.scrollDown();
-		} else if (eventType.equals(OPEN_MENU)) {
-			solo.sendKey(Solo.MENU);
-		} else if (eventType.equals(SWAP_TAB) && value!=null) {
-			if (v instanceof TabHost) {
-				swapTab ((TabHost)v, value);
-			} else {
-				swapTab (this.tabs, value);
-			}
-		} else if (eventType.equals(LIST_SELECT)) {
-			selectListItem((ListView)v, value);
-		} else if (eventType.equals(LIST_LONG_SELECT)) {
-			selectListItem((ListView)v, value, true);
-		} else {
-			return;
-		}
-		*/
 		injectInteraction(v, eventType, value);
 		solo.sleep(SLEEP_AFTER_EVENT);
 		waitOnThrobber();
@@ -239,6 +214,8 @@
 			longClick(v);
 		} else if (interactionType.equals(BACK)) {
 			solo.goBack();
+		} else if (interactionType.equals(CHANGE_ORIENTATION)) {
+			changeOrientation();
 		} else if (interactionType.equals(OPEN_MENU)) {
 			solo.sendKey(Solo.MENU);
 		} else if (interactionType.equals(SCROLL_DOWN)) {
@@ -269,6 +246,13 @@
 			return;
 		}		
 	}
+
+	public void changeOrientation() {
+		Display display = ((WindowManager) getInstrumentation().getContext().getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
+		int angle = display.getRotation();
+		int newAngle = ((angle==ROTATION_0)||(angle==ROTATION_180))?Solo.LANDSCAPE:Solo.PORTRAIT;
+		solo.setActivityOrientation(newAngle);
+	}
 	
 	private void swapTab (TabHost t, String tab) {
 		swapTab (t, Integer.valueOf(tab));
@@ -282,7 +266,7 @@
 				t.setCurrentTab(n);
 			}
 		});
-		this.getInstrumentation().waitForIdleSync();
+		getInstrumentation().waitForIdleSync();
 	}
 	
 	private void selectListItem (ListView l, String item) {
