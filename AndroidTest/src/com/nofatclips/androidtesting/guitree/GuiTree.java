@@ -14,12 +14,14 @@ import org.xml.sax.SAXException;
 import com.nofatclips.androidtesting.model.ActivityState;
 import com.nofatclips.androidtesting.model.Session;
 import com.nofatclips.androidtesting.model.Trace;
+import com.nofatclips.androidtesting.Plottable;
 import com.nofatclips.androidtesting.Testable;
+import com.nofatclips.androidtesting.graphviz.GuiTreeToDot;
 import com.nofatclips.androidtesting.junit.TestCaseFromSession;
 import com.nofatclips.androidtesting.xml.NodeListWrapper;
 import com.nofatclips.androidtesting.xml.XmlGraph;
 
-public class GuiTree extends XmlGraph implements Session, Testable {
+public class GuiTree extends XmlGraph implements Session, Testable, Plottable {
 		
 	public GuiTree () throws ParserConfigurationException {
 		super ("guitree.dtd", TAG);
@@ -31,6 +33,11 @@ public class GuiTree extends XmlGraph implements Session, Testable {
 	@Override
 	public Document getDom() {
 		return this.guiTree;
+	}
+	
+	public String getDot () {
+		GuiTreeToDot g = new GuiTreeToDot (this);
+		return g.getDot();
 	}
 	
 	public void parse(File f) throws SAXException, IOException, ParserConfigurationException {

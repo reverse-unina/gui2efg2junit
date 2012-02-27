@@ -79,6 +79,8 @@ class Gui2EfcFrame extends JFrame  {
 			}
 		});
 
+		JSourceCodeArea dotGuiTree = new JSourceCodeArea();
+		dotGuiTree.setDefaultExtension("dot");
 		JSourceCodeArea xmlCode = new JSourceCodeArea();
 		JSourceCodeArea dotCode = new JSourceCodeArea();
 		dotCode.setDefaultExtension("dot");
@@ -92,6 +94,7 @@ class Gui2EfcFrame extends JFrame  {
 
 		schermo = new JSourceCodePane();
 		schermo.addEnabled(GUI_TREE, null, xmlInput);
+		schermo.addDisabled(GUI_TREE_DOT, null, dotGuiTree);
 		schermo.addDisabled(EFG_XML, null, xmlCode);
 		schermo.addDisabled(EFG_DOT, null, dotCode);
 		schermo.addDisabled(JUNIT_JAVA, null, jUnitCode);
@@ -116,6 +119,7 @@ class Gui2EfcFrame extends JFrame  {
 		try {
 			this.guiTree = GuiTree.fromXml(file);
 			this.showInputXml(this.guiTree.getDom());
+			showGuiTreeDot();
 			this.efg = EventFlowTree.fromSession(this.guiTree);
 			showEfg();
 			showDot(); // Can't show dot if efg failed
@@ -203,10 +207,20 @@ class Gui2EfcFrame extends JFrame  {
 		Pattern p = Pattern.compile("(.+)\\.[^.]+");
 		Matcher m = p.matcher(inputFileName);
 		if (m.find()) {
-			schermo.setFileName(EFG_DOT, m.group(1));
+			schermo.setFileName(EFG_DOT, m.group(1)+"_efg");
 		}	
 		schermo.showCode(EFG_DOT, this.efg.getDot());
 	}
+	
+	private void showGuiTreeDot() {
+		Pattern p = Pattern.compile("(.+)\\.[^.]+");
+		Matcher m = p.matcher(inputFileName);
+		if (m.find()) {
+			schermo.setFileName(GUI_TREE_DOT, m.group(1));
+		}
+		schermo.showCode(GUI_TREE_DOT, this.guiTree.getDot());
+	}
+
 
 	private void showTest() {
 		String code = this.guiTree.getJUnit();

@@ -10,6 +10,7 @@ public class Resources {
 	public static final int DEFAULT_WIDTH = 960;
 	public static final int DEFAULT_HEIGHT = 540;
 	public final static String GUI_TREE = "GUI Tree";
+	public final static String GUI_TREE_DOT = "Gui Tree (DOT)";
 	public final static String EFG_XML = "Event Flow Tree (XML)";
 	public final static String EFG_DOT = "Event Flow Tree (Dot)";
 	public final static String JUNIT_JAVA = "JUnit Test";
