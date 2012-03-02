@@ -33,6 +33,11 @@ public class FinalActivity extends TestCaseActivity {
 	public static FinalActivity createActivity (ActivityState originalActivity) {
 		Document dom = originalActivity.getElement().getOwnerDocument();
 		FinalActivity newActivity = createActivity (dom);
+		if (originalActivity instanceof TestCaseActivity) {
+			TestCaseActivity original = (TestCaseActivity)originalActivity; 
+			newActivity.setUniqueId(original.getUniqueId());
+			newActivity.setScreenshot(original.getScreenshot());
+		}
 		newActivity.setName(originalActivity.getName());
 		newActivity.setTitle(originalActivity.getTitle());
 		newActivity.setId(originalActivity.getId());

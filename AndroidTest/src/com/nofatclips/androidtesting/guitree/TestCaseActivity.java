@@ -37,34 +37,44 @@ public class TestCaseActivity extends ElementWrapper implements ActivityState {
 		return null;
 	}
 
-	@Override
 	public String getName() {
 		return getAttribute("name");
 	}
 	
-	@Override
 	public void setName(String name) {
 		setAttribute("name",name);
 	}
 
-	@Override
 	public String getTitle() {
 		return getAttribute("title");
 	}
 	
-	@Override
 	public void setTitle(String title) {
 		setAttribute("title", title);
 	}
 
-	@Override
 	public String getId() {
 		return getAttribute("id");
 	}
 
-	@Override
 	public void setId(String id) {
 		setAttribute("id",id);		
+	}
+
+	public String getUniqueId() {
+		return getAttribute("unique_id");
+	}
+
+	public void setUniqueId(String id) {
+		setAttribute("unique_id",id);		
+	}
+
+	public String getScreenshot() {
+		return getAttribute("screenshot");
+	}
+
+	public void setScreenshot(String fileName) {
+		setAttribute("screenshot",fileName);		
 	}
 
 	public static TestCaseActivity createActivity (Document dom, String tag) {
@@ -115,12 +125,10 @@ public class TestCaseActivity extends ElementWrapper implements ActivityState {
 		return createActivity(this);
 	}
 	
-	@Override
 	public void addWidget(WidgetState w) {
 		this.description.appendChild(w.getElement());
 	}
 	
-	@Override
 	public boolean hasWidget(WidgetState widgetToCheck) {
 		for (WidgetState stored: this) {
 			if (widgetToCheck.equals(stored))

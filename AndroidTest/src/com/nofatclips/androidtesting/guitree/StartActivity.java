@@ -33,6 +33,11 @@ public class StartActivity extends TestCaseActivity {
 	public static StartActivity createActivity (ActivityState originalActivity) {
 		Document dom = originalActivity.getElement().getOwnerDocument();
 		StartActivity newActivity = createActivity (dom);
+		if (originalActivity instanceof TestCaseActivity) {
+			TestCaseActivity original = (TestCaseActivity)originalActivity; 
+			newActivity.setUniqueId(original.getUniqueId());
+			newActivity.setScreenshot(original.getScreenshot());
+		}
 		newActivity.setName(originalActivity.getName());
 		newActivity.setTitle(originalActivity.getTitle());
 		newActivity.setId(originalActivity.getId());
