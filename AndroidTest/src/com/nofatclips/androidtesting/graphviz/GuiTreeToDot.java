@@ -1,7 +1,9 @@
 package com.nofatclips.androidtesting.graphviz;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.ArrayList;
+//import java.util.LinkedHashMap;
+import java.util.List;
+//import java.util.Map;
 
 import com.nofatclips.androidtesting.Plottable;
 import com.nofatclips.androidtesting.guitree.GuiTree;
@@ -13,178 +15,143 @@ public class GuiTreeToDot implements Plottable {
 
 	public GuiTreeToDot (GuiTree session) {
 		this.session = session;
-		this.edges = new LinkedHashMap<String,String>();
-		this.nodes = new LinkedHashMap<String,String>();
-		this.states = new LinkedHashMap<String,String>();
-		this.count = 0;
+		this.nodes = new ArrayList<Node>();
+		this.edges = new ArrayList<Edge>();
+//		this.edges = new LinkedHashMap<String,String>();
+//		this.nodes = new LinkedHashMap<String,String>();
+//		this.states = new LinkedHashMap<String,String>();
+//		this.labels = new LinkedHashMap<String, String>();
+//		this.count = 0;
 	}
 	
-	private String getCount() {
-		String out = "s"+this.count;
-		this.count++;
-		return out;
-	}
+//	private String getCount() {
+//		String out = "s"+this.count;
+//		this.count++;
+//		return out;
+//	}
 	
 	public String getDot () {
-		final String EOL = System.getProperty("line.separator");
-		final String TAB = "\t";
+		
+		boolean first = true;
+		for (Trace t: this.session) {
+			Transition action = t.getFinalTransition();
+			addTransition(action, first);
+			first = false;
+		}
 		
 		StringBuilder dot = new StringBuilder ();
 		dot.append("digraph GuiTree {" + EOL + EOL);
 		dot.append(TAB + "graph [nodesep=1, fontsize=36];" + EOL);
-
-		boolean first = true;
-		for (Trace t: this.session) {
-			Transition action = t.getFinalTransition();
-			String start = action.getStartActivity().getId();
-			String finish = action.getFinalActivity().getId();
-			UserEvent event = action.getEvent();
-			
-			// Add main activity to nodes
-			if (first) {
-				String tmp = getCount();
-				this.states.put(start, tmp);
-				this.nodes.put(tmp, start+".jpg");
-				first = false;
-			}
-
-			String nodeName = getCount();
-
-			// Add new activity to state map
-			if (!(this.states.containsKey(finish))) {
-				this.states.put(finish, nodeName);
-			}
-			
-			// Add new activity to nodes
-			String imageName = (abnormalState(finish))?finish:(finish+".jpg");
-			this.nodes.put(nodeName, imageName);
-			
-			// Add event to edges
-			String pass = this.states.get(start) + " -> " + nodeName;
-			this.edges.put (pass,event.getId() + ": " + getCaption(event));
-		}
+		dot.append(TAB + "node [fontsize=36];" + EOL);
+		dot.append(TAB + "edge [fontsize=36, headport=ne];" + EOL);
 		
-		
-		dot.append(EOL + "## Edges" + EOL);
-		dot.append(EOL + TAB + "edge [fontsize=36, headport=ne];" + EOL + EOL);
-		for (String edge:this.edges.keySet()) {
-			dot.append(TAB + edge + " [label=\"" + edges.get(edge) + "\"];" + EOL);
+		dot.append(EOL + "## Edges" + EOL + EOL);
+		for (Edge edge: this.edges) {
+			dot.append(TAB + edge + " [label=\"" + edge.getId() + ": " + edge.getLabel() + "\"];" + EOL);
 		}
+//		for (String edge:this.edges.keySet()) {
+//			dot.append(TAB + edge + " [label=\"" + edges.get(edge) + "\"];" + EOL);
+//		}
 
 		dot.append(EOL + "## Nodes" + EOL + EOL);
-		for (String node:this.nodes.keySet()) {
-			String val = nodes.get(node);
-			if (abnormalState(val)) {
-				dot.append(TAB + node + " [label=\"" + val + "\"];" + EOL + EOL);
+		for (Node node: this.nodes) {
+			if (node.hasImage()) {
+				dot.append(TAB + "subgraph cluster_" + node + "{label=\"" + node.getLabel() + "\"; " + node + "};" + EOL);
+				dot.append(TAB + node + " [label=\"\", shapefile=\"" + node.getImage() + "\"];" + EOL + EOL);				
 			} else {
-//				dot.append(TAB + node + " [label=\"" + node + "\" image=\"" + val + "\"];" + EOL);
-				dot.append(TAB + "subgraph cluster_" + node + "{label=\"" + node + "\"; " + node + "};" + EOL);
-				dot.append(TAB + node + " [label=\"\", shapefile=\""+val+"\"];" + EOL + EOL);
+				dot.append(TAB + node + " [label=\"" + node.getLabel() + "\"];" + EOL + EOL);
 			}
 		}
+//		for (String node:this.nodes.keySet()) {
+//			String val = nodes.get(node);
+//			String label = labels.get(node);
+//			if (val.equals("")) {
+//				dot.append(TAB + node + " [label=\"" + label + "\"];" + EOL + EOL);
+//			} else {
+////				dot.append(TAB + node + " [label=\"" + node + "\" image=\"" + val + "\"];" + EOL);
+//				dot.append(TAB + "subgraph cluster_" + node + "{label=\"" + label  + "\"; " + node + "};" + EOL);
+//				dot.append(TAB + node + " [label=\"\", shapefile=\""+val+"\"];" + EOL + EOL);
+//			}
+//		}
 
-		dot.append(EOL + "}");		
+		dot.append("}");		
 		return dot.toString();
 	}
 
-//	public String getCaption (UserEvent event) {
-//		Element e = event.getElement();
-//		Element widget = event.getWidget().getElement();
-//		String type = e.getAttribute("type");
-//		String target = widget.getAttribute("name");
-//		boolean special = widget.getAttribute("type").equals("null");
-//		if (target.equals(""))
-//			target = e.getAttribute("desc");
-//		if (target.equals(""))
-//			target = e.getAttribute("value");
-//		if (target.equals("")) {
-//			target = e.getAttribute("widget_type");
-//			if (e.getAttribute("widget_id")!="") {
-//				target = target + " #" + e.getAttribute("widget_id");
-//			}
+	private void addTransition(Transition action, boolean first) {
+		Node start = new Node (action.getStartActivity());
+		Node finish = new Node (action.getFinalActivity());
+//		String start = action.getStartActivity().getId();
+//		String finish = action.getFinalActivity().getId();
+//		String finishShot = action.getFinalActivity().getScreenshot();
+//		String nodeName = action.getFinalActivity().getUniqueId();
+		UserEvent event = action.getEvent();
+		
+		// Add main activity to nodes
+		if (first) {
+//			String startShot = action.getStartActivity().getScreenshot();
+//			String rootName = action.getStartActivity().getUniqueId();
+//			this.states.put(start, rootName);
+			this.nodes.add(start);
+//			this.nodes.put(rootName, startShot);
+//			first = false;
+		}
+		
+//		// Add new activity to state map
+//		if (!(this.states.containsKey(finish))) {
+//			this.states.put(finish, nodeName);
 //		}
-//		String nodeDesc = special?type:(type + "\\n'" + escapeDot(target) + "'");
-//		return nodeDesc;
-//
-//	}
+		
+		// Add new activity to nodes
+//		String imageName = (abnormalState(finish))?finish:(finishShot);
+//		String imageName = (finishShot.equals(""))?finish:(finishShot);
+//		this.nodes.put(nodeName, finishShot);
+		
+		finish.setLabel(createLabel (finish));
+		this.nodes.add(finish);
+//		if (abnormalState(finish)) {
+//			this.labels.put(nodeName, "");
+//		} else if (finish.equals(nodeName) || finish.equals("")) {
+//			this.labels.put(nodeName, nodeName);
+//		} else {
+//			this.labels.put(nodeName, nodeName + " = " + finish);
+//		}
+		
+		// Add event to edges
+		Edge e = new Edge(start,finish);
+		e.setLabel(getCaption(event));
+		e.setId(event.getId());
+		this.edges.add(e);
+//		String pass = this.states.get(start) + " -> " + nodeName;
+//		this.edges.put (pass,event.getId() + ": " + getCaption(event));
 	
+	}
+
+	private String createLabel (Node state) {
+		String label = state.getLabel();
+		String id = state.getId();
+		if (label.equals(state.getId())) return label;
+		if (abnormalState(label)) return label;
+		if (id.equals("")) return label;
+		if (label.equals("")) return id;
+		return id + " = " + label;
+	}
+
 	protected boolean abnormalState (String id) {
 		return ((id.equals("exit")) || (id.equals("crash")) || (id.equals("fail")));
 	}
-	
-//	public static String escapeDot (String str) {
-//        if (str == null) {
-//            return null;
-//        }
-//        int sz = str.length();
-//        StringBuffer out = new StringBuffer(sz * 2);
-//        for (int i = 0; i < sz; i++) {
-//            char ch = str.charAt(i);
-//            // handle unicode
-////            if (ch > 0xfff) {
-////                out.append("\\u").append(hex(ch));
-////            } else if (ch > 0xff) {
-////                out.append("\\u0").append(hex(ch));
-////            } else if (ch > 0x7f) {
-////                out.append("\\u00").append(hex(ch));
-////            } else 
-//           	if (ch < 32) {
-//                switch (ch) {
-//                    case '\b' :
-//                        out.append('\\');
-//                        out.append('b');
-//                        break;
-//                    case '\n' :
-//                        out.append('\\');
-//                        out.append('n');
-//                        break;
-//                    case '\t' :
-//                        out.append('\\');
-//                        out.append('t');
-//                        break;
-//                    case '\f' :
-//                        out.append('\\');
-//                        out.append('f');
-//                        break;
-//                    case '\r' :
-//                        out.append('\\');
-//                        out.append('r');
-//                        break;
-//                    default :
-//                        if (ch > 0xf) {
-//                            out.append("\\u00").append(hex(ch));
-//                        } else {
-//                            out.append("\\u000").append(hex(ch));
-//                        }
-//                        break;
-//                }
-//            } else {
-//                switch (ch) {
-//                    case '"' :
-//                        out.append('\\');
-//                        out.append('"');
-//                        break;
-//                    case '\\' :
-//                        out.append('\\');
-//                        out.append('\\');
-//                        break;
-//                    default :
-//                        out.append(ch);
-//                        break;
-//                }
-//            }
-//        }
-//        return out.toString();
-//    }
-//
-//    public static String hex(char ch) {
-//        return Integer.toHexString(ch).toUpperCase(Locale.ENGLISH);
-//    }
-    
+	    
 	private GuiTree session;
-	private Map<String,String> edges;
-	private Map<String,String> nodes;
-	private Map<String,String> states;
-	private int count;
+	private List<Node> nodes;
+	private List<Edge> edges;
+	
+//	final String EOL = System.getProperty("line.separator");
+//	final String TAB = "\t";
+
+//	private Map<String,String> edges;
+//	private Map<String,String> nodes;
+//	private Map<String,String> labels;
+//	private Map<String,String> states;
+//	private int count;
 	
 }

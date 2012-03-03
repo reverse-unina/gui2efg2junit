@@ -6,6 +6,9 @@ import com.nofatclips.androidtesting.model.UserEvent;
 
 public class DotUtilities {
 
+	final static String EOL = System.getProperty("line.separator");
+	final static String TAB = "\t";
+
 	public static String getCaption (UserEvent event) {
 		String type = event.getType();
 		String target = event.getWidgetName();
