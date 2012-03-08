@@ -23,6 +23,8 @@ import com.nofatclips.androidtesting.guitree.GuiTree;
 import com.nofatclips.androidtesting.source.*;
 
 import static com.nofatclips.androidtesting.Resources.*;
+import static com.nofatclips.androidtesting.graphviz.DotUtilities.*;
+import static com.nofatclips.androidtesting.junit.JunitUtilities.*;
 
 public class EventFlowModeler {
 
@@ -209,7 +211,7 @@ class Gui2EfcFrame extends JFrame  {
 		if (m.find()) {
 			schermo.setFileName(EFG_DOT, m.group(1)+"_efg");
 		}	
-		schermo.showCode(EFG_DOT, this.efg.getDot());
+		schermo.showCode(EFG_DOT, exportToDot(this.efg));
 	}
 	
 	private void showGuiTreeDot() {
@@ -218,12 +220,12 @@ class Gui2EfcFrame extends JFrame  {
 		if (m.find()) {
 			schermo.setFileName(GUI_TREE_DOT, m.group(1));
 		}
-		schermo.showCode(GUI_TREE_DOT, this.guiTree.getDot());
+		schermo.showCode(GUI_TREE_DOT, exportToDot(this.guiTree));
 	}
 
 
 	private void showTest() {
-		String code = this.guiTree.getJUnit();
+		String code = exportToJunit(this.guiTree);
 		if (this.outputFileName.equals("")) {
 			Pattern p = Pattern.compile("public class ([^ ]+) ");
 			Matcher m = p.matcher(code);

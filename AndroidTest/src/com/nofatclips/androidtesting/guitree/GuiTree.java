@@ -11,13 +11,7 @@ import org.w3c.dom.*;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import com.nofatclips.androidtesting.model.ActivityState;
-import com.nofatclips.androidtesting.model.Plottable;
-import com.nofatclips.androidtesting.model.Session;
-import com.nofatclips.androidtesting.model.Testable;
-import com.nofatclips.androidtesting.model.Trace;
-import com.nofatclips.androidtesting.graphviz.GuiTreeToDot;
-import com.nofatclips.androidtesting.junit.TestCaseFromSession;
+import com.nofatclips.androidtesting.model.*;
 import com.nofatclips.androidtesting.xml.NodeListWrapper;
 import com.nofatclips.androidtesting.xml.XmlGraph;
 
@@ -30,15 +24,14 @@ public class GuiTree extends XmlGraph implements Session, Testable, Plottable {
 		this.guiTree.appendChild(rootElement);
 	}
 	
-	@Override
 	public Document getDom() {
 		return this.guiTree;
 	}
 	
-	public String getDot () {
-		GuiTreeToDot g = new GuiTreeToDot (this);
-		return g.getDot();
-	}
+//	public String getDot () {
+//		GuiTreeToDot g = new GuiTreeToDot (this);
+//		return g.getDot();
+//	}
 	
 	public void parse(File f) throws SAXException, IOException, ParserConfigurationException {
 		this.guiTree = getBuilder().parse(f);
@@ -176,21 +169,21 @@ public class GuiTree extends XmlGraph implements Session, Testable, Plottable {
 		return g;
 	}
 
-	public String getJUnit() {
-		Testable t = new TestCaseFromSession(this);
-		return t.getJUnit();
-	}
+//	public String getJUnit() {
+//		Testable t = new TestCaseFromSession(this);
+//		return t.getJUnit();
+//	}
 	
 	public void addTrace (Trace t) {
 		getDom().getDocumentElement().appendChild(t.getElement());
 	}
 	
 	public void addCrashedTrace (Trace t) {
-		addFailedTrace (t,"crash");
+		addFailedTrace (t,ActivityState.CRASH);
 	}
 
 	public void addFailedTrace (Trace t) {
-		addFailedTrace (t,"fail");
+		addFailedTrace (t,ActivityState.FAILURE);
 	}
 	
 	protected void addFailedTrace (Trace t, String failType) {

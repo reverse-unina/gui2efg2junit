@@ -9,14 +9,12 @@ import com.nofatclips.androidtesting.model.Session;
 import com.nofatclips.androidtesting.model.Trace;
 import com.nofatclips.androidtesting.model.Transition;
 import com.nofatclips.androidtesting.model.UserEvent;
-import com.nofatclips.androidtesting.graphviz.EfgToDot;
 import com.nofatclips.androidtesting.xml.XmlGraph;
 
 public class EventFlowTree extends XmlGraph implements Plottable {
 	
 	public EventFlowTree () throws ParserConfigurationException {
 		super ("eventtree.dtd","EFG");
-//		this.id = 0;
 		this.efg = getBuilder().newDocument();
 		this.rootElement = this.efg.createElement("EFG");
 		this.rootElement.setAttribute("id", "root");
@@ -88,20 +86,15 @@ public class EventFlowTree extends XmlGraph implements Plottable {
 		}
 		return null;
 	}
-		
-	public String getDot () {
-		EfgToDot g = new EfgToDot(this);
-		return g.getDot();
-	}
+
+//	public String getDot () {
+//		EfgToDot g = new EfgToDot(this);
+//		return g.getDot();
+//	}
 	
 	public Document getDom () {
 		return this.efg;
 	}
-	
-//	public String getUniqueId () {
-//		this.id++;
-//		return "e"+this.id;
-//	}
 	
 	public Element getNavigator() {
 		return this.navigator;
@@ -122,6 +115,5 @@ public class EventFlowTree extends XmlGraph implements Plottable {
 	private Document efg;
 	private Element rootElement;
 	private Element navigator;
-//	private int id;
 	
 }

@@ -77,7 +77,7 @@ public class ReportGenerator {
 	}
 
 	public void evaluate() {
-		String s;
+		ActivityState a;
 		DateFormat millis = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.UK); //    yyyy
 //		millis.setCalendar(new GregorianCalendar());
 		Date start = null;
@@ -109,9 +109,9 @@ public class ReportGenerator {
 
 			// Trace count
 			this.traces++;
-			s = theTrace.getFinalTransition().getFinalActivity().getId();
-			if (s.equals("fail")) this.tracesFailed++;
-			else if (s.equals("crash")) this.tracesCrashed++;
+			a = theTrace.getFinalTransition().getFinalActivity();
+			if (a.isFailure()) this.tracesFailed++;
+			else if (a.isCrash()) this.tracesCrashed++;
 			else this.tracesSuccessful++;
 			if (theTrace.isAsync()) this.tracesAsync++;
 			
@@ -121,14 +121,6 @@ public class ReportGenerator {
 				
 				// Transition count
 				this.transitions++;
-				
-//				// Activity and states count
-//				this.activity.add(step.getStartActivity().getName());
-//				this.activityStates.add(step.getStartActivity().getId());
-//				if (!(step.getFinalActivity().getId().equals("fail") || step.getFinalActivity().getId().equals("crash"))) {
-//					this.activity.add(step.getFinalActivity().getName());
-//					this.activityStates.add(step.getFinalActivity().getId());
-//				}
 				
 				// Events and input count
 				this.events.add(step.getEvent().getId());
@@ -246,7 +238,7 @@ public class ReportGenerator {
 		int localCount = 0;
 		String key = activity.getName();
 		String key2 = activity.getId();
-		if (activity.getId().equals("fail") || activity.getId().equals("crash")) return;
+		if (activity.isFailure() || activity.isCrash()) return;
 		
 		for (WidgetState w: activity) {
 			this.widgetCount++;

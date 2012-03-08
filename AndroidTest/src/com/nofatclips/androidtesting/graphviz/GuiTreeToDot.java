@@ -1,9 +1,7 @@
 package com.nofatclips.androidtesting.graphviz;
 
 import java.util.ArrayList;
-//import java.util.LinkedHashMap;
 import java.util.List;
-//import java.util.Map;
 
 import com.nofatclips.androidtesting.guitree.GuiTree;
 import com.nofatclips.androidtesting.model.*;
@@ -86,7 +84,7 @@ public class GuiTreeToDot implements Plottable {
 	protected boolean abnormalState (String id) {
 		return ((id.equals("exit")) || (id.equals("crash")) || (id.equals("fail")));
 	}
-	    
+	
 	private GuiTree session;
 	private List<Node> nodes;
 	private List<Edge> edges;

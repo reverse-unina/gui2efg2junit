@@ -29,31 +29,26 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 		return getAttribute("name");
 	}
 	
-	@Override
 	public boolean isAvailable() {
 		if (!hasAttribute("available")) return true;
 		return (getAttribute("available").equals("true"));
 	}
 
-	@Override
 	public boolean isClickable() {
 		if (!hasAttribute("clickable")) return true;
 		return (getAttribute("clickable").equals("true"));
 	}
 
-	@Override
 	public boolean isLongClickable() {
 		if (!hasAttribute("long_clickable")) return true;
 		return (getAttribute("long_clickable").equals("true"));
 	}
 
-	@Override
 	public int getCount() {
 		if (!hasAttribute("count")) return 1;
 		return Integer.parseInt(getAttribute("count"));
 	}
 	
-	@Override
 	public String getValue() {
 		return getAttribute("value");
 	}
@@ -71,7 +66,6 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 		setAttribute("index", String.valueOf(index));
 	}
 
-	@Override
 	public String getTextType() {
 		return getAttribute("text_type");
 	}
@@ -94,17 +88,14 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 		setAttribute("value", value);
 	}
 	
-	@Override
 	public void setAvailable (String a) {
 		setAttribute("available", a);
 	}
 
-	@Override
 	public void setClickable (String c) {
 		setAttribute("clickable", c);
 	}
 
-	@Override
 	public void setLongClickable (String c) {
 		setAttribute("long_clickable", c);
 	}
@@ -117,12 +108,10 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 		setAttribute("simple_type",type);
 	}
 
-	@Override
 	public void setTextType(String inputType) {
 		setAttribute("text_type",inputType);
 	}
 
-	@Override
 	public void setCount(int count) {
 		setAttribute("count", String.valueOf(count));
 	}

@@ -2,6 +2,10 @@ package com.nofatclips.androidtesting.model;
 
 public interface ActivityState extends WrapperInterface, Iterable<WidgetState> {
 	
+	public static String FAILURE = "fail";
+	public static String CRASH = "crash";
+	public static String EXIT = "exit";
+	
 	public String getName();
 	public void setName (String name);
 	public String getTitle();
@@ -17,5 +21,9 @@ public interface ActivityState extends WrapperInterface, Iterable<WidgetState> {
 	public boolean isExit();
 	public boolean isCrash();
 	public boolean isFailure();
+	public void markAsExit();
+	public void markAsCrash();
+	public void markAsFailure();
+
 	
 }

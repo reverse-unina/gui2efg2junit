@@ -1,37 +1,20 @@
-package com.nofatclips.androidtesting.graphviz;
+package com.nofatclips.androidtesting.junit;
 
 import java.util.Locale;
 
-import com.nofatclips.androidtesting.efg.EventFlowTree;
-import com.nofatclips.androidtesting.guitree.GuiTree;
-import com.nofatclips.androidtesting.model.Plottable;
-import com.nofatclips.androidtesting.model.UserEvent;
+import com.nofatclips.androidtesting.model.Session;
+import com.nofatclips.androidtesting.model.Testable;
 
-public class DotUtilities {
+public class JunitUtilities {
 
-	final static String EOL = System.getProperty("line.separator");
-	final static String TAB = "\t";
-
-	public static String getCaption (UserEvent event) {
-		String type = event.getType();
-		String target = event.getWidgetName();
-		boolean special = event.getWidgetType().equals("null");
-		if (target.equals(""))
-			target = event.getDescription();
-		if (target.equals(""))
-			target = event.getValue();
-		if (target.equals("")) {
-			target = event.getWidgetType();
-			if (!(event.getWidgetId().equals(""))) {
-				target = target + " #" + event.getWidgetId();
-			}
-		}
-		String nodeDesc = special?type:(type + "\\n'" + escapeDot(target) + "'");
-		return nodeDesc;
-
+	public static String tidyName (String s) {
+		int i = s.lastIndexOf('.');
+		String initial = s.substring(i+1,i+2).toUpperCase();
+		return initial + s.substring(i+2).replaceAll("[^a-zA-Z0-9_]", "");
 	}
 
-	public static String escapeDot (String str) {
+	// Escape method taken from Apache Commons
+	public static String escapeJava (String str) {
         if (str == null) {
             return null;
         }
@@ -40,14 +23,13 @@ public class DotUtilities {
         for (int i = 0; i < sz; i++) {
             char ch = str.charAt(i);
             // handle unicode
-//            if (ch > 0xfff) {
-//                out.append("\\u").append(hex(ch));
-//            } else if (ch > 0xff) {
-//                out.append("\\u0").append(hex(ch));
-//            } else if (ch > 0x7f) {
-//                out.append("\\u00").append(hex(ch));
-//            } else 
-           	if (ch < 32) {
+            if (ch > 0xfff) {
+                out.append("\\u").append(hex(ch));
+            } else if (ch > 0xff) {
+                out.append("\\u0").append(hex(ch));
+            } else if (ch > 0x7f) {
+                out.append("\\u00").append(hex(ch));
+            } else if (ch < 32) {
                 switch (ch) {
                     case '\b' :
                         out.append('\\');
@@ -96,20 +78,20 @@ public class DotUtilities {
         return out.toString();
     }
 
-    public static String hex(char ch) {
+    public static String  hex(char ch) {
         return Integer.toHexString(ch).toUpperCase(Locale.ENGLISH);
     }
     
-    public static String exportToDot (Plottable xml) {
-    	if (xml instanceof GuiTree) {
-    		GuiTreeToDot g = new GuiTreeToDot ((GuiTree)xml);
-    		return g.getDot();
-    	}
-    	if (xml instanceof EventFlowTree) {
-    		EfgToDot g = new EfgToDot((EventFlowTree)xml);
-    		return g.getDot();
+    public static String padLeft(String s) {
+        return String.format("%05d", Integer.valueOf(s));  
+    }
+    
+    public static String exportToJunit (Testable t) {
+    	if (t instanceof Session) {
+    		TestCaseFromSession converter = new TestCaseFromSession((Session)t);
+    		return converter.getJUnit();
     	}
     	return "";
     }
-
+    
 }
