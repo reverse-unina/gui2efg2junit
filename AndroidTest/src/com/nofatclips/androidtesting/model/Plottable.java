@@ -1,4 +1,4 @@
-package com.nofatclips.androidtesting;
+package com.nofatclips.androidtesting.model;
 
 public interface Plottable {
 

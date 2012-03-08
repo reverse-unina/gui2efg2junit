@@ -12,10 +12,10 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import com.nofatclips.androidtesting.model.ActivityState;
+import com.nofatclips.androidtesting.model.Plottable;
 import com.nofatclips.androidtesting.model.Session;
+import com.nofatclips.androidtesting.model.Testable;
 import com.nofatclips.androidtesting.model.Trace;
-import com.nofatclips.androidtesting.Plottable;
-import com.nofatclips.androidtesting.Testable;
 import com.nofatclips.androidtesting.graphviz.GuiTreeToDot;
 import com.nofatclips.androidtesting.junit.TestCaseFromSession;
 import com.nofatclips.androidtesting.xml.NodeListWrapper;

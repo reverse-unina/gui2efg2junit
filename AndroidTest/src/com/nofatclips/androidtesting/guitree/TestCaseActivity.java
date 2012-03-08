@@ -141,6 +141,18 @@ public class TestCaseActivity extends ElementWrapper implements ActivityState {
 		return "ACTIVITY";
 	}
 
+	public boolean isExit() {
+		return getId().equals("exit");
+	}
+
+	public boolean isCrash() {
+		return getId().equals("crash");
+	}
+
+	public boolean isFailure() {
+		return getId().equals("fail");
+	}
+
 	private Element description;
 	public final static String DESC_TAG = "DESCRIPTION";
 	

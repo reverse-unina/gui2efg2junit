@@ -14,5 +14,8 @@ public interface ActivityState extends WrapperInterface, Iterable<WidgetState> {
 	public void setScreenshot (String screenshot);
 	public void addWidget (WidgetState widget);
 	public boolean hasWidget (WidgetState widget);
+	public boolean isExit();
+	public boolean isCrash();
+	public boolean isFailure();
 	
 }

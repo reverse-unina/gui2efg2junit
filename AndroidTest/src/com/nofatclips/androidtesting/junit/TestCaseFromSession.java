@@ -5,9 +5,9 @@ import java.util.Locale;
 
 import com.nofatclips.androidtesting.model.ActivityState;
 import com.nofatclips.androidtesting.model.Session;
-import com.nofatclips.androidtesting.Testable;
 import com.nofatclips.androidtesting.model.InteractionType;
 import com.nofatclips.androidtesting.model.SimpleType;
+import com.nofatclips.androidtesting.model.Testable;
 import com.nofatclips.androidtesting.model.Trace;
 import com.nofatclips.androidtesting.model.Transition;
 import com.nofatclips.androidtesting.model.UserEvent;

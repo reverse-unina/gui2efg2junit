@@ -8,9 +8,9 @@ import java.util.Map;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.nofatclips.androidtesting.Plottable;
 import com.nofatclips.androidtesting.xml.NodeListIterator;
 import com.nofatclips.androidtesting.efg.*;
+import com.nofatclips.androidtesting.model.Plottable;
 
 import static com.nofatclips.androidtesting.graphviz.DotUtilities.*;
 

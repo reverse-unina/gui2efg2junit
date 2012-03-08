@@ -3,7 +3,8 @@ package com.nofatclips.androidtesting.efg;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import com.nofatclips.androidtesting.Plottable;
+
+import com.nofatclips.androidtesting.model.Plottable;
 import com.nofatclips.androidtesting.model.Session;
 import com.nofatclips.androidtesting.model.Trace;
 import com.nofatclips.androidtesting.model.Transition;
