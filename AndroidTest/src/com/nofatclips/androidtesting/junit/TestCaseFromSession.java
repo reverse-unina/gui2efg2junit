@@ -1,6 +1,7 @@
 package com.nofatclips.androidtesting.junit;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
 import com.nofatclips.androidtesting.model.*;
 import com.nofatclips.androidtesting.source.SourceCodeBuilder;
 
@@ -67,9 +68,22 @@ public class TestCaseFromSession implements Testable {
 		loc("");
 		this.j.includeSnippet("tc_framework.txt");
 
+		// Build a map of the leaf nodes
+		HashMap<String,String> leaves = new HashMap<String,String>();
+		for (Trace task: aGuiTree) {
+			// Remove from the leaf map all traces including the current one 
+			for (Transition action: task) {
+				leaves.remove(action.getEvent().getId());
+			}
+			// Add the current trace to the leaf map
+			leaves.put(task.getFinalTransition().getEvent().getId(), task.getId());
+		}
+		
 		loc ("// Test Cases").blank();
 		for (Trace t: aGuiTree) {
-			generateTest(t);
+			if (leaves.containsValue(t.getId())) {
+				generateTest(t);
+			}
 		}
 	
 		loc ("//Helper methods for doing the actual work with instrumentation").blank();
