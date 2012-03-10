@@ -51,8 +51,8 @@ public class GuiTreeToDot implements Plottable {
 	}
 
 	private void addTransition(Transition action, boolean first) {
-		Node start = new Node (action.getStartActivity());
-		Node finish = new Node (action.getFinalActivity());
+		Node start = getNode(action.getStartActivity()); //new Node (action.getStartActivity());
+		Node finish = getNode(action.getFinalActivity()); //new Node (action.getFinalActivity());
 		UserEvent event = action.getEvent();
 		
 		// Add main activity to nodes
@@ -85,8 +85,32 @@ public class GuiTreeToDot implements Plottable {
 		return ((id.equals("exit")) || (id.equals("crash")) || (id.equals("fail")));
 	}
 	
+	private Node getNode (ActivityState activity) {
+		Node ret = new Node (activity);
+		if (activity.isCrash()) {
+			ret.setId(getCrashId());
+		} else if (activity.isFailure()) {
+			ret.setId(getFailId());
+		}
+		return ret;
+	}
+	
+	private String getCrashId() {
+		String ret = "c"+this.crashCount;
+		this.crashCount++;
+		return ret;
+	}
+
+	private String getFailId() {
+		String ret = "f"+this.failCount;
+		this.failCount++;
+		return ret;
+	}
+
 	private GuiTree session;
 	private List<Node> nodes;
 	private List<Edge> edges;
+	private int crashCount = 0;
+	private int failCount = 0;
 	
 }
