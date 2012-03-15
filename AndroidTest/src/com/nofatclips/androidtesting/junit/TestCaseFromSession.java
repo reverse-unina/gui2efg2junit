@@ -82,7 +82,7 @@ public class TestCaseFromSession implements Testable {
 		loc ("// Test Cases").blank();
 		for (Trace t: aGuiTree) {
 			if (leaves.containsValue(t.getId())) {
-				generateTest(t);
+				generateTest(t, getNumber());
 			}
 		}
 	
@@ -93,8 +93,9 @@ public class TestCaseFromSession implements Testable {
 		return j.toString();
 	}
 	
-	private void generateTest(Trace aTrace, String message) {
-		loc ("public void testTrace" + padLeft(aTrace.getId()) + " () {").blank();
+	public void generateTest(Trace aTrace, String message, String testNum) {
+		loc ("// Generated from trace " + aTrace.getId());
+		loc ("public void testTrace" + padLeft(testNum) + " () {").blank();
 		loc ("// Testing base activity");
 		generateTest(this.aGuiTree.getBaseActivity(), "Testing base activity");
 		for (Transition t: aTrace) {
@@ -125,8 +126,12 @@ public class TestCaseFromSession implements Testable {
 		j.blank();
 	}
 	
-	private void generateTest (Trace t) {
-		generateTest (t,"");
+	public void generateTest (Trace t) {
+		generateTest (t, Integer.valueOf(t.getId()));
+	}
+
+	public void generateTest (Trace t, int testNum) {
+		generateTest (t, "", String.valueOf(testNum));
 	}
 
 	private void generateTest (ActivityState a) {
@@ -136,8 +141,16 @@ public class TestCaseFromSession implements Testable {
 	private SourceCodeBuilder loc (String code) {
 		return this.j.loc (code);
 	}
+	
+	private int getNumber()  {
+		int ret = this.testNumber;
+		this.testNumber++;
+		return ret;
+	}
+	
 
     Session aGuiTree;
 	SourceCodeBuilder j;
+	int testNumber = 0;
 	
 }
