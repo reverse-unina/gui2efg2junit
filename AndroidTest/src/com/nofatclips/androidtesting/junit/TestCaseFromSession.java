@@ -36,33 +36,31 @@ public class TestCaseFromSession implements Testable {
 		loc ("public final static boolean IN_AND_OUT_FOCUS= " + inAndOutFocus +";").blank();
 		
 		for (Field f: InteractionType.class.getFields()) {
-//			String fieldType = f.getType().getSimpleName();
-//			String fieldName = f.getName();
-			String fieldValue = "";
-			try {
-				fieldValue = "\"" + f.get("").toString() + "\"";
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			loc ("public final static String " + f.getName() + " = " + fieldValue + ";");
+//			String fieldValue = "";
+//			try {
+//				fieldValue = "\"" + f.get("").toString() + "\"";
+//			} catch (IllegalArgumentException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (IllegalAccessException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+			loc ("public final static String " + constantField(f) + ";");
 		}
 
 		for (Field f: SimpleType.class.getFields()) {
-			String fieldValue = "";
-			try {
-				fieldValue = "\"" + f.get("").toString() + "\"";
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			loc ("public final static String " + f.getName() + " = " + fieldValue + ";");
+//			String fieldValue = "";
+//			try {
+//				fieldValue = "\"" + f.get("").toString() + "\"";
+//			} catch (IllegalArgumentException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (IllegalAccessException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+			loc ("public final static String " + constantField(f) + ";");
 		}
 
 		loc("");
@@ -148,8 +146,21 @@ public class TestCaseFromSession implements Testable {
 		return ret;
 	}
 	
+	private String constantField (Field f) {
+		String fieldValue = "";
+		try {
+			fieldValue = "\"" + f.get("").toString() + "\"";
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return f.getName() + " = " + fieldValue;
+	}
 
-    Session aGuiTree;
+	Session aGuiTree;
 	SourceCodeBuilder j;
 	int testNumber = 0;
 	
