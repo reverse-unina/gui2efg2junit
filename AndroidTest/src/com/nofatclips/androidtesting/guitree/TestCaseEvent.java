@@ -32,7 +32,7 @@ public class TestCaseEvent extends ElementWrapper implements UserEvent {
 	}
 
 	public String getType() {
-		return getElement().getAttribute("type");
+		return getAttribute("type");
 	}
 
 	public void setType(String t) {
@@ -44,19 +44,27 @@ public class TestCaseEvent extends ElementWrapper implements UserEvent {
 	}
 	
 	public String getValue() {
-		return getElement().getAttribute("value");
+		return getAttribute("value");
 	}
 
 	public void setValue(String v) {
-		getElement().setAttribute("value",v);
+		setAttribute("value",v);
 	}
 
 	public void setId (String id) {
-		getElement().setAttribute("id",id);
+		setAttribute("id",id);
 	}
 	
 	public String getId() {
-		return getElement().getAttribute("id");
+		return getAttribute("id");
+	}
+
+	public String getScreenshot() {
+		return getAttribute("screenshot");
+	}
+
+	public void setScreenshot(String fileName) {
+		setAttribute("screenshot",fileName);		
 	}
 
 	public WidgetState getWidget() {
@@ -119,9 +127,13 @@ public class TestCaseEvent extends ElementWrapper implements UserEvent {
 	public TestCaseEvent clone () {
 		TestCaseEvent e = createEvent (this.getElement().getOwnerDocument());
 		e.setType(this.getType());
-		if (hasValue()) e.setValue(this.getValue());
+		if (this.hasValue()) {
+			e.setValue(this.getValue());
+		}
 		e.setId(this.getId());
-		if (hasDescription()) e.setDescription(this.getDescription());
+		if (this.hasDescription()) {
+			e.setDescription(this.getDescription());
+		}
 		e.setWidget(this.getWidget().clone());
 		return e;
 	}

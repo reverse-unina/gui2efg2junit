@@ -18,7 +18,7 @@ public class TestCaseFromSession implements Testable {
 
 		String packageName = this.aGuiTree.getPackageName();
 		String className = this.aGuiTree.getClassName();
-		String testClassName = tidyName(this.aGuiTree.getAppName()) + "GuiTest"; // + ((className == "")?"":generic);
+		String testClassName = tidyName(this.aGuiTree.getAppName()) + "GuiTest";
 		String sleepAfterEvent = this.aGuiTree.getSleepAfterEvent ();
 		String sleepAfterRestart = this.aGuiTree.getSleepAfterRestart ();
 		String sleepOnThrobber = this.aGuiTree.getSleepOnThrobber();
@@ -36,30 +36,9 @@ public class TestCaseFromSession implements Testable {
 		loc ("public final static boolean IN_AND_OUT_FOCUS= " + inAndOutFocus +";").blank();
 		
 		for (Field f: InteractionType.class.getFields()) {
-//			String fieldValue = "";
-//			try {
-//				fieldValue = "\"" + f.get("").toString() + "\"";
-//			} catch (IllegalArgumentException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			} catch (IllegalAccessException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
 			loc ("public final static String " + constantField(f) + ";");
 		}
-
 		for (Field f: SimpleType.class.getFields()) {
-//			String fieldValue = "";
-//			try {
-//				fieldValue = "\"" + f.get("").toString() + "\"";
-//			} catch (IllegalArgumentException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			} catch (IllegalAccessException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
 			loc ("public final static String " + constantField(f) + ";");
 		}
 
