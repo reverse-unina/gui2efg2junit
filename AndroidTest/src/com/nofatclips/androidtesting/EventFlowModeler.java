@@ -21,6 +21,7 @@ import org.xml.sax.SAXException;
 import com.nofatclips.androidtesting.efg.EventFlowTree;
 import com.nofatclips.androidtesting.guitree.GuiTree;
 import com.nofatclips.androidtesting.source.*;
+import com.nofatclips.androidtesting.stats.ReportGenerator;
 
 import static com.nofatclips.androidtesting.Resources.*;
 import static com.nofatclips.androidtesting.graphviz.DotUtilities.*;
@@ -35,8 +36,6 @@ public class EventFlowModeler {
 				String outputFileName = (args.length > 1) ? args[1] : "";
 				String packageName = (args.length > 2) ? args[2] : "";
 				String efgFileName = (args.length > 3) ? args[3] : "";
-//				String inputFileName = "C:\\Users\\mm\\Desktop\\opensudoku.xml";
-//				String outputFileName = "C:\\Users\\mm\\Desktop\\opensudoku.java";
 				Gui2EfcFrame frame = new Gui2EfcFrame(inputFileName, outputFileName, packageName, efgFileName);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				if (frame.isWindowed()) {
@@ -120,6 +119,14 @@ class Gui2EfcFrame extends JFrame  {
 		this.someLogger.finest(getFilename());
 		try {
 			this.guiTree = GuiTree.fromXml(file);
+			
+			//
+			
+//			this.activityMap = new ActivityMap(this.guiTree);
+//			this.activityMap.loadActivities("C:\\Users\\mm\\Desktop\\Applicazioni test\\Wordpress2\\15 - Screenshots E01\\activities.xml");
+			
+			//
+			
 			this.showInputXml(this.guiTree.getDom());
 			showGuiTreeDot();
 			this.efg = EventFlowTree.fromSession(this.guiTree);
@@ -138,6 +145,10 @@ class Gui2EfcFrame extends JFrame  {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		showTest(); // Can try to show test even if efg failed
 		showReport();
 	}
@@ -223,7 +234,6 @@ class Gui2EfcFrame extends JFrame  {
 		schermo.showCode(GUI_TREE_DOT, exportToDot(this.guiTree));
 	}
 
-
 	private void showTest() {
 		String code = exportToJunit(this.guiTree);
 		if (this.outputFileName.equals("")) {
@@ -265,6 +275,7 @@ class Gui2EfcFrame extends JFrame  {
 	private String efgFileName;
 	private boolean windowed;
 	private GuiTree guiTree;
+	private ActivityMap activityMap;
 	private EventFlowTree efg;
 	private Logger someLogger;
 	private JSourceCodePane schermo;

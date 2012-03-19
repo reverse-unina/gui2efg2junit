@@ -213,7 +213,14 @@ public class GuiTree extends XmlGraph implements Session, Testable, Plottable {
 	public Iterator<Trace> iterator() {
 		return traces();
 	}
-	
+
+	public TestCaseActivity importState (Element fromXml) {
+		Element state = (Element)getDom().adoptNode(fromXml);
+		TestCaseActivity imported = (state.getNodeName().equals(FinalActivity.getTag()))?FinalActivity.createActivity(this):StartActivity.createActivity(this);
+		imported.setElement(state);
+		return imported;
+	}
+
 	private Document guiTree;
 	public final static String TAG = "SESSION";
 	
