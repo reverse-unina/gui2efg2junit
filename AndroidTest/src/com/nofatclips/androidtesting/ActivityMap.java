@@ -10,8 +10,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Element;
 
 import com.nofatclips.androidtesting.guitree.*;
-import com.nofatclips.androidtesting.model.Session;
-import com.nofatclips.androidtesting.xml.XmlGraph;
 
 public class ActivityMap {
 
@@ -68,20 +66,20 @@ public class ActivityMap {
 	
 	public void loadActivities(String stateFile) {
 		List<String> entries = readStateFile(stateFile); //"C:\\Users\\mm\\Desktop\\Applicazioni test\\Wordpress2\\15 - Screenshots E01\\activities.xml"); //this.doc.getStateFileName());
-		Session sandboxSession = getNewSession();
+		GuiTree sandboxSession = getNewSession();
 		TestCaseActivity s;
 		Element e;
 		for (String state: entries) {
 //			System.out.println(state);
 			sandboxSession.parse(state);
-			e = ((XmlGraph)sandboxSession).getDom().getDocumentElement();
+			e = sandboxSession.getDom().getDocumentElement();
 //			System.out.println(e.getTagName());
-			s = this.doc.importState (e);
+			s = sandboxSession.importState (e);
 			addActivity(s);
 		}
 	}
 
-	public Session getNewSession() {
+	public GuiTree getNewSession() {
 		try {
 			return new GuiTree();
 		} catch (ParserConfigurationException e) {
