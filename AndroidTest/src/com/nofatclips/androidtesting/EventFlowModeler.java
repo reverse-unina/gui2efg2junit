@@ -122,8 +122,8 @@ class Gui2EfcFrame extends JFrame  {
 			
 			//
 			
-//			this.activityMap = new ActivityMap(this.guiTree);
-//			this.activityMap.loadActivities("C:\\Users\\mm\\Desktop\\Applicazioni test\\Wordpress2\\15 - Screenshots E01\\activities.xml");
+			this.activityMap = new ActivityMap(this.guiTree);
+			this.activityMap.loadActivities("C:\\Users\\mm\\Desktop\\Applicazioni test\\Wordpress2\\15 - Screenshots E01\\activities.xml");
 			
 			//
 			
@@ -235,7 +235,7 @@ class Gui2EfcFrame extends JFrame  {
 	}
 
 	private void showTest() {
-		String code = exportToJunit(this.guiTree);
+		String code = exportToJunit(this.guiTree, this.activityMap);
 		if (this.outputFileName.equals("")) {
 			Pattern p = Pattern.compile("public class ([^ ]+) ");
 			Matcher m = p.matcher(code);

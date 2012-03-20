@@ -14,6 +14,8 @@ public interface ActivityState extends WrapperInterface, Iterable<WidgetState> {
 	public void setId (String id);
 	public String getUniqueId();
 	public void setUniqueId (String id);
+	public String getDescriptionId();
+	public void setDescriptionId (String id);
 	public String getScreenshot();
 	public void setScreenshot (String screenshot);
 	public void addWidget (WidgetState widget);

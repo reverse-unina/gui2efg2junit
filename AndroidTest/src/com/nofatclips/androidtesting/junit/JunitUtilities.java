@@ -2,6 +2,7 @@ package com.nofatclips.androidtesting.junit;
 
 import java.util.Locale;
 
+import com.nofatclips.androidtesting.ActivityMap;
 import com.nofatclips.androidtesting.model.Session;
 import com.nofatclips.androidtesting.model.Testable;
 
@@ -93,5 +94,13 @@ public class JunitUtilities {
     	}
     	return "";
     }
-    
+
+    public static String exportToJunit (Testable t, ActivityMap m) {
+    	if (t instanceof Session) {
+    		TestCaseFromSession converter = new TestCaseFromSession((Session)t, m);
+    		return converter.getJUnit();
+    	}
+    	return "";
+    }
+
 }

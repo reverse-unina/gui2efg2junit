@@ -10,31 +10,40 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Element;
 
 import com.nofatclips.androidtesting.guitree.*;
+import com.nofatclips.androidtesting.model.ActivityState;
 
 public class ActivityMap {
 
-	public Map<String,TestCaseActivity> activities;
+	public Map<String,ActivityState> activities;
 	public GuiTree doc;
 	
 	public ActivityMap (GuiTree theDoc) {
 		this.doc = theDoc;
-		this.activities = new HashMap<String, TestCaseActivity>();
+		this.activities = new HashMap<String, ActivityState>();
 	}
 	
-	public void addActivity(TestCaseActivity t) {
+	public void addActivity(ActivityState t) {
 		addActivity(t.getId(), t);
 	}
 
-	public void addActivity(String id, TestCaseActivity t) {
+	public void addActivity(String id, ActivityState t) {
 		this.activities.put(id, t);
 	}
 
-	public TestCaseActivity getActivity(String id) {
+	public ActivityState getActivity(String id) {
 		return this.activities.get(id);
 	}
 	
-	public TestCaseActivity getActivity(TestCaseActivity t) {
+	public ActivityState getActivity(ActivityState t) {
 		return getActivity(t.getDescriptionId());
+	}
+	
+	public boolean hasActivity (ActivityState t) {
+		return hasActivity(t.getDescriptionId());
+	}
+	
+	public boolean hasActivity (String id) {
+		return this.activities.containsKey(id);
 	}
 
 	public List<String> readStateFile (String stateFileName) {

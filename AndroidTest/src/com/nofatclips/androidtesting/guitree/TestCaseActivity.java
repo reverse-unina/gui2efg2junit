@@ -101,6 +101,7 @@ public class TestCaseActivity extends ElementWrapper implements ActivityState {
 	}
 
 	public void copyDescriptionFrom (ActivityState originalActivity) {
+		this.setDescriptionId(originalActivity.getDescriptionId());
 		for (WidgetState w: originalActivity) {
 			this.addWidget (w.clone());
 		}

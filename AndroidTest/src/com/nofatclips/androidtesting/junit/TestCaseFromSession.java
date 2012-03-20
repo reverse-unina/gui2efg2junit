@@ -2,6 +2,8 @@ package com.nofatclips.androidtesting.junit;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
+
+import com.nofatclips.androidtesting.ActivityMap;
 import com.nofatclips.androidtesting.model.*;
 import com.nofatclips.androidtesting.source.SourceCodeBuilder;
 
@@ -13,7 +15,12 @@ public class TestCaseFromSession implements Testable {
 		this.aGuiTree = session;
 		this.j = new SourceCodeBuilder ();
 	}
-	
+
+	public TestCaseFromSession (Session session, ActivityMap map) {
+		this(session);
+		this.activities = map;
+	}
+
 	public String getJUnit() {
 
 		String packageName = this.aGuiTree.getPackageName();
@@ -88,13 +95,18 @@ public class TestCaseFromSession implements Testable {
 			} else {
 				loc ("fireEvent (" + idOrNot + "" + w.getIndex() + ", \"" + escapeJava(w.getName()) + "\", \"" + w.getSimpleType() + "\", \"" + e.getType() + "\", \"" + e.getValue() + "\");").blank();
 			}
-			loc ("// Testing final activity for transition " + t.getId());
 			generateTest (t.getFinalActivity());
 		}
 		loc ("}").blank();
 	}
 	
 	private void generateTest(ActivityState anActivity, String message) {
+		if (anActivity.isCrash() || anActivity.isExit() || anActivity.isFailure()) {
+			loc ("// This event leads to " + anActivity.getDescriptionId());
+			return;
+		}
+		loc ("// Testing final activity for last transition");
+		anActivity = getCompleteActivity(anActivity);
 		loc ("retrieveWidgets();");
 		loc ("solo.assertCurrentActivity(\"" + message + "\", \"" + anActivity.getName() + "\");");
 		for (WidgetState w: anActivity) {
@@ -138,8 +150,14 @@ public class TestCaseFromSession implements Testable {
 		}
 		return f.getName() + " = " + fieldValue;
 	}
+	
+	private ActivityState getCompleteActivity (ActivityState state) {
+		if ((this.activities == null) || (state.getDescriptionId().equals("")) || (!this.activities.hasActivity(state)) ) return state;
+		return this.activities.getActivity(state);
+	}
 
 	Session aGuiTree;
+	ActivityMap activities = null;
 	SourceCodeBuilder j;
 	int testNumber = 0;
 	
