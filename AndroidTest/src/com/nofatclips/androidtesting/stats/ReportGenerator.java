@@ -6,6 +6,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Element;
 
+import com.nofatclips.androidtesting.ActivityMap;
 import com.nofatclips.androidtesting.efg.EventFlowTree;
 import com.nofatclips.androidtesting.guitree.GuiTree;
 import com.nofatclips.androidtesting.model.*;
@@ -17,6 +18,7 @@ public class ReportGenerator extends StatsReport {
 	
 	private GuiTree session;
 	private EventFlowTree efg;
+	private ActivityMap activities;
 	
 	private TraceStats traceReport = new TraceStats();
 	private InteractionStats eventReport = new InteractionStats();
@@ -56,6 +58,11 @@ public class ReportGenerator extends StatsReport {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public ReportGenerator(GuiTree guiTree, EventFlowTree efg, ActivityMap map) {
+		this (guiTree, efg);
+		this.activities = map;
 	}
 
 	public void evaluate() {
@@ -123,10 +130,12 @@ public class ReportGenerator extends StatsReport {
 	}
 	
 	public void countWidgets (ActivityState activity) {
+		if (activity.isFailure() || activity.isCrash()) return;
 		int localCount = 0;
 		String key = activity.getName();
 		String key2 = activity.getId();
-		if (activity.isFailure() || activity.isCrash()) return;
+		
+		activity = getCompleteActivity(activity);
 		
 		for (WidgetState w: activity) {
 			this.widgetCount++;
@@ -140,6 +149,11 @@ public class ReportGenerator extends StatsReport {
 		this.widgets.put(key, max(localCount,this.widgets.get(key)));
 		this.activityStates.add(key2);
 		this.widgetStates.put(key2, max(localCount,this.widgetStates.get(key2)));
+	}
+
+	private ActivityState getCompleteActivity (ActivityState state) {
+		if ((this.activities == null) || (state.getDescriptionId().equals("")) || (!this.activities.hasActivity(state)) ) return state;
+		return this.activities.getActivity(state);
 	}
 
 }
