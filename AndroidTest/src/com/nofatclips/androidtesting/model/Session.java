@@ -18,6 +18,8 @@ public interface Session extends Iterable<Trace> {
 	public String getInAndOutFocus();
 	public void addFailedTrace(Trace theTask);
 	public void addCrashedTrace (Trace theTask);
+	public void setComparationWidgets (String commaSeparatedTypes);
+	public String getComparationWidgets ();
 	
 	public void parse (String xml);
 

@@ -8,6 +8,7 @@ import com.nofatclips.androidtesting.model.*;
 import com.nofatclips.androidtesting.source.SourceCodeBuilder;
 
 import static com.nofatclips.androidtesting.junit.JunitUtilities.*;
+import static com.nofatclips.androidtesting.model.SimpleType.NULL;
 
 public class TestCaseFromSession implements Testable {
 
@@ -30,6 +31,7 @@ public class TestCaseFromSession implements Testable {
 		String sleepAfterRestart = this.aGuiTree.getSleepAfterRestart ();
 		String sleepOnThrobber = this.aGuiTree.getSleepOnThrobber();
 		String inAndOutFocus = this.aGuiTree.getInAndOutFocus();
+		setComparationWidgets (this.aGuiTree.getComparationWidgets());
 		
 		this.j.setClassName(testClassName);
 		this.j.includeSnippet("tc_imports.txt");
@@ -110,6 +112,7 @@ public class TestCaseFromSession implements Testable {
 		loc ("retrieveWidgets();");
 		loc ("solo.assertCurrentActivity(\"" + message + "\", \"" + anActivity.getName() + "\");");
 		for (WidgetState w: anActivity) {
+			if (!matchClass(w.getSimpleType())) continue;
 			loc ("doTestWidget(" + w.getId() + ", \"" + w.getType() + "\", \"" + escapeJava(w.getName()) + "\");");
 		}
 		j.blank();
@@ -155,10 +158,32 @@ public class TestCaseFromSession implements Testable {
 		if ((this.activities == null) || (state.getDescriptionId().equals("")) || (!this.activities.hasActivity(state)) ) return state;
 		return this.activities.getActivity(state);
 	}
+	
+	private void setComparationWidgets (String csv) {
+		if (csv.equals("")) return;
+		if (csv.equals(NULL)) {
+			this.skipWidgets = true;
+			return;
+		}
+		this.selectWidgets = true;
+		this.widgetClasses = csv.split(",");
+	}
+
+	public boolean matchClass (String type) {
+		if (this.skipWidgets) return false;
+		if (!this.selectWidgets) return true;
+		for (String storedType: this.widgetClasses) {
+			if (storedType.equals(type)) return true;
+		}
+		return false;
+	}
 
 	Session aGuiTree;
 	ActivityMap activities = null;
 	SourceCodeBuilder j;
 	int testNumber = 0;
+	boolean selectWidgets = false;
+	boolean skipWidgets = false;
+	protected String[] widgetClasses;
 	
 }

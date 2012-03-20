@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.*;
 import java.util.regex.*;
 
@@ -20,6 +22,9 @@ import org.xml.sax.SAXException;
 
 import com.nofatclips.androidtesting.efg.EventFlowTree;
 import com.nofatclips.androidtesting.guitree.GuiTree;
+import com.nofatclips.androidtesting.model.ActivityState;
+import com.nofatclips.androidtesting.model.Trace;
+import com.nofatclips.androidtesting.model.Transition;
 import com.nofatclips.androidtesting.source.*;
 import com.nofatclips.androidtesting.stats.ReportGenerator;
 
@@ -119,8 +124,7 @@ class Gui2EfcFrame extends JFrame  {
 		this.someLogger.finest(getFilename());
 		try {
 			this.guiTree = GuiTree.fromXml(file);
-			
-			//
+			pezzotto();
 			
 			if (!this.guiTree.getStateFileName().equals("")) {
 				File activitiesxml = new File (file.getParentFile(), this.guiTree.getStateFileName());
@@ -129,8 +133,6 @@ class Gui2EfcFrame extends JFrame  {
 					this.activityMap.loadActivities(activitiesxml.getAbsolutePath()); //"C:\\Users\\mm\\Desktop\\Applicazioni test\\Wordpress2\\15 - Screenshots E01\\activities.xml");
 				}
 			}
-			
-			//
 			
 			this.showInputXml(this.guiTree.getDom());
 			showGuiTreeDot();
@@ -273,6 +275,30 @@ class Gui2EfcFrame extends JFrame  {
 		ReportGenerator r = new ReportGenerator (this.guiTree, this.efg, this.activityMap);
 		schermo.showCode(TEST_REPORT, r.getReport());
 	}
+	
+	// TODO Remove when old GuiTree are replaced by new ones with description id
+
+	Map<String,String> idMap = new HashMap<String,String>();
+
+	public void pezzotto() {
+		for (Trace t: this.guiTree) {
+			for (Transition tt: t) {
+				pezzotto (tt.getStartActivity());
+				pezzotto (tt.getFinalActivity());
+			}
+		}
+	}
+	
+	public void pezzotto (ActivityState state) {
+		String id = state.getUniqueId();
+		if (idMap.containsKey(id)) {
+			state.setDescriptionId(idMap.get(id));
+		} else {
+			idMap.put(id, state.getDescriptionId());
+		}
+	}
+	
+	// Fine pezzotto
 	
 	private String inputFileName;
 	private String outputFileName;

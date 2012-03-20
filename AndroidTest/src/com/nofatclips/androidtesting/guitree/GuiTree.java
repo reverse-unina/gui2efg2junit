@@ -113,6 +113,15 @@ public class GuiTree extends XmlGraph implements Session, Testable, Plottable {
 		getDom().getDocumentElement().setAttribute("state_file",file);
 	}
 
+	public String getComparationWidgets () {
+		if (!getDom().getDocumentElement().hasAttribute("comparation_widgets")) return "";
+		return getDom().getDocumentElement().getAttribute("comparation_widgets");
+	}
+
+	public void setComparationWidgets (String commaSeparatedTypes) {
+		getDom().getDocumentElement().setAttribute("comparation_widgets",commaSeparatedTypes);
+	}
+
 	public String getSleepOnThrobber () {
 		if (!getDom().getDocumentElement().hasAttribute("throbber_sleep")) return "";
 		return getDom().getDocumentElement().getAttribute("throbber_sleep");
