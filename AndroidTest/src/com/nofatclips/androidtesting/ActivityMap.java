@@ -79,10 +79,8 @@ public class ActivityMap {
 		TestCaseActivity s;
 		Element e;
 		for (String state: entries) {
-//			System.out.println(state);
 			sandboxSession.parse(state);
 			e = sandboxSession.getDom().getDocumentElement();
-//			System.out.println(e.getTagName());
 			s = sandboxSession.importState (e);
 			addActivity(s);
 		}

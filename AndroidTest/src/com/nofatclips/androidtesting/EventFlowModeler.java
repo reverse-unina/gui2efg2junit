@@ -122,8 +122,13 @@ class Gui2EfcFrame extends JFrame  {
 			
 			//
 			
-			this.activityMap = new ActivityMap(this.guiTree);
-			this.activityMap.loadActivities("C:\\Users\\mm\\Desktop\\Applicazioni test\\Wordpress2\\15 - Screenshots E01\\activities.xml");
+			if (!this.guiTree.getStateFileName().equals("")) {
+				File activitiesxml = new File (file.getParentFile(), this.guiTree.getStateFileName());
+				if (activitiesxml.exists()) {
+					this.activityMap = new ActivityMap(this.guiTree);
+					this.activityMap.loadActivities(activitiesxml.getAbsolutePath()); //"C:\\Users\\mm\\Desktop\\Applicazioni test\\Wordpress2\\15 - Screenshots E01\\activities.xml");
+				}
+			}
 			
 			//
 			
