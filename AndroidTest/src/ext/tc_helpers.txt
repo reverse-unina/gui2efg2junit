@@ -45,6 +45,8 @@
 		clearWidgetList();
 		ArrayList<View> viewList = (isInAndOutFocusEnabled())?solo.getViews():solo.getCurrentViews();
 		for (View w: viewList) {
+			String text = (w instanceof TextView)?": "+((TextView)w).getText().toString():"";
+			Log.d("nofatclips", "Found widget: id=" + w.getId() + " ("+ w.toString() + ")" + text); // + " in window at [" + xy[0] + "," + xy[1] + "] on screen at [" + xy2[0] + "," + xy2[1] +"]");
 
 			//
 			allViews.add(w);
@@ -81,14 +83,27 @@
 		return null;
 	}
 	
+	public View getWidget (String theType, String theName) {
+		for (View testee: getWidgetsByType(theType)) {
+			if (checkWidgetEquivalence(testee, theType, theName)) {
+				return testee;
+			}
+		}
+		return null;
+	}
+	
 	public boolean checkWidgetEquivalence (View testee, int theId, String theType, String theName) {
+		return ((theId == testee.getId()) && checkWidgetEquivalence (testee, theType, theName));
+	}
+	
+	public boolean checkWidgetEquivalence (View testee, String theType, String theName) {
 		Log.i("nofatclips", "Retrieved from return list id=" + testee.getId());
 		String testeeSimpleType = getSimpleType(testee);
 		String testeeType = testee.getClass().getName();
 		Log.i("nofatclips", "Testing for type (" + testeeType + ") against the original (" + theType + ")");
 		String testeeName = (testee instanceof TextView)?((TextView) testee).getText().toString():"";
 		Log.i("nofatclips", "Testing for name (" + testeeName + ") against the original (" + theName + ")");
-		if ( ((theType.equals(testeeType)) || (theType.equals(testeeSimpleType)) ) && (theName.equals(testeeName)) && (theId == testee.getId()) ) {
+		if ( ((theType.equals(testeeType)) || (theType.equals(testeeSimpleType)) ) && (theName.equals(testeeName)) ) {
 			return true;
 		}
 		return false;
@@ -106,6 +121,17 @@
 		return theList;
 	}
 	
+	public ArrayList<View> getWidgetsByType (String type) {
+		ArrayList<View> theList = new ArrayList<View>();
+		for (View theView: getAllWidgets()) {
+			if (theView.getClass().getName().equals(type)) {
+				Log.i("nofatclips", "Added to return list " + type + " with id=" + theView.getId());
+				theList.add(theView);
+			}
+		}
+		return theList;
+	}
+	
 	public ArrayList<View> getAllWidgets () {
 		return this.allViews;
 	}
@@ -117,20 +143,11 @@
 	
 	public void doTestWidget (int theId, String theType, String theName) {
 		if (theId == -1) return;
-//		View v = getWidget(theId);
-//		assertNotNull("Checking for id", v);
-//		
-//		String type = v.getClass().getName();
-//		// type = type.substring(0, type.indexOf('@'));
-//		assertEquals("Checking for type", theType, type);
-//		
-//		if (theName != "") { //
-//			MoreAsserts.assertAssignableFrom(TextView.class, v);
-//			TextView widget = (TextView) v;
-//			String name = widget.getText().toString();
-//			assertEquals("Checking for name", theName, name);
-//		}	
 		assertNotNull("Testing for id #" + theId + " (" + theType + "): " + theName, getWidget(theId, theType, theName));
+	}
+
+	public void doTestWidget (String theType, String theName) {
+		assertNotNull("Testing for type " + theType + "): " + theName, getWidget(theType, theName));
 	}
 	
 	public void fireEvent (int widgetId, int widgetIndex, String widgetType, String eventType) {
@@ -172,6 +189,8 @@
 		}
 		if (widgetType.equals(BUTTON)) {
 			v = solo.getButton(widgetName);
+		} else if (widgetType.equals(LIST_VIEW)) {
+			v = solo.getCurrentListViews().get(0);
 		}
 		if (v == null) {
 			for (View w: getAllWidgets()) {

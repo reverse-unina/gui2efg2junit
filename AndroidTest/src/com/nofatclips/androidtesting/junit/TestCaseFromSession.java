@@ -91,7 +91,7 @@ public class TestCaseFromSession implements Testable {
 			}
 			UserEvent e = t.getEvent();
 			WidgetState w = e.getWidget();
-			String idOrNot = (w.getId().equals("-1"))?"":w.getId() + ", ";
+			String idOrNot = (w.getId().equals("-1") || generatedWidget(w))?"":w.getId() + ", ";
 			if (e.getValue().equals("") || (e.getValue()==null) ) {
 				loc ("fireEvent (" + idOrNot + "" + w.getIndex() + ", \"" + escapeJava(w.getName()) + "\", \"" + w.getSimpleType() + "\", \"" + e.getType() + "\");").blank();
 			} else {
@@ -113,7 +113,11 @@ public class TestCaseFromSession implements Testable {
 		loc ("solo.assertCurrentActivity(\"" + message + "\", \"" + anActivity.getName() + "\");");
 		for (WidgetState w: anActivity) {
 			if (!matchClass(w.getSimpleType())) continue;
-			loc ("doTestWidget(" + w.getId() + ", \"" + w.getType() + "\", \"" + escapeJava(w.getName()) + "\");");
+			if (generatedWidget(w)) {
+				loc ("doTestWidget(\"" + w.getType() + "\", \"" + escapeJava(w.getName()) + "\");");
+			} else {
+				loc ("doTestWidget(" + w.getId() + ", \"" + w.getType() + "\", \"" + escapeJava(w.getName()) + "\");");
+			}
 		}
 		j.blank();
 	}
@@ -176,6 +180,10 @@ public class TestCaseFromSession implements Testable {
 			if (storedType.equals(type)) return true;
 		}
 		return false;
+	}
+	
+	public boolean generatedWidget (WidgetState w) {
+		return w.getType().contains("$");
 	}
 
 	Session aGuiTree;
