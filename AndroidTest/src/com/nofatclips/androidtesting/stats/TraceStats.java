@@ -60,9 +60,9 @@ public class TraceStats extends StatsReport {
 		return "Traces processed: " + getTraces() + NEW_LINE + 
 				TAB + "success: " + getTracesSuccessful() + NEW_LINE + 
 				TAB + "fail: " + getTracesFailed() + NEW_LINE + 
-				TAB + TAB + "traces: " + expandList(this.failures) + NEW_LINE +
+				((this.failures.size()>0)?(TAB + TAB + "traces: " + expandList(this.failures) + NEW_LINE):"") +
 				TAB + "crash: " + getTracesCrashed() + NEW_LINE +
-				TAB + TAB + "traces: " + expandList(this.crashes) + NEW_LINE +
+				((this.crashes.size()>0)?(TAB + TAB + "traces: " + expandList(this.crashes) + NEW_LINE):"") +
 				"Non repeatable issues:" + getTracesAsync();
 	}
 

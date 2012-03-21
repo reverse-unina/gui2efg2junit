@@ -37,14 +37,13 @@
 				}
 			}
 		} while (flag && (sleepTime>0));
-		sync();
+		this.getInstrumentation().waitForIdleSync();
 	}
 	
 	public void retrieveWidgets () {
 		home();
 		clearWidgetList();
-		ArrayList<View> viewList = (isInAndOutFocusEnabled())?solo.getViews():solo.getCurrentViews();
-		for (View w: viewList) {
+		for (View w: (isInAndOutFocusEnabled())?solo.getViews():solo.getCurrentViews()) {
 
 			//
 			allViews.add(w);
@@ -203,10 +202,13 @@
 	}
 	
 	private void injectInteraction (View v, String interactionType, String value) {
-		if (v!=null) {
-			requestView(v);
-		}
 		if (interactionType.equals(CLICK)) {
+			if(isInAndOutFocusEnabled()){
+				requestFocus(v);
+				if(!isInFocus){	
+					requestFocusWithScroll(v);					
+				}					 			 				
+			}			
 			click (v);			
 		} else if (interactionType.equals(LONG_CLICK)) {
 			longClick(v);
@@ -229,7 +231,13 @@
 		} else if (interactionType.equals(LIST_LONG_SELECT)) {
 			selectListItem((ListView)v, value, true);
 		} else if (interactionType.equals(SPINNER_SELECT)) {
-			selectSpinnerItem((Spinner)v, value);			
+			if(isInAndOutFocusEnabled()){
+				requestFocus(v);
+				if(!isInFocus){	
+					requestFocusWithScroll(v);					
+				}					 			 				
+			}
+			pressSpinnerItem((Spinner)v, Integer.parseInt(value));				
 		} else if (interactionType.equals(TYPE_TEXT)) {
 			solo.enterText((EditText)v, value);
 		} else if (interactionType.equals(SET_BAR)) {
@@ -258,7 +266,7 @@
 				t.setCurrentTab(n);
 			}
 		});
-		sync();
+		getInstrumentation().waitForIdleSync();
 	}
 	
 	private void selectListItem (ListView l, String item) {
@@ -279,7 +287,7 @@
 				l.setSelection(n);
 			}
 		});
-		sync();
+		this.getInstrumentation().waitForIdleSync();
 		if (n<l.getCount()/2) {
 			solo.sendKey(Solo.DOWN);
 			solo.sendKey(Solo.UP);
@@ -287,14 +295,42 @@
 			solo.sendKey(Solo.UP);
 			solo.sendKey(Solo.DOWN);
 		}
-		sync();
+		this.getInstrumentation().waitForIdleSync();
 		if (longClick) {
 			longClick (l.getSelectedView());
 		} else {
 			click (l.getSelectedView());
 		}
 	}
-			
+	
+	public void pressSpinnerItem(final Spinner spinner, int itemIndex){	
+		solo.clickOnView(spinner);		
+		try{
+			solo.sendKey(Solo.DOWN);
+			for(int i=1;i<=spinner.getCount();i++){solo.sendKey(Solo.UP);}
+		}catch(SecurityException ignored){}
+		boolean countingUp = true;
+		if(itemIndex < 0){
+			countingUp = false;
+			itemIndex *= -1;
+		}
+		for(int i = 0; i < itemIndex; i++){
+			solo.sleep(200);
+			if(countingUp){
+				try{
+					solo.sendKey(solo.DOWN);
+				}catch(SecurityException ignored){}
+			}else{
+				try{
+					solo.sendKey(solo.UP);
+				}catch(SecurityException ignored){}
+			}
+		}
+		try{							
+			solo.sendKey(solo.ENTER);
+		}catch(SecurityException ignored){}
+	}		
+		
 	public static boolean isInAndOutFocusEnabled () {
 		return (IN_AND_OUT_FOCUS);
 	}			
@@ -302,39 +338,27 @@
 	protected void requestFocus (final View v) {
 		getActivity().runOnUiThread(new Runnable() {
 			public void run() {
-				v.requestFocus();		
+				isInFocus = v.requestFocus();		
 			}
 		});
-		sync();
+		this.getInstrumentation().waitForIdleSync();
 	}
 	
-	// Scroll until the view is on the screen if IN_AND_OUT_OF_FOCUS is enabled or if the force parameter is true 
-	protected void requestView (final View v, boolean force) {
-		if (force || isInAndOutFocusEnabled()) {
-			home();
-			solo.sendKey(Solo.UP); // Solo.waitForView() requires a widget to be focused		
-			solo.waitForView(v, 1000, true);
-		}
-		requestFocus(v);
+	protected void requestFocusWithScroll (final View v) {
+		home();
+		solo.sendKey(Solo.UP); //E' necessario perché il waitForView di
+							   //robotium necessita che almeno un widget
+							   //abbia il focus.
+		
+		solo.waitForView(v, 1000, true);
+		getActivity().runOnUiThread(new Runnable() {
+			public void run() {
+				v.requestFocus();	
+			}
+		});
+		this.getInstrumentation().waitForIdleSync();
 	}		
-
-	protected void requestView (final View v) {
-		requestView(v, false);
-	}
-	
-	
-	private void selectSpinnerItem (Spinner l, String item) {
-		selectSpinnerItem (l, Integer.valueOf(item));
-	}
-
-	private void selectSpinnerItem (final Spinner s, int num) {
-		assertNotNull(s, "Cannon press spinner item: the spinner does not exist");
-		Log.i("nofatclips", "Clicking the spinner view");
-		click(s);
-		sync();
-		selectListItem(solo.getCurrentListViews().get(0), num, false);
-	}	
-	
+		
 	protected void click (View v) {
 		// TouchUtils.clickView(this, v);
 		solo.clickOnView(v);
@@ -365,7 +389,7 @@
 				}
 			});
 		}
-		sync();
+		this.getInstrumentation().waitForIdleSync();		
 	}
 	
 
@@ -431,18 +455,6 @@
 		if ((v instanceof WebView) || type.endsWith("WebView"))
 			return WEB_VIEW;
 		return "";
-	}
-	
-	protected void assertNotNull (final View v) {
-		ActivityInstrumentationTestCase2.assertNotNull(v);
-	}
-
-	protected void assertNotNull (final View v, String errorMessage) {
-		ActivityInstrumentationTestCase2.assertNotNull(errorMessage, v);
-	}
-	
-	public void sync() {
-		getInstrumentation().waitForIdleSync();
 	}
 	
 	public void debug (String msg) {

@@ -34,5 +34,3 @@ public class %TEST_CLASS_NAME% extends ActivityInstrumentationTestCase2 {
 	private Solo solo;	
 	private TabHost	tabs;
 	private int tabNum;
-
-	private boolean isInFocus;		
