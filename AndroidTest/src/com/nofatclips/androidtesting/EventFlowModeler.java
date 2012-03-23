@@ -2,10 +2,7 @@ package com.nofatclips.androidtesting;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.*;
@@ -17,7 +14,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactoryConfigurationError;
 
-import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import com.nofatclips.androidtesting.efg.EventFlowTree;
@@ -125,7 +121,7 @@ class Gui2EfcFrame extends JFrame  {
 		try {
 			this.guiTree = GuiTree.fromXml(file);
 			pezzotto();
-			
+
 			if (!this.guiTree.getStateFileName().equals("")) {
 				File activitiesxml = new File (file.getParentFile(), this.guiTree.getStateFileName());
 				if (activitiesxml.exists()) {
@@ -133,9 +129,10 @@ class Gui2EfcFrame extends JFrame  {
 					this.activityMap.loadActivities(activitiesxml.getAbsolutePath()); //"C:\\Users\\mm\\Desktop\\Applicazioni test\\Wordpress2\\15 - Screenshots E01\\activities.xml");
 				}
 			}
-			
-			this.showInputXml(this.guiTree.getDom());
+	
+			this.showInputXml(); //this.guiTree.getDom());
 			showGuiTreeDot();
+
 			this.efg = EventFlowTree.fromSession(this.guiTree);
 			showEfg();
 			showDot(); // Can't show dot if efg failed
@@ -158,6 +155,7 @@ class Gui2EfcFrame extends JFrame  {
 //		}
 		showTest(); // Can try to show test even if efg failed
 		showReport();
+
 	}
 	
 	public boolean isWindowed () {
@@ -173,20 +171,44 @@ class Gui2EfcFrame extends JFrame  {
 		this.setTitle(filename);
 	}
 
-	private void showInputXml(final Document doc) {
-		String input="";
-		try {
-			input = this.guiTree.toXml();
-		} catch (TransformerFactoryConfigurationError e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (TransformerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+//	private void showInputXml(final Document doc) {
+//		String input="";
+//		try {
+//			input = this.guiTree.toXml();
+//		} catch (TransformerFactoryConfigurationError e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (TransformerException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		schermo.showCode(GUI_TREE, input);
+//	}
+
+	private void showInputXml () {
+		StringBuffer input= new StringBuffer();
+		try{
+			// Open the file that is the first 
+			// command line parameter
+			FileInputStream fstream = new FileInputStream(getFilename());
+			// Get the object of DataInputStream
+			DataInputStream in = new DataInputStream(fstream);
+			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			String strLine;
+			//Read File Line By Line
+			while ((strLine = br.readLine()) != null)   {
+				// Print the content on the console
+				input.append(strLine + System.getProperty("line.separator"));
+			}
+			//Close the input stream
+			in.close();
+		}catch (Exception e){//Catch exception if any
+			System.err.println("Error: " + e.getMessage());
 		}
-		schermo.showCode(GUI_TREE, input);
+		schermo.showCode(GUI_TREE, input.toString());
 	}
 
+		
 	public boolean showEfg() throws IOException, TransformerException {
 		String xml="";
 		try {

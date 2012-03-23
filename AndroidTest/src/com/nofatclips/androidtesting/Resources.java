@@ -37,4 +37,10 @@ public class Resources {
 		debug (faultMessage);
 	}	
 
+	public static void getTimestamp (String label) {
+		java.util.Date d = new java.util.Date();
+		java.sql.Timestamp t = new java.sql.Timestamp (d.getTime());
+		System.out.println(label + t.toString());
+	}
+
 }
