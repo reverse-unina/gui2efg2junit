@@ -87,11 +87,13 @@ public class TestCaseFromSession implements Testable {
 		for (Transition t: aTrace) {
 			loc ("// Testing transition " + t.getId());
 			for (UserInput input: t) {
+				loc ("// Setting input: " + input.getId());
 				loc ("setInput (" + input.getWidgetId() + ", \"" + input.getType() + "\", \"" + escapeJava(input.getValue()) + "\");");
 			}
 			UserEvent e = t.getEvent();
 			WidgetState w = e.getWidget();
 			String idOrNot = (w.getId().equals("-1") || generatedWidget(w))?"":w.getId() + ", ";
+			loc ("// Firing event: " + e.getId());
 			if (e.getValue().equals("") || (e.getValue()==null) ) {
 				loc ("fireEvent (" + idOrNot + "" + w.getIndex() + ", \"" + escapeJava(w.getName()) + "\", \"" + w.getSimpleType() + "\", \"" + e.getType() + "\");").blank();
 			} else {
@@ -107,9 +109,9 @@ public class TestCaseFromSession implements Testable {
 			loc ("// This event leads to " + anActivity.getDescriptionId());
 			return;
 		}
-		loc ("// Testing final activity for last transition");
 		anActivity = getCompleteActivity(anActivity);
 		loc ("retrieveWidgets();");
+		loc ("// Testing current activity: should be " + anActivity.getId());
 		loc ("solo.assertCurrentActivity(\"" + message + "\", \"" + anActivity.getName() + "\");");
 		for (WidgetState w: anActivity) {
 			if (!matchClass(w.getSimpleType())) continue;
