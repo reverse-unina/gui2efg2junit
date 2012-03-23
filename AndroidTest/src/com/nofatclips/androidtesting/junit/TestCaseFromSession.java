@@ -185,7 +185,7 @@ public class TestCaseFromSession implements Testable {
 	}
 	
 	public boolean generatedWidget (WidgetState w) {
-		return w.getType().contains("$");
+		return (w.getType().startsWith("com.android.internal"));
 	}
 
 	Session aGuiTree;
