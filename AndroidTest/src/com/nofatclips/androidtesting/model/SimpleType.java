@@ -21,6 +21,6 @@ public interface SimpleType {
 	public final static String WEB_VIEW = "webPage";
 	public final static String DATE_PICKER = "datePicker";
 	public final static String TIME_PICKER = "timePicker";
-	
+	public final static String LIST_ITEM = "listItem";
 	public final static String SPINNER_INPUT = "spinnerInput";
 }
