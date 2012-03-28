@@ -189,6 +189,8 @@
 		}
 		if (widgetType.equals(BUTTON)) {
 			v = solo.getButton(widgetName);
+		} else if (widgetType.equals(MENU_ITEM)) {
+			v = solo.getText(widgetName);
 		} else if (widgetType.equals(LIST_VIEW)) {
 			v = solo.getCurrentListViews().get(0);
 		}
