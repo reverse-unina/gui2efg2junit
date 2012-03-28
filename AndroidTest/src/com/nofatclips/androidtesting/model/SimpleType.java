@@ -23,4 +23,6 @@ public interface SimpleType {
 	public final static String TIME_PICKER = "timePicker";
 	public final static String LIST_ITEM = "listItem";
 	public final static String SPINNER_INPUT = "spinnerInput";
+	public final static String MENU_ITEM = "menuItem";
+	public final static String EMPTY_LIST = "emptyList";
 }
