@@ -14,5 +14,6 @@ public interface InteractionType {
 	public final static String SET_BAR = "setBar";
 	public final static String SPINNER_SELECT = "selectSpinnerItem";
 	public final static String CHANGE_ORIENTATION = "changeOrientation";
+	public final static String CLICK_ON_TEXT = "clickText";
 	
 }

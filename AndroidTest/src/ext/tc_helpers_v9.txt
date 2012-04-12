@@ -101,8 +101,7 @@
 		String testeeSimpleType = getSimpleType(testee);
 		String testeeType = testee.getClass().getName();
 		Log.i("nofatclips", "Testing for type (" + testeeType + ") against the original (" + theType + ")");
-		String testeeText = (testee instanceof TextView)?(((TextView)testee).getText().toString()):"";
-		String testeeName = (testee instanceof EditText)?(((EditText)testee).getHint().toString()):testeeText;
+		String testeeName = (testee instanceof TextView)?((TextView) testee).getText().toString():"";
 		Log.i("nofatclips", "Testing for name (" + testeeName + ") against the original (" + theName + ")");
 		if ( ((theType.equals(testeeType)) || (theType.equals(testeeSimpleType)) ) && (theName.equals(testeeName)) ) {
 			return true;
