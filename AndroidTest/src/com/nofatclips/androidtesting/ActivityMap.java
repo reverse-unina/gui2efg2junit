@@ -19,7 +19,7 @@ public class ActivityMap {
 	
 	public ActivityMap (GuiTree theDoc) {
 		this.doc = theDoc;
-		this.activities = new HashMap<String, ActivityState>();
+		this.activities = new LinkedHashMap<String, ActivityState>();
 	}
 	
 	public void addActivity(ActivityState t) {
