@@ -168,6 +168,10 @@ public class GuiTree extends XmlGraph implements Session, Testable, Plottable {
 		getDom().getDocumentElement().setAttribute("in_and_out_focus", val);
 	}	
 
+	public void setInAndOutFocus(boolean trueOrFalse) {
+		setInAndOutFocus ((trueOrFalse)?"true":"false");
+	}	
+
 	public ActivityState getBaseActivity () {
 		return traces().next().transitions().next().getStartActivity();
 	}
