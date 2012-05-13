@@ -25,4 +25,6 @@ public interface SimpleType {
 	public final static String SPINNER_INPUT = "spinnerInput";
 	public final static String MENU_ITEM = "menuItem";
 	public final static String EMPTY_LIST = "emptyList";
+	public final static String SINGLE_CHOICE_LIST = "singleChoiceList";
+	public final static String MULTI_CHOICE_LIST = "multiChoiceList";
 }
