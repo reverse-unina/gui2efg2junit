@@ -50,6 +50,8 @@ public class TestCaseFromSession implements Testable {
 		for (Field f: SimpleType.class.getFields()) {
 			loc ("public final static String " + constantField(f) + ";");
 		}
+		
+		loc ("public final static String[] PRECRAWLING = {};");
 
 		loc("");
 		this.j.includeSnippet("tc_framework.txt");

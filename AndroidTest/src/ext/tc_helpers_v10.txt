@@ -2,49 +2,8 @@
 		solo.setActivityOrientation(Solo.PORTRAIT);
 		solo.sleep(SLEEP_AFTER_RESTART);
 		waitOnThrobber();
-		if (PRECRAWLING.length>0) {
-			refreshCurrentActivity();
-			retrieveWidgets();
-			processPrecrawling();
-		}
-		
 		Log.d("nofatclips", "Ready to operate after restarting...");
 	}
-	
-	private void processPrecrawling() {
-		Log.i("nofatclips", "Processing precrawling");
-		String[] params = new String[3];
-		int paramCount=0;
-		for (String s: PRECRAWLING) {
-			if (s == null) {
-				switch (paramCount) {
-					case 0: continue;
-					case 1: {
-						Log.i ("nofatclips", "Firing event " + params[0]);
-						fireEventOnView(null, params[0], null);
-						break;
-					}
-					case 2: {
-						Log.i ("nofatclips", "Firing event " + params[0] + " with value: " + params[1]);
-						fireEventOnView(null, params[0], params[1]);
-						break;
-					}	
-					case 3: {
-						View v = getWidget(Integer.parseInt(params[1]));
-						Log.i ("nofatclips", "Firing event " + params[0] + " on widget #" + params[1] + " with value: " + params[2]);
-						fireEventOnView(v, params[0], params[2]);
-						break;
-					}
-				};
-				paramCount = 0;
-			} else {
-				params[paramCount] = s;
-				paramCount++;
-			}
-		}
-	}
-	
-	
 /*
 	public void waitOnThrobber() {
 		boolean flag;
@@ -235,9 +194,6 @@
 		if (eventType.equals(BACK) || eventType.equals(SCROLL_DOWN)) {
 			fireEventOnView(null, eventType, null);
 			return;
-		} else if (eventType.equals(CLICK_ON_TEXT)) {
-			Log.d("nofatclips", "Firing event: type= " + eventType + " value= " + value);
-			fireEventOnView(null, eventType, value);
 		}
 		if (widgetType.equals(BUTTON)) {
 			v = solo.getButton(widgetName);
@@ -287,8 +243,6 @@
 			solo.goBack();
 		} else if (interactionType.equals(CHANGE_ORIENTATION)) {
 			changeOrientation();
-		} else if (interactionType.equals(CLICK_ON_TEXT)) {
-			clickOnText(value);
 		} else if (interactionType.equals(OPEN_MENU)) {
 			solo.sendKey(Solo.MENU);
 		} else if (interactionType.equals(SCROLL_DOWN)) {
@@ -334,10 +288,6 @@
 			}
 		});
 		sync();
-	}
-
-	private void clickOnText (String text) {
-		solo.clickOnText (text);
 	}
 	
 	private void selectListItem (ListView l, String item) {
