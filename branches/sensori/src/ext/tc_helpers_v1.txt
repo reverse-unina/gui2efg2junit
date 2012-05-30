@@ -1,0 +1,66 @@
+	public void retrieveWidgets () {
+		theViews.clear();
+		for (View w: solo.getCurrentViews()) {
+			theViews.put(w.getId(), w);
+		}
+	}
+	
+	public Map<Integer,View> getWidgets () {
+		return this.theViews;
+	}
+	
+	public View getWidget (int key) {
+		return getWidgets().get(key);
+	}
+	
+	public void doTestWidget (int theId, String theType, String theName) {
+		if (theId == -1)
+			return;
+		View v = getWidget(theId);
+		assertNotNull("Checking for id", v);
+
+		String type = v.toString();
+		type = type.substring(0, type.indexOf('@'));
+		assertEquals("Checking for type", theType, type);
+		
+		if (theName != "") {
+			MoreAsserts.assertAssignableFrom(TextView.class, v);
+			TextView widget = (TextView) v;
+			String name = widget.getText().toString();
+			assertEquals("Checking for name", theName, name);
+		}
+	}
+	
+	public void fireEvent (int widgetId, String widgetType, String eventType) {
+		View v = getWidget(widgetId);
+		if (v == null) {
+			v = theActivity.findViewById(widgetId);
+		}
+		if (eventType == "click") {
+			TouchUtils.clickView(this, v);
+		}
+		this.theActivity = solo.getCurrentActivity();
+	}
+	
+	public void setInput (int widgetId, String widgetType, String value) {
+		View v = getWidget(widgetId);
+		if (v == null) {
+			v = theActivity.findViewById(widgetId);
+		}
+		if (widgetType == "editText") {
+			solo.enterText((EditText)v, value);
+		} else if (widgetType == "button") {
+			TouchUtils.clickView(this, v);
+		}
+	}
+	
+	public void debug (String msg) {
+		Log.d("nofatclips",msg);
+		for (View x: getWidgets().values()) {
+			if (x instanceof TextView) {
+				Log.i("nofatclips", ((TextView)x).getText().toString() + "[" + x.toString() + "]: " + x.getId());
+			} else {
+				Log.i("nofatclips", "[" + x.toString() + "]: " + x.getId());
+			}
+		}
+	}
