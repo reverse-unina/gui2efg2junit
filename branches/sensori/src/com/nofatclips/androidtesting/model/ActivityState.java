@@ -27,5 +27,10 @@ public interface ActivityState extends WrapperInterface, Iterable<WidgetState> {
 	public void markAsCrash();
 	public void markAsFailure();
 
-	
+	/** @author nicola amatucci */
+	public void setUsesSensorsManager(boolean yes_no);
+	public boolean getUsesSensorsManager();
+	public void setUsesLocationManager(boolean yes_no);
+	public boolean getUsesLocationManager();
+	/** @author nicola amatucci */
 }
