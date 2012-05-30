@@ -1,0 +1,34 @@
+	private static Class<?> theClass;
+	static {
+		try {
+			theClass = Class.forName(CLASS_NAME);
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public %TEST_CLASS_NAME% () {
+		super(PACKAGE_NAME,theClass);
+		this.theViews = new HashMap<Integer,View>();
+	}
+
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		this.solo = new Solo (getInstrumentation(), getActivity());
+		restart();
+		afterRestart();
+		refreshCurrentActivity();
+	}
+	
+	@Override
+	protected void tearDown() throws Exception {
+		try {
+			solo.finalize();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		theActivity.finish();
+		super.tearDown();
+	}

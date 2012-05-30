@@ -1,0 +1,36 @@
+//package your.package.here;
+
+/*	Add package and import declarations. Try CTRL+SHIFT+O if you're using Eclipse.
+//	Robotium must be in the build path!!! Otherwise, Solo cannot be resolved to a class.
+//	Additionally, the targetPackage for Instrumentation in AndroidManifest.xml should
+//	be set to the package of the application under test (that is PACKAGE_NAME below) */
+	
+import android.app.Activity;
+import android.content.ContextWrapper;
+import android.content.Intent;
+
+import com.jayway.android.robotium.solo.Solo;
+import android.view.View;
+import android.webkit.WebView;
+import android.widget.*;
+import android.util.Log;
+import android.view.Display;
+import android.view.WindowManager;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import android.test.ActivityInstrumentationTestCase2;
+
+import static android.content.Context.WINDOW_SERVICE;
+import static android.view.Surface.*;
+
+@SuppressWarnings("rawtypes")
+public class %TEST_CLASS_NAME% extends ActivityInstrumentationTestCase2 {
+
+	// Attributes
+	private Activity theActivity;
+	private Map<Integer,View> theViews;
+	private ArrayList<View> allViews = new ArrayList<View>(); // A list of all widgets
+	private Solo solo;	
+	private TabHost	tabs;
+	private int tabNum;
