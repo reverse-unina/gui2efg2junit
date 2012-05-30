@@ -122,6 +122,29 @@ public class TestCaseActivity extends ElementWrapper implements ActivityState {
 		return this.description.getAttribute("id");
 	}
 
+	/** @author nicola amatucci */
+	@Override
+	public void setUsesSensorsManager(boolean yes_no) {
+		setAttribute("uses_sensor_manager", (yes_no)?"TRUE":"FALSE" );
+		
+	}
+
+	@Override
+	public boolean getUsesSensorsManager() {
+		return getAttribute("uses_sensor_manager").equals("TRUE");
+	}
+
+	@Override
+	public void setUsesLocationManager(boolean yes_no) {
+		setAttribute("uses_location_manager", (yes_no)?"TRUE":"FALSE" );
+	}
+
+	@Override
+	public boolean getUsesLocationManager() {
+		return getAttribute("uses_location_manager").equals("TRUE");
+	}
+	/** @author nicola amatucci */
+	
 	public TestCaseActivity clone () {
 		return createActivity(this);
 	}

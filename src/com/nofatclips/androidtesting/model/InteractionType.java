@@ -16,4 +16,12 @@ public interface InteractionType {
 	public final static String CHANGE_ORIENTATION = "changeOrientation";
 	public final static String CLICK_ON_TEXT = "clickText";
 	
+	/** @author nicola amatucci */
+	//sensors
+	public final static String ACCELEROMETER_SENSOR_EVENT = "accelerometerSensorEvent";
+	public final static String ORIENTATION_SENSOR_EVENT = "orientationSensorEvent";
+	public final static String MAGNETIC_FIELD_SENSOR_EVENT = "magneticFieldSensorEvent";
+	public final static String TEMPERATURE_SENSOR_EVENT = "temperatureSensorEvent";
+	public final static String AMBIENT_TEMPERATURE_SENSOR_EVENT = "ambientTemperatureSensorEvent";
+	/** @author nicola amatucci */	
 }
