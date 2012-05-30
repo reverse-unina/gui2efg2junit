@@ -23,5 +23,6 @@ public interface InteractionType {
 	public final static String MAGNETIC_FIELD_SENSOR_EVENT = "magneticFieldSensorEvent";
 	public final static String TEMPERATURE_SENSOR_EVENT = "temperatureSensorEvent";
 	public final static String AMBIENT_TEMPERATURE_SENSOR_EVENT = "ambientTemperatureSensorEvent";
+	public final static String LOCATION_CHANGE_EVENT = "locationChangeEvent";
 	/** @author nicola amatucci */	
 }
