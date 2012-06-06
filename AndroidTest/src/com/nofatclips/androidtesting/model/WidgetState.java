@@ -4,6 +4,8 @@ public interface WidgetState extends WrapperInterface {
 
 	public String getId();
 	public void setId(String id);
+	public String getUniqueId();
+	public void setUniqueId(String id);
 	public String getName();
 	public void setName(String name);
 	public String getType();

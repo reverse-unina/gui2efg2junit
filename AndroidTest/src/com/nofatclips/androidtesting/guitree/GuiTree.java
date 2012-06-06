@@ -99,6 +99,19 @@ public class GuiTree extends XmlGraph implements Session, Testable, Plottable {
 		getDom().getDocumentElement().setAttribute("restart_sleep",millis);
 	}
 
+	public String getSleepAfterTask () {
+		if (!getDom().getDocumentElement().hasAttribute("end_task_sleep")) return "";
+		return this.getDom().getDocumentElement().getAttribute("end_task_sleep");
+	}
+
+	public void setSleepAfterTask (int millis) {
+		setSleepAfterTask (String.valueOf(millis));
+	}
+
+	public void setSleepAfterTask (String millis) {
+		getDom().getDocumentElement().setAttribute("end_task_sleep",millis);
+	}
+
 	public String getInAndOutFocus () {
 		boolean hasClassName = getDom().getDocumentElement().hasAttribute("in_and_out_focus");
 		return (hasClassName)?getDom().getDocumentElement().getAttribute("in_and_out_focus"):("false");
