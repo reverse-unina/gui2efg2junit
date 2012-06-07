@@ -27,4 +27,7 @@ public interface SimpleType {
 	public final static String EMPTY_LIST = "emptyList";
 	public final static String SINGLE_CHOICE_LIST = "singleChoiceList";
 	public final static String MULTI_CHOICE_LIST = "multiChoiceList";
+	public final static String PREFERENCE_LIST = "preferenceList";
+	public final static String EMPTY_SPINNER = "emptySpinner";
+	
 }
