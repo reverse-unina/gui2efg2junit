@@ -289,6 +289,8 @@
 			changeOrientation();
 		} else if (interactionType.equals(CLICK_ON_TEXT)) {
 			clickOnText(value);
+		} else if (interactionType.equals(PRESS_KEY)) {
+			pressKey(value);
 		} else if (interactionType.equals(OPEN_MENU)) {
 			solo.sendKey(Solo.MENU);
 		} else if (interactionType.equals(SCROLL_DOWN)) {
@@ -397,6 +399,14 @@
 		});
 		sync();
 	}
+	
+	public void pressKey (String keyCode) {
+		pressKey (Integer.parseInt(keyCode));
+	}
+
+	public void pressKey (int keyCode) {
+		solo.sendKey(keyCode);
+	}	
 	
 	// Scroll until the view is on the screen if IN_AND_OUT_OF_FOCUS is enabled or if the force parameter is true 
 	protected void requestView (final View v, boolean force) {
