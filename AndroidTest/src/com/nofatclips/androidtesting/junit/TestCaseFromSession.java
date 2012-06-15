@@ -111,7 +111,7 @@ public class TestCaseFromSession implements Testable {
 	
 	private void generateTest(ActivityState anActivity, String message) {
 		if (anActivity.isCrash() || anActivity.isExit() || anActivity.isFailure()) {
-			loc ("// This event leads to " + anActivity.getDescriptionId());
+			loc ("// This event leads to " + anActivity.getTitle());
 			return;
 		}
 		anActivity = getCompleteActivity(anActivity);
