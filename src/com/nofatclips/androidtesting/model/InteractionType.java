@@ -25,5 +25,7 @@ public interface InteractionType {
 	public final static String AMBIENT_TEMPERATURE_SENSOR_EVENT = "ambientTemperatureSensorEvent";
 	public final static String GPS_LOCATION_CHANGE_EVENT = "gpsLocationChangeEvent";
 	public final static String GPS_PROVIDER_DISABLE_EVENT = "gpsProviderDisableEvent";
+	public final static String INCOMING_SMS_EVENT = "incomingSMSEvent";
+	public final static String INCOMING_CALL_EVENT = "incomingCallEvent";
 	/** @author nicola amatucci */	
 }
