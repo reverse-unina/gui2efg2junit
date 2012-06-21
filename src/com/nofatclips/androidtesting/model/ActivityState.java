@@ -33,4 +33,5 @@ public interface ActivityState extends WrapperInterface, Iterable<WidgetState> {
 	public void setUsesLocationManager(boolean yes_no);
 	public boolean getUsesLocationManager();
 	/** @author nicola amatucci */
+
 }
