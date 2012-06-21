@@ -15,9 +15,10 @@ public interface InteractionType {
 	public final static String SPINNER_SELECT = "selectSpinnerItem";
 	public final static String CHANGE_ORIENTATION = "changeOrientation";
 	public final static String CLICK_ON_TEXT = "clickText";
+	public final static String WRITE_TEXT = "writeText";
+	public final static String PRESS_KEY = "pressKey";
 	
 	/** @author nicola amatucci */
-	//sensors
 	public final static String ACCELEROMETER_SENSOR_EVENT = "accelerometerSensorEvent";
 	public final static String ORIENTATION_SENSOR_EVENT = "orientationSensorEvent";
 	public final static String MAGNETIC_FIELD_SENSOR_EVENT = "magneticFieldSensorEvent";

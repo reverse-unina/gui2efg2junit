@@ -30,6 +30,7 @@ public class TestCaseFromSession implements Testable {
 		String sleepAfterEvent = this.aGuiTree.getSleepAfterEvent ();
 		String sleepAfterRestart = this.aGuiTree.getSleepAfterRestart ();
 		String sleepOnThrobber = this.aGuiTree.getSleepOnThrobber();
+		String sleepAfterTask = this.aGuiTree.getSleepAfterTask();
 		String inAndOutFocus = this.aGuiTree.getInAndOutFocus();
 		setComparationWidgets (this.aGuiTree.getComparationWidgets());
 		
@@ -41,6 +42,7 @@ public class TestCaseFromSession implements Testable {
 		loc ("public final static int SLEEP_AFTER_EVENT = " + (sleepAfterEvent.equals("")?2000:sleepAfterEvent) + ";");
 		loc ("public final static int SLEEP_AFTER_RESTART = " + (sleepAfterRestart.equals("")?2000:sleepAfterRestart) + ";");
 		loc ("public final static int SLEEP_ON_THROBBER = " + (sleepOnThrobber.equals("")?10000:sleepOnThrobber) + ";");
+		loc ("public final static int SLEEP_AFTER_TASK = " + (sleepOnThrobber.equals("")?0:sleepAfterTask) + ";");
 		loc ("public final static boolean FORCE_RESTART = false;").blank();
 		loc ("public final static boolean IN_AND_OUT_FOCUS= " + inAndOutFocus +";").blank();
 		
@@ -50,6 +52,8 @@ public class TestCaseFromSession implements Testable {
 		for (Field f: SimpleType.class.getFields()) {
 			loc ("public final static String " + constantField(f) + ";");
 		}
+		
+		loc ("public final static String[] PRECRAWLING = {};");
 
 		loc("");
 		this.j.includeSnippet("tc_framework.txt");
@@ -101,12 +105,13 @@ public class TestCaseFromSession implements Testable {
 			}
 			generateTest (t.getFinalActivity());
 		}
+		loc ("solo.sleep (SLEEP_AFTER_TASK);");
 		loc ("}").blank();
 	}
 	
 	private void generateTest(ActivityState anActivity, String message) {
 		if (anActivity.isCrash() || anActivity.isExit() || anActivity.isFailure()) {
-			loc ("// This event leads to " + anActivity.getDescriptionId());
+			loc ("// This event leads to " + anActivity.getTitle());
 			return;
 		}
 		anActivity = getCompleteActivity(anActivity);

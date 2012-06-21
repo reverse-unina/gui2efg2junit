@@ -4,12 +4,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.nofatclips.androidtesting.model.UserEvent;
-import com.nofatclips.androidtesting.model.WidgetState;
 import com.nofatclips.androidtesting.model.WrapperInterface;
-import com.nofatclips.androidtesting.xml.ElementWrapper;
 import com.nofatclips.androidtesting.xml.XmlGraph;
 
-public class TestCaseEvent extends ElementWrapper implements UserEvent {
+public class TestCaseEvent extends TestCaseInteraction implements UserEvent {
 
 	public TestCaseEvent () {
 		super();
@@ -20,11 +18,11 @@ public class TestCaseEvent extends ElementWrapper implements UserEvent {
 	}
 	
 	public TestCaseEvent (XmlGraph g) {
-		super (g, "EVENT");
+		super (g, TAG);
 	}
 
 	public TestCaseEvent (Document d) {
-		super (d, "EVENT");
+		super (d, TAG);
 	}
 
 	public WrapperInterface getWrapper(Element e) {
@@ -36,7 +34,7 @@ public class TestCaseEvent extends ElementWrapper implements UserEvent {
 	}
 
 	public void setType(String t) {
-		getElement().setAttribute("type",t);
+		setAttribute("type",t);
 	}
 
 	public boolean hasValue() {
@@ -67,24 +65,24 @@ public class TestCaseEvent extends ElementWrapper implements UserEvent {
 		setAttribute("screenshot",fileName);		
 	}
 
-	public WidgetState getWidget() {
-		return new TestCaseWidget ((Element)getElement().getChildNodes().item(0));
-	}
+//	public WidgetState getWidget() {
+//		return new TestCaseWidget ((Element)getElement().getChildNodes().item(0));
+//	}
+//
+//	public void setWidget(WidgetState newChild) {
+//		Element oldChild = getWidget().getElement();
+//		if (oldChild != null)
+//			getElement().removeChild(oldChild);
+//		getElement().appendChild(newChild.getElement());
+//	}
 
-	public void setWidget(WidgetState newChild) {
-		Element oldChild = getWidget().getElement();
-		if (oldChild != null)
-			getElement().removeChild(oldChild);
-		getElement().appendChild(newChild.getElement());
-	}
-
-	public String getWidgetName() {
-		return getWidget().getName();
-	}
-
-	public void setWidgetName(String n) {
-		getWidget().setName(n);
-	}
+//	public String getWidgetName() {
+//		return getWidget().getName();
+//	}
+//
+//	public void setWidgetName(String n) {
+//		getWidget().setName(n);
+//	}
 	
 	public void setDescription (String d) {
 		setAttribute("desc",d);
@@ -98,21 +96,21 @@ public class TestCaseEvent extends ElementWrapper implements UserEvent {
 		return getAttribute("desc");
 	}
 
-	public String getWidgetType() {
-		return getWidget().getType();
-	}
+//	public String getWidgetType() {
+//		return getWidget().getType();
+//	}
+//
+//	public void setWidgetType(String t) {
+//		getWidget().setType(t);
+//	}
 
-	public void setWidgetType(String t) {
-		getWidget().setType(t);
-	}
-
-	public String getWidgetId() {
-		return getWidget().getId();
-	}
-
-	public void setWidgetId(String id) {
-		getWidget().setId(id);
-	}
+//	public String getWidgetId() {
+//		return getWidget().getId();
+//	}
+//
+//	public void setWidgetId(String id) {
+//		getWidget().setId(id);
+//	}
 
 	public static TestCaseEvent createEvent(GuiTree theSession) {
 		TestCaseEvent event = new TestCaseEvent(theSession);
@@ -125,7 +123,7 @@ public class TestCaseEvent extends ElementWrapper implements UserEvent {
 	}
 	
 	public TestCaseEvent clone () {
-		TestCaseEvent e = createEvent (this.getElement().getOwnerDocument());
+		TestCaseEvent e = createEvent (getElement().getOwnerDocument());
 		e.setType(this.getType());
 		if (this.hasValue()) {
 			e.setValue(this.getValue());
@@ -138,4 +136,6 @@ public class TestCaseEvent extends ElementWrapper implements UserEvent {
 		return e;
 	}
 
+	public static String TAG = "EVENT";
+	
 }

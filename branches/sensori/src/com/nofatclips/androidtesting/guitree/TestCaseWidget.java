@@ -25,6 +25,10 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 		return getAttribute("id");
 	}
 
+	public String getUniqueId() {
+		return getAttribute("unique_id");
+	}
+
 	public String getName() {
 		return getAttribute("name");
 	}
@@ -77,6 +81,11 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 
 	public void setId(String id) {
 		setAttribute("id", id);
+		
+	}
+
+	public void setUniqueId(String id) {
+		setAttribute("unique_id", id);
 		
 	}
 
@@ -135,6 +144,7 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 		Element el = this.getElement().getOwnerDocument().createElement(TAG);
 		TestCaseWidget newOne = new TestCaseWidget(el);
 		newOne.setIdNameType(this.getId(), this.getName(), this.getType());
+		newOne.setUniqueId(this.getUniqueId());
 		newOne.setTextType(this.getTextType());
 		newOne.setSimpleType(this.getSimpleType());
 		newOne.setAvailable(this.getAvailable());

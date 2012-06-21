@@ -145,6 +145,7 @@ public class TestCaseActivity extends ElementWrapper implements ActivityState {
 	}
 	/** @author nicola amatucci */
 	
+	
 	public TestCaseActivity clone () {
 		return createActivity(this);
 	}

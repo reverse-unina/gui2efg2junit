@@ -33,79 +33,62 @@ public class WidgetAdapter implements WidgetState {
 		return "";
 	}
 
-	@Override
+	public String getUniqueId() {
+		return "";
+	}
+
 	public void setId(String id) {}
-
-	@Override
 	public void setName(String name) {}
-
-	@Override
 	public void setType(String type) {}
-	
-	@Override
+
 	public WidgetState clone() {
 		return null;
 	}
 
-	@Override
 	public String getSimpleType() {
 		return null;
 	}
 
-	@Override
 	public String getTextType() {
 		return null;
 	}
 
-	@Override
 	public void setTextType(String inputType) {}
-
-	@Override
 	public void setSimpleType(String simpleType) {}
 
-	@Override
 	public boolean isAvailable() {
 		return true;
 	}
 
-	@Override
 	public void setAvailable(String a) {}
 
-	@Override
 	public int getCount() {
 		return 1;
 	}
 
-	@Override
 	public void setCount(int count) {}
 
-	@Override
 	public int getIndex() {
 		return 0;
 	}
 
-	@Override
 	public boolean isClickable() {
 		return true;
 	}
 
-	@Override
 	public void setClickable(String c) {}
 
-	@Override
 	public String getValue() {
 		return "";
 	}
 
-	@Override
 	public void setValue(String v) {}
 
-	@Override
 	public boolean isLongClickable() {
 		return false;
 	}
 
-	@Override
 	public void setLongClickable(String lc) {}
+	public void setUniqueId(String id) {}
 	
 }
