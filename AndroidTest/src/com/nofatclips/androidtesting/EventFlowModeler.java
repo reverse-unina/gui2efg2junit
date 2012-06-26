@@ -37,7 +37,10 @@ public class EventFlowModeler {
 				String outputFileName = (args.length > 1) ? args[1] : "";
 				String packageName = (args.length > 2) ? args[2] : "";
 				String efgFileName = (args.length > 3) ? args[3] : "";
-				Gui2EfcFrame frame = new Gui2EfcFrame(inputFileName, outputFileName, packageName, efgFileName);
+				String reportFileName = (args.length > 4) ? args[4] : "";
+				String dotFileName = (args.length > 5) ? args[5] : "";
+				String dotEfgFileName = (args.length > 6) ? args[6] : "";
+				Gui2EfcFrame frame = new Gui2EfcFrame(inputFileName, outputFileName, packageName, efgFileName,reportFileName,dotFileName,dotEfgFileName);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				if (frame.isWindowed()) {
 					frame.setVisible(true);
@@ -52,12 +55,15 @@ public class EventFlowModeler {
 class Gui2EfcFrame extends JFrame  {
 
 	@SuppressWarnings("serial")
-	public Gui2EfcFrame (String inputFileName, String outputFileName, String packageName, String efgFileName) {
+	public Gui2EfcFrame (String inputFileName, String outputFileName, String packageName, String efgFileName, String reportFileName, String dotFileName, String dotEfgFileName) {
 		super();
 		this.inputFileName = inputFileName;
 		this.outputFileName = outputFileName;
 		this.packageName = packageName;
 		this.efgFileName = efgFileName;
+		this.reportFileName = reportFileName;
+		this.dotFileName = dotFileName;
+		this.dotEfgFileName = dotEfgFileName;
 		this.windowed = ((outputFileName.equals("")) || (inputFileName.equals("")));
 		this.someLogger = Logger.getLogger(LOGGER);
 		this.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
@@ -246,25 +252,64 @@ class Gui2EfcFrame extends JFrame  {
 	}
 
 	private void showDot() {
-		Pattern p = Pattern.compile("(.+)\\.[^.]+");
-		Matcher m = p.matcher(inputFileName);
-		if (m.find()) {
-			schermo.setFileName(EFG_DOT, m.group(1)+"_efg");
-		}	
-		schermo.showCode(EFG_DOT, exportToDot(this.efg));
+		if (this.dotEfgFileName.equals("")) {
+			Pattern p = Pattern.compile("(.+)\\.[^.]+");
+			Matcher m = p.matcher(inputFileName);
+			if (m.find()) {
+				schermo.setFileName(EFG_DOT, m.group(1)+"_efg");
+			}	
+		} else {
+			schermo.setFileName(EFG_DOT, this.dotEfgFileName);
+		}
+		
+		String dot = exportToDot(this.efg);
+		
+		if (isWindowed()) {
+			schermo.showCode(EFG_DOT, dot);
+		} else {
+			PrintWriter autput;
+			try {
+				autput = new PrintWriter (this.dotEfgFileName);
+				autput.println(dot);
+				autput.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	private void showGuiTreeDot() {
-		Pattern p = Pattern.compile("(.+)\\.[^.]+");
-		Matcher m = p.matcher(inputFileName);
-		if (m.find()) {
-			schermo.setFileName(GUI_TREE_DOT, m.group(1));
+		if (this.dotFileName.equals("")) {
+			Pattern p = Pattern.compile("(.+)\\.[^.]+");
+			Matcher m = p.matcher(inputFileName);
+			if (m.find()) {
+				schermo.setFileName(GUI_TREE_DOT, m.group(1));
+			}
+		} else {
+			schermo.setFileName(GUI_TREE_DOT, this.dotFileName);
 		}
-		schermo.showCode(GUI_TREE_DOT, exportToDot(this.guiTree));
+		
+		String dot = exportToDot(this.guiTree);
+		
+		if (isWindowed()) {
+			schermo.showCode(GUI_TREE_DOT, dot);
+		} else {
+			PrintWriter autput;
+			try {
+				autput = new PrintWriter (this.dotFileName);
+				autput.println(dot);
+				autput.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	private void showTest() {
 		String code = exportToJunit(this.guiTree, this.activityMap);
+		
 		if (this.outputFileName.equals("")) {
 			Pattern p = Pattern.compile("public class ([^ ]+) ");
 			Matcher m = p.matcher(code);
@@ -274,6 +319,7 @@ class Gui2EfcFrame extends JFrame  {
 		} else {
 			schermo.setFileName(JUNIT_JAVA, this.outputFileName);
 		}
+
 		if (isWindowed()) {
 			schermo.showCode(JUNIT_JAVA, code);
 		} else {
@@ -293,9 +339,32 @@ class Gui2EfcFrame extends JFrame  {
 	}
 	
 	private void showReport() {
-		schermo.setFileName(TEST_REPORT, "report");
+		if (this.outputFileName.equals("")) {
+			Pattern p = Pattern.compile("(.+)\\.[^.]+");
+			Matcher m = p.matcher(inputFileName);
+			if (m.find()) {
+				schermo.setFileName(TEST_REPORT, m.group(1)+"_efg");
+			}	
+		} else {
+			schermo.setFileName(TEST_REPORT, "report");
+		}
+
 		ReportGenerator r = new ReportGenerator (this.guiTree, this.efg, this.activityMap);
-		schermo.showCode(TEST_REPORT, r.getReport());
+		String report = r.getReport();
+
+		if (isWindowed()) {
+			schermo.showCode(TEST_REPORT, report);
+		} else {
+			PrintWriter autput;
+			try {
+				autput = new PrintWriter (this.reportFileName);
+				autput.println(report);
+				autput.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	// TODO Remove when old GuiTree are replaced by new ones with description id
@@ -326,6 +395,9 @@ class Gui2EfcFrame extends JFrame  {
 	private String outputFileName;
 	private String packageName;
 	private String efgFileName;
+	private String reportFileName;
+	private String dotFileName;
+	private String dotEfgFileName;
 	private boolean windowed;
 	private GuiTree guiTree;
 	private ActivityMap activityMap;
