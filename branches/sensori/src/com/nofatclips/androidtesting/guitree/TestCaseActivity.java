@@ -1,11 +1,14 @@
 package com.nofatclips.androidtesting.guitree;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import com.nofatclips.androidtesting.model.ActivityState;
+import com.nofatclips.androidtesting.model.SupportedEvent;
 import com.nofatclips.androidtesting.model.WidgetState;
 import com.nofatclips.androidtesting.xml.ElementWrapper;
 import com.nofatclips.androidtesting.xml.NodeListWrapper;
@@ -27,7 +30,11 @@ public class TestCaseActivity extends ElementWrapper implements ActivityState {
 	@Override
 	public void setElement (Element e) {
 		super.setElement(e);
-		this.description = (Element) getElement().getChildNodes().item(0); 
+		this.description = (Element) getElement().getChildNodes().item(0);
+		
+		/** @author nicola amatucci */
+		this.supported_events =  (Element) getElement().getChildNodes().item(1);
+		/** @author nicola amatucci */
 	}
 	
 	public Iterator<WidgetState> iterator() {
@@ -79,8 +86,15 @@ public class TestCaseActivity extends ElementWrapper implements ActivityState {
 
 	public static TestCaseActivity createActivity (Document dom, String tag) {
 		Element el = dom.createElement(tag);
+		
 		Element desc = dom.createElement(DESC_TAG);
 		el.appendChild(desc);
+		
+		/** @author nicola amatucci */
+		Element supported_events = dom.createElement(SUPPORTED_EVENTS_TAG);
+		el.appendChild(supported_events);
+		/** @author nicola amatucci */
+		
 		return new TestCaseActivity (el);		
 	}
 	
@@ -97,6 +111,11 @@ public class TestCaseActivity extends ElementWrapper implements ActivityState {
 		Document dom = originalActivity.getElement().getOwnerDocument();
 		TestCaseActivity newActivity = createActivity (dom);
 		newActivity.copyDescriptionFrom(originalActivity);
+		
+		/** @author nicola amatucci */
+		newActivity.copySupportedEventsFrom(originalActivity);
+		/** @author nicola amatucci */
+		
 		return newActivity;
 	}
 
@@ -123,6 +142,62 @@ public class TestCaseActivity extends ElementWrapper implements ActivityState {
 	}
 
 	/** @author nicola amatucci */
+	public ArrayList<SupportedEvent> getSupportedEvents()
+	{
+		ArrayList<SupportedEvent> ret = new ArrayList<SupportedEvent>();
+		
+		if (this.supported_events != null && this.supported_events.getNodeName().equals(SUPPORTED_EVENTS_TAG))
+		{			
+			NodeListWrapper<SupportedEvent> list = new NodeListWrapper<SupportedEvent> (this.supported_events, new TestCaseSupportedEvent());
+			
+			while (list.hasNext())
+				ret.add(list.next());
+		}
+		
+		return ret;
+	}
+	
+	public ArrayList<SupportedEvent> getSupportedEventsByWidgetUniqueId(String uid) {
+		ArrayList<SupportedEvent> ret = new ArrayList<SupportedEvent>();
+		
+		for ( SupportedEvent se : this.getSupportedEvents() )
+			if ( se.getWidgetUniqueId().equals(uid) )
+				ret.add(se);
+		
+		return ret;
+	}	
+	
+	public void copySupportedEventsFrom(ActivityState originalActivity) {
+		for (SupportedEvent s: originalActivity.getSupportedEvents()) {
+			this.addSupportedEvent(s.clone());
+		}
+	}
+	
+	public void resetSupportedEvents()
+	{
+		if (this.supported_events != null)
+		{
+			NodeList list = this.supported_events.getChildNodes();
+			for (int i = 0; i < list.getLength(); i++)
+				this.supported_events.removeChild(list.item(i));
+		}
+	}
+	
+	public void addSupportedEvent(SupportedEvent event)
+	{
+		this.supported_events.appendChild(event.getElement());
+	}
+	
+	public boolean supportsEvent(String uid, String event)
+	{
+		for ( SupportedEvent se : this.getSupportedEvents() )
+			if ( se.getWidgetUniqueId().equals(uid) && se.getEventType().equals(event) )
+				return true;
+		
+		return false;
+	}
+	
+	/*
 	@Override
 	public void setUsesSensorsManager(boolean yes_no) {
 		setAttribute("uses_sensor_manager", (yes_no)?"TRUE":"FALSE" );
@@ -143,6 +218,7 @@ public class TestCaseActivity extends ElementWrapper implements ActivityState {
 	public boolean getUsesLocationManager() {
 		return getAttribute("uses_location_manager").equals("TRUE");
 	}
+	*/
 	/** @author nicola amatucci */
 	
 	
@@ -191,6 +267,8 @@ public class TestCaseActivity extends ElementWrapper implements ActivityState {
 	}
 
 	private Element description;
+	private Element supported_events;
 	public final static String DESC_TAG = "DESCRIPTION";
+	public final static String SUPPORTED_EVENTS_TAG = "SUPPORTED_EVENTS";
 
 }

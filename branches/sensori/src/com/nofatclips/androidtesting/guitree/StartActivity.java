@@ -27,6 +27,12 @@ public class StartActivity extends TestCaseActivity {
 		Element el = dom.createElement(tag);
 		Element desc = dom.createElement(DESC_TAG);
 		el.appendChild(desc);
+		
+		/** @author nicola amatucci */
+		Element supported_events = dom.createElement(SUPPORTED_EVENTS_TAG);
+		el.appendChild(supported_events);
+		/** @author nicola amatucci */
+		
 		return new StartActivity (el);		
 	}
 	
@@ -37,6 +43,11 @@ public class StartActivity extends TestCaseActivity {
 		newActivity.setTitle(originalActivity.getTitle());
 		newActivity.setId(originalActivity.getId());
 		newActivity.copyDescriptionFrom(originalActivity);
+		
+		/** @author nicola amatucci */
+		newActivity.copySupportedEventsFrom(originalActivity);
+		/** @author nicola amatucci */
+		
 		newActivity.setUniqueId(originalActivity.getUniqueId());
 		newActivity.setScreenshot(originalActivity.getScreenshot());
 		return newActivity;
