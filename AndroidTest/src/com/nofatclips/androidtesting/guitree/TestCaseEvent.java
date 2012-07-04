@@ -64,25 +64,6 @@ public class TestCaseEvent extends TestCaseInteraction implements UserEvent {
 	public void setScreenshot(String fileName) {
 		setAttribute("screenshot",fileName);		
 	}
-
-//	public WidgetState getWidget() {
-//		return new TestCaseWidget ((Element)getElement().getChildNodes().item(0));
-//	}
-//
-//	public void setWidget(WidgetState newChild) {
-//		Element oldChild = getWidget().getElement();
-//		if (oldChild != null)
-//			getElement().removeChild(oldChild);
-//		getElement().appendChild(newChild.getElement());
-//	}
-
-//	public String getWidgetName() {
-//		return getWidget().getName();
-//	}
-//
-//	public void setWidgetName(String n) {
-//		getWidget().setName(n);
-//	}
 	
 	public void setDescription (String d) {
 		setAttribute("desc",d);
@@ -96,22 +77,6 @@ public class TestCaseEvent extends TestCaseInteraction implements UserEvent {
 		return getAttribute("desc");
 	}
 
-//	public String getWidgetType() {
-//		return getWidget().getType();
-//	}
-//
-//	public void setWidgetType(String t) {
-//		getWidget().setType(t);
-//	}
-
-//	public String getWidgetId() {
-//		return getWidget().getId();
-//	}
-//
-//	public void setWidgetId(String id) {
-//		getWidget().setId(id);
-//	}
-
 	public static TestCaseEvent createEvent(GuiTree theSession) {
 		TestCaseEvent event = new TestCaseEvent(theSession);
 		return event;
@@ -123,17 +88,17 @@ public class TestCaseEvent extends TestCaseInteraction implements UserEvent {
 	}
 	
 	public TestCaseEvent clone () {
-		TestCaseEvent e = createEvent (getElement().getOwnerDocument());
-		e.setType(this.getType());
+		TestCaseEvent that = createEvent (getElement().getOwnerDocument());
+		that.setType(this.getType());
 		if (this.hasValue()) {
-			e.setValue(this.getValue());
+			that.setValue(this.getValue());
 		}
-		e.setId(this.getId());
+		that.setId(this.getId());
 		if (this.hasDescription()) {
-			e.setDescription(this.getDescription());
+			that.setDescription(this.getDescription());
 		}
-		e.setWidget(this.getWidget().clone());
-		return e;
+		that.setWidget(this.getWidget().clone());
+		return that;
 	}
 
 	public static String TAG = "EVENT";

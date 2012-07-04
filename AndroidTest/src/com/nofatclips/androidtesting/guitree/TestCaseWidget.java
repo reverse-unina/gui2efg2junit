@@ -71,7 +71,7 @@ public class TestCaseWidget extends ElementWrapper implements WidgetState {
 	}
 
 	public String getTextType() {
-		return getAttribute("text_type");
+		return hasAttribute("text_type")?getAttribute("text_type"):"0";
 	}
 	
 	public String guessType() {
