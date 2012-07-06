@@ -2,49 +2,8 @@
 		solo.setActivityOrientation(Solo.PORTRAIT);
 		solo.sleep(SLEEP_AFTER_RESTART);
 		waitOnThrobber();
-		if (PRECRAWLING.length>0) {
-			refreshCurrentActivity();
-			retrieveWidgets();
-			processPrecrawling();
-		}
-		
 		Log.d("nofatclips", "Ready to operate after restarting...");
 	}
-	
-	private void processPrecrawling() {
-		Log.i("nofatclips", "Processing precrawling");
-		String[] params = new String[3];
-		int paramCount=0;
-		for (String s: PRECRAWLING) {
-			if (s == null) {
-				switch (paramCount) {
-					case 0: continue;
-					case 1: {
-						Log.i ("nofatclips", "Firing event " + params[0]);
-						fireEventOnView(null, params[0], null);
-						break;
-					}
-					case 2: {
-						Log.i ("nofatclips", "Firing event " + params[0] + " with value: " + params[1]);
-						fireEventOnView(null, params[0], params[1]);
-						break;
-					}	
-					case 3: {
-						View v = getWidget(Integer.parseInt(params[1]));
-						Log.i ("nofatclips", "Firing event " + params[0] + " on widget #" + params[1] + " with value: " + params[2]);
-						fireEventOnView(v, params[0], params[2]);
-						break;
-					}
-				};
-				paramCount = 0;
-			} else {
-				params[paramCount] = s;
-				paramCount++;
-			}
-		}
-	}
-	
-	
 /*
 	public void waitOnThrobber() {
 		boolean flag;
@@ -235,9 +194,6 @@
 		if (eventType.equals(BACK) || eventType.equals(SCROLL_DOWN)) {
 			fireEventOnView(null, eventType, null);
 			return;
-		} else if (eventType.equals(CLICK_ON_TEXT)) {
-			Log.d("nofatclips", "Firing event: type= " + eventType + " value= " + value);
-			fireEventOnView(null, eventType, value);
 		}
 		if (widgetType.equals(BUTTON)) {
 			v = solo.getButton(widgetName);
@@ -287,10 +243,6 @@
 			solo.goBack();
 		} else if (interactionType.equals(CHANGE_ORIENTATION)) {
 			changeOrientation();
-		} else if (interactionType.equals(CLICK_ON_TEXT)) {
-			clickOnText(value);
-		} else if (interactionType.equals(PRESS_KEY)) {
-			pressKey(value);
 		} else if (interactionType.equals(OPEN_MENU)) {
 			solo.sendKey(Solo.MENU);
 		} else if (interactionType.equals(SCROLL_DOWN)) {
@@ -308,23 +260,12 @@
 		} else if (interactionType.equals(SPINNER_SELECT)) {
 			selectSpinnerItem((Spinner)v, value);			
 		} else if (interactionType.equals(TYPE_TEXT)) {
-			typeText((EditText)v, value);
-		} else if (interactionType.equals(WRITE_TEXT)) {
-			writeText((EditText)v, value);
+			solo.enterText((EditText)v, value);
 		} else if (interactionType.equals(SET_BAR)) {
 			solo.setProgressBar((ProgressBar)v, Integer.parseInt(value));
 		} else {
 			return;
 		}		
-	}
-
-	protected void typeText (EditText v, String value) {
-		solo.enterText(v, value);
-	}
-	
-	protected void writeText (EditText v, String value) {
-		typeText (v, "");
-		typeText (v, value);
 	}
 
 	public void changeOrientation() {
@@ -347,10 +288,6 @@
 			}
 		});
 		sync();
-	}
-
-	private void clickOnText (String text) {
-		solo.clickOnText (text);
 	}
 	
 	private void selectListItem (ListView l, String item) {
@@ -388,7 +325,7 @@
 	}
 			
 	public static boolean isInAndOutFocusEnabled () {
-		return IN_AND_OUT_FOCUS;
+		return (IN_AND_OUT_FOCUS);
 	}			
 	
 	protected void requestFocus (final View v) {
@@ -399,14 +336,6 @@
 		});
 		sync();
 	}
-	
-	public void pressKey (String keyCode) {
-		pressKey (Integer.parseInt(keyCode));
-	}
-
-	public void pressKey (int keyCode) {
-		solo.sendKey(keyCode);
-	}	
 	
 	// Scroll until the view is on the screen if IN_AND_OUT_OF_FOCUS is enabled or if the force parameter is true 
 	protected void requestView (final View v, boolean force) {
@@ -507,11 +436,8 @@
 			return BUTTON;
 		if (type.endsWith("EditText"))
 			return EDIT_TEXT;
-		if (type.endsWith("Spinner")) {
-			Spinner s = (Spinner)v;
-			if (s.getCount() == 0) return EMPTY_SPINNER;
+		if (type.endsWith("Spinner"))
 			return SPINNER;
-		}
 		if (type.endsWith("SeekBar"))
 			return SEEK_BAR;
 		if (v instanceof RatingBar && (!((RatingBar)v).isIndicator()))
@@ -520,17 +446,7 @@
 			return TAB_HOST;
 		if (type.endsWith("ListView") || type.endsWith("ExpandedMenuView")) {
 			ListView l = (ListView)v;
-			if (l.getCount() == 0) return EMPTY_LIST;
-
-			if (l.getAdapter().getClass().getName().endsWith("PreferenceGroupAdapter")) {
-				return PREFERENCE_LIST;
-			} 
-
-			switch (l.getChoiceMode()) {
-				case ListView.CHOICE_MODE_NONE: return LIST_VIEW;
-				case ListView.CHOICE_MODE_SINGLE: return SINGLE_CHOICE_LIST;
-				case ListView.CHOICE_MODE_MULTIPLE: return MULTI_CHOICE_LIST;
-			}
+			return (l.getCount()>0)?LIST_VIEW:EMPTY_LIST;
 		}
 		if (type.endsWith("TextView"))
 			return TEXT_VIEW;
@@ -539,7 +455,7 @@
 		if (type.endsWith("LinearLayout"))
 			return LINEAR_LAYOUT;
 		if (type.endsWith("RelativeLayout"))
-			return RELATIVE_LAYOUT;			
+			return RELATIVE_LAYOUT;
 		if ((v instanceof WebView) || type.endsWith("WebView"))
 			return WEB_VIEW;
 		if (type.endsWith("TwoLineListItem"))
