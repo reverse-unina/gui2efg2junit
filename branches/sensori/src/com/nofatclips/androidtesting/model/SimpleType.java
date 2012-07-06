@@ -18,7 +18,11 @@ public interface SimpleType {
 	public final static String SEEK_BAR = "seekBar";
 	public final static String RATING_BAR = "ratingBar";
 	public final static String LINEAR_LAYOUT = "linearLayout";
+	
+	/** @author nicola amatucci */
 	public final static String RELATIVE_LAYOUT = "relativeLayout";
+	/** @author nicola amatucci */
+	
 	public final static String WEB_VIEW = "webPage";
 	public final static String DATE_PICKER = "datePicker";
 	public final static String TIME_PICKER = "timePicker";
