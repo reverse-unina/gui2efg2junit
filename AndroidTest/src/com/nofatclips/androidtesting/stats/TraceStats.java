@@ -12,9 +12,11 @@ public class TraceStats extends StatsReport {
 	private int tracesSuccessful = 0;
 	private int tracesFailed = 0;
 	private int tracesCrashed = 0;
+	private int tracesExit = 0;
 	private int tracesAsync = 0;
 	private List<String> crashes;
 	private List<String> failures;
+	private List<String> exits;
 	
 	public TraceStats() {
 		crashes = new ArrayList<String>();
@@ -30,6 +32,9 @@ public class TraceStats extends StatsReport {
 		} else if (a.isCrash()) {
 			this.tracesCrashed++;
 			this.crashes.add(theTrace.getId());
+		} else if (a.isExit()) {
+			this.tracesExit++;
+			this.exits.add(theTrace.getId());
 		} else {
 			this.tracesSuccessful++;
 		}
@@ -48,6 +53,10 @@ public class TraceStats extends StatsReport {
 		return tracesFailed;
 	}
 
+	public int getTracesExit() {
+		return tracesExit;
+	}
+
 	public int getTracesCrashed() {
 		return tracesCrashed;
 	}
@@ -55,14 +64,23 @@ public class TraceStats extends StatsReport {
 	public int getTracesAsync() {
 		return tracesAsync;
 	}
+	
+	public String printList (List<String> list) {
+		return ((list.size()>0)?(TAB + TAB + "traces: " + expandList(list) + NEW_LINE):"");
+	}
 
 	public String getReport() {
 		return "Traces processed: " + getTraces() + NEW_LINE + 
 				TAB + "success: " + getTracesSuccessful() + NEW_LINE + 
 				TAB + "fail: " + getTracesFailed() + NEW_LINE + 
-				((this.failures.size()>0)?(TAB + TAB + "traces: " + expandList(this.failures) + NEW_LINE):"") +
+				printList (this.failures) +
+//				((this.failures.size()>0)?(TAB + TAB + "traces: " + expandList(this.failures) + NEW_LINE):"") +
 				TAB + "crash: " + getTracesCrashed() + NEW_LINE +
-				((this.crashes.size()>0)?(TAB + TAB + "traces: " + expandList(this.crashes) + NEW_LINE):"") +
+				printList (this.crashes) +
+//				((this.crashes.size()>0)?(TAB + TAB + "traces: " + expandList(this.crashes) + NEW_LINE):"") +
+				TAB + "exit: " + getTracesExit() + NEW_LINE + 
+				printList (this.exits) +
+//				((this.exits.size()>0)?(TAB + TAB + "traces: " + expandList(this.exits) + NEW_LINE):"") +
 				"Non repeatable issues:" + getTracesAsync();
 	}
 
