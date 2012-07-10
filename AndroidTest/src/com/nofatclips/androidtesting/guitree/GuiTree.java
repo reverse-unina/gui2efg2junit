@@ -120,7 +120,11 @@ public class GuiTree extends XmlGraph implements Session, Testable, Plottable {
 	public void setRandomSeed (int millis) {
 		setRandomSeed(String.valueOf(millis));
 	}
-	
+
+	public void setRandomSeed (long millis) {
+		setRandomSeed(String.valueOf(millis));
+	}
+
 	public void setRandomSeed (String millis) {
 		getDom().getDocumentElement().setAttribute("random_seed",millis);
 	}
