@@ -112,6 +112,32 @@ public class GuiTree extends XmlGraph implements Session, Testable, Plottable {
 		getDom().getDocumentElement().setAttribute("end_task_sleep",millis);
 	}
 
+	public String getRandomSeed () {
+		if (!getDom().getDocumentElement().hasAttribute("random_seed")) return "";
+		return this.getDom().getDocumentElement().getAttribute("random_seed");
+	}
+
+	public void setRandomSeed (int millis) {
+		setRandomSeed(String.valueOf(millis));
+	}
+	
+	public void setRandomSeed (String millis) {
+		getDom().getDocumentElement().setAttribute("random_seed",millis);
+	}
+
+	public String getMaxDepth () {
+		if (!getDom().getDocumentElement().hasAttribute("max_depth")) return "";
+		return this.getDom().getDocumentElement().getAttribute("max_depth");
+	}
+
+	public void setMaxDepth (int millis) {
+		setMaxDepth(String.valueOf(millis));
+	}
+	
+	public void setMaxDepth (String millis) {
+		getDom().getDocumentElement().setAttribute("max_depth",millis);
+	}
+
 	public String getInAndOutFocus () {
 		boolean hasClassName = getDom().getDocumentElement().hasAttribute("in_and_out_focus");
 		return (hasClassName)?getDom().getDocumentElement().getAttribute("in_and_out_focus"):("false");
