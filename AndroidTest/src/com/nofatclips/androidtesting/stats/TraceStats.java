@@ -21,6 +21,7 @@ public class TraceStats extends StatsReport {
 	public TraceStats() {
 		crashes = new ArrayList<String>();
 		failures = new ArrayList<String>();
+		exits = new ArrayList<String>();
 	}
 	
 	public void analyzeTrace (Trace theTrace) {
