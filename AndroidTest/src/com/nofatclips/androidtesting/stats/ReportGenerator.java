@@ -24,6 +24,7 @@ public class ReportGenerator extends StatsReport {
 	private InteractionStats eventReport = new InteractionStats();
 	
 	private int transitions = 0;
+	private int depth = 0;
 	private Set<String> activity;
 	private Set<String> activityStates;
 
@@ -72,10 +73,12 @@ public class ReportGenerator extends StatsReport {
 			traceReport.analyzeTrace(theTrace);
 
 			boolean first = true;
+			int currentDepth = 0;
 			for (Transition step: theTrace) {				
 				
 				// Transition count
 				this.transitions++;
+				currentDepth++;
 
 				// Events and input count
 				eventReport.analyzeInteractions(step);
@@ -88,6 +91,7 @@ public class ReportGenerator extends StatsReport {
 				first = false;
 
 			}
+			this.depth = max(this.depth,currentDepth);
 		}
 		
 		countLeaves();
@@ -116,6 +120,7 @@ public class ReportGenerator extends StatsReport {
 		return this.traceReport + NEW_LINE +
 				"Actual traces: " + this.actualTraces + " (for " + this.actualTransitions + " transitions)" + 
 				BREAK +
+				"Depth reached: " + this.depth + NEW_LINE +
 				"Transitions: " + this.transitions + NEW_LINE + 
 				TAB + "different activity states found: " + this.activityStates.size() + NEW_LINE + 
 				TAB + "different activities found: " + this.activity.size() +
