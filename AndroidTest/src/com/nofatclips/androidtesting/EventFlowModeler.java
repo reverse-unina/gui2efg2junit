@@ -1,11 +1,11 @@
 package com.nofatclips.androidtesting;
 
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.*;
 import java.util.regex.*;
 
 import javax.swing.*;
@@ -20,9 +20,7 @@ import org.xml.sax.SAXException;
 
 import com.nofatclips.androidtesting.efg.EventFlowTree;
 import com.nofatclips.androidtesting.guitree.GuiTree;
-import com.nofatclips.androidtesting.model.ActivityState;
-import com.nofatclips.androidtesting.model.Trace;
-import com.nofatclips.androidtesting.model.Transition;
+import com.nofatclips.androidtesting.model.*;
 import com.nofatclips.androidtesting.source.*;
 import com.nofatclips.androidtesting.stats.ReportGenerator;
 
@@ -67,7 +65,7 @@ class Gui2EfcFrame extends JFrame  {
 		this.dotFileName = dotFileName;
 		this.dotEfgFileName = dotEfgFileName;
 		this.windowed = ((outputFileName.equals("")) || (inputFileName.equals("")));
-		this.someLogger = Logger.getLogger(LOGGER);
+//		this.someLogger = Logger.getLogger(LOGGER);
 		this.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		
 		JSourceCodeArea xmlInput = new JSourceCodeArea();
@@ -84,7 +82,7 @@ class Gui2EfcFrame extends JFrame  {
 				if (code == JFileChooser.APPROVE_OPTION) {
 					File theFile = toLoad.getSelectedFile();
 					processFile (theFile);
-					someLogger.fine(theFile.toString());
+//					someLogger.fine(theFile.toString());
 				}
 			}
 		});
@@ -113,18 +111,12 @@ class Gui2EfcFrame extends JFrame  {
         new FileDrop (null, xmlInput, new FileDrop.Listener() {
         	public void filesDropped(File[] files ) {
         		if (files.length==0) return;
-    				try {
-						processFile(files[0].getCanonicalPath());
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+				processFile(files[0]);
             }
         });
-
 		
 		this.add(schermo);
-		this.someLogger.setLevel(Level.FINER);
+//		this.someLogger.setLevel(Level.FINER);
 		
 		if (inputFileName != "") { 
 			processFile(inputFileName);
@@ -132,13 +124,12 @@ class Gui2EfcFrame extends JFrame  {
 	}
 
 	public void processFile(String filename) {
-		setFilename(filename);
+//		setFilename(filename);
 		processFile (new File (filename));
 	}
 	
 	private void processFile(File file) {
-		setFilename (file.getAbsolutePath());
-		this.someLogger.finest(getFilename());
+		setFilename (file);
 		try {
 			this.guiTree = GuiTree.fromXml(file);
 			pezzotto();
@@ -147,7 +138,7 @@ class Gui2EfcFrame extends JFrame  {
 				File activitiesxml = new File (file.getParentFile(), this.guiTree.getStateFileName());
 				if (activitiesxml.exists()) {
 					this.activityMap = new ActivityMap(this.guiTree);
-					this.activityMap.loadActivities(activitiesxml.getAbsolutePath()); //"C:\\Users\\mm\\Desktop\\Applicazioni test\\Wordpress2\\15 - Screenshots E01\\activities.xml");
+					this.activityMap.loadActivities(activitiesxml.getAbsolutePath());
 				}
 			}
 	
@@ -170,10 +161,7 @@ class Gui2EfcFrame extends JFrame  {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+
 		showTest(); // Can try to show test even if efg failed
 		showReport();
 
@@ -192,6 +180,15 @@ class Gui2EfcFrame extends JFrame  {
 		this.setTitle(filename);
 	}
 
+	public void setFilename(File theFile) {
+		setFilename (theFile.getAbsolutePath());
+		for (Component c: this.schermo) {
+			if (c instanceof JSourceCodeArea) {
+				((JSourceCodeArea)c).setDefaultPath(theFile.getPath());
+			}
+		}
+	}
+
 //	private void showInputXml(final Document doc) {
 //		String input="";
 //		try {
@@ -208,22 +205,16 @@ class Gui2EfcFrame extends JFrame  {
 
 	private void showInputXml () {
 		StringBuffer input= new StringBuffer();
-		try{
-			// Open the file that is the first 
-			// command line parameter
+		try {
 			FileInputStream fstream = new FileInputStream(getFilename());
-			// Get the object of DataInputStream
 			DataInputStream in = new DataInputStream(fstream);
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			String strLine;
-			//Read File Line By Line
 			while ((strLine = br.readLine()) != null)   {
-				// Print the content on the console
 				input.append(strLine + System.getProperty("line.separator"));
 			}
-			//Close the input stream
 			in.close();
-		}catch (Exception e){//Catch exception if any
+		} catch (Exception e) {
 			System.err.println("Error: " + e.getMessage());
 		}
 		schermo.showCode(GUI_TREE, input.toString());
@@ -354,15 +345,17 @@ class Gui2EfcFrame extends JFrame  {
 	}
 	
 	private void showReport() {
-		if (this.outputFileName.equals("")) {
-			Pattern p = Pattern.compile("(.+)\\.[^.]+");
-			Matcher m = p.matcher(inputFileName);
-			if (m.find()) {
-				schermo.setFileName(TEST_REPORT, m.group(1)+"_efg");
-			}	
-		} else {
-			schermo.setFileName(TEST_REPORT, "report");
-		}
+//		if (this.reportFileName.equals("")) {
+//			Pattern p = Pattern.compile("(.+)\\.[^.]+");
+//			Matcher m = p.matcher(inputFileName);
+//			if (m.find()) {
+//				schermo.setFileName(TEST_REPORT, m.group(1)+"_efg");
+//			}	
+//			schermo.setFileName(TEST_REPORT, "report.txt");
+//		} else {
+//			schermo.setFileName(TEST_REPORT, this.reportFileName);
+//		}
+		schermo.setFileName(TEST_REPORT, this.reportFileName.equals("")?"report.txt":this.reportFileName);
 
 		ReportGenerator r = new ReportGenerator (this.guiTree, this.efg, this.activityMap);
 		String report = r.getReport();
@@ -417,7 +410,7 @@ class Gui2EfcFrame extends JFrame  {
 	private GuiTree guiTree;
 	private ActivityMap activityMap;
 	private EventFlowTree efg;
-	private Logger someLogger;
+//	private Logger someLogger;
 	private JSourceCodePane schermo;
 	private static final long serialVersionUID = 1L;
 

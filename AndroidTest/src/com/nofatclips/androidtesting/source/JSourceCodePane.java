@@ -1,14 +1,16 @@
 package com.nofatclips.androidtesting.source;
 
 import java.awt.Component;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.swing.Icon;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
 @SuppressWarnings("serial")
-public class JSourceCodePane extends JTabbedPane {
+public class JSourceCodePane extends JTabbedPane implements Iterable<Component> {
 
 	public JSourceCodePane () {
 		this.areas = new HashMap<String, Component>();
@@ -50,6 +52,10 @@ public class JSourceCodePane extends JTabbedPane {
 		Component c = areas.get(tab);
 		if (c instanceof JSourceCodeArea)
 			((JSourceCodeArea) c).setDefaultFileName(name);
+	}
+
+	public Iterator<Component> iterator() {
+		return new ArrayList<Component>(this.areas.values()).iterator();
 	}
 
 	private HashMap<String,Component> areas;
