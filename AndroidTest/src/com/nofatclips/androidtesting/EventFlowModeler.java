@@ -14,6 +14,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactoryConfigurationError;
 
+import net.iharder.dnd.FileDrop;
+
 import org.xml.sax.SAXException;
 
 import com.nofatclips.androidtesting.efg.EventFlowTree;
@@ -108,6 +110,19 @@ class Gui2EfcFrame extends JFrame  {
 		schermo.addDisabled(JUNIT_JAVA, null, jUnitCode);
 		schermo.addDisabled(TEST_REPORT, null, testReport);
 
+        new FileDrop (null, xmlInput, new FileDrop.Listener() {
+        	public void filesDropped(File[] files ) {
+        		if (files.length==0) return;
+    				try {
+						processFile(files[0].getCanonicalPath());
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+            }
+        });
+
+		
 		this.add(schermo);
 		this.someLogger.setLevel(Level.FINER);
 		
