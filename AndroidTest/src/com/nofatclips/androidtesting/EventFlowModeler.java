@@ -345,16 +345,6 @@ class Gui2EfcFrame extends JFrame  {
 	}
 	
 	private void showReport() {
-//		if (this.reportFileName.equals("")) {
-//			Pattern p = Pattern.compile("(.+)\\.[^.]+");
-//			Matcher m = p.matcher(inputFileName);
-//			if (m.find()) {
-//				schermo.setFileName(TEST_REPORT, m.group(1)+"_efg");
-//			}	
-//			schermo.setFileName(TEST_REPORT, "report.txt");
-//		} else {
-//			schermo.setFileName(TEST_REPORT, this.reportFileName);
-//		}
 		schermo.setFileName(TEST_REPORT, this.reportFileName.equals("")?"report.txt":this.reportFileName);
 
 		ReportGenerator r = new ReportGenerator (this.guiTree, this.efg, this.activityMap);
