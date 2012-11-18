@@ -36,6 +36,7 @@ public class ReportGenerator extends StatsReport {
 	
 	// Data inferred from the Event Flow Tree
 	private int actualTraces=0;
+	private List<String> actualCrashes;
 	private int actualTransitions=0;
 	
 	public ReportGenerator(GuiTree guiTree) {
@@ -49,6 +50,7 @@ public class ReportGenerator extends StatsReport {
 		this.widgetTypes = new Hashtable<String, Integer>();
 		this.widgets = new Hashtable<String,Integer>();
 		this.widgetStates = new Hashtable<String,Integer>();
+		this.actualCrashes = new ArrayList<String>();
 		if (efg!=null) {
 			this.efg=efg;
 		} else {
@@ -112,13 +114,17 @@ public class ReportGenerator extends StatsReport {
 		if (!atLeastOneChild) {
 			this.actualTraces++;
 			this.actualTransitions+=depth;
+			if (traceReport.getCrashEvents().contains(evento.getAttribute("id"))) {
+				this.actualCrashes.add("#"+this.actualTraces);
+			}
 		}
 	}
 
 	public String getReport () {
 		evaluate();
 		return this.traceReport + NEW_LINE +
-				"Actual traces: " + this.actualTraces + " (for " + this.actualTransitions + " transitions)" + 
+				"Actual traces: " + this.actualTraces + " (for " + this.actualTransitions + " transitions)" + NEW_LINE +
+				"List of actual crashed traces: " + expandList(this.actualCrashes) + 
 				BREAK +
 				"Depth reached: " + this.depth + NEW_LINE +
 				"Transitions: " + this.transitions + NEW_LINE + 

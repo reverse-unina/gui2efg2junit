@@ -15,6 +15,7 @@ public class TraceStats extends StatsReport {
 	private int tracesExit = 0;
 	private int tracesAsync = 0;
 	private List<String> crashes;
+	private List<String> crashEvents;
 	private List<String> failures;
 	private List<String> exits;
 	
@@ -22,20 +23,26 @@ public class TraceStats extends StatsReport {
 		crashes = new ArrayList<String>();
 		failures = new ArrayList<String>();
 		exits = new ArrayList<String>();
+		crashEvents = new ArrayList<String>();
 	}
 	
 	public void analyzeTrace (Trace theTrace) {
 		this.traces++;
 		ActivityState a = theTrace.getFinalTransition().getFinalActivity();
+		String txt;
 		if (a.isFailure()) {
 			this.tracesFailed++;
-			this.failures.add(theTrace.getId());
+			txt = theTrace.getId();
+			this.failures.add(txt);
 		} else if (a.isCrash()) {
 			this.tracesCrashed++;
-			this.crashes.add(theTrace.getId());
+			txt = theTrace.getId();
+			this.crashes.add(txt);
+			this.crashEvents.add(theTrace.getFinalTransition().getEvent().getId());
 		} else if (a.isExit()) {
 			this.tracesExit++;
-			this.exits.add(theTrace.getId());
+			txt = theTrace.getId();
+			this.exits.add(txt);
 		} else {
 			this.tracesSuccessful++;
 		}
@@ -64,6 +71,10 @@ public class TraceStats extends StatsReport {
 
 	public int getTracesAsync() {
 		return tracesAsync;
+	}
+	
+	public List<String>getCrashEvents() {
+		return this.crashEvents;
 	}
 	
 	public String printList (List<String> list) {
