@@ -26,7 +26,8 @@ public class DotUtilities {
 				target = target + " #" + event.getWidgetId();
 			}
 		}
-		String nodeDesc = special?type:(type + "\\n'" + escapeDot(target) + "'");
+		//String nodeDesc = special?type:(type + "\\n'" + escapeDot(target) + "'");
+		String nodeDesc = special?type:(type + " '" + escapeDot(target) + "'");
 		return nodeDesc;
 
 	}

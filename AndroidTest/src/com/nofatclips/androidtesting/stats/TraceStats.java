@@ -13,7 +13,7 @@ public class TraceStats extends StatsReport {
 	private int tracesFailed = 0;
 	private int tracesCrashed = 0;
 	private int tracesExit = 0;
-	private int tracesAsync = 0;
+	//private int tracesAsync = 0;
 	private List<String> crashes;
 	private List<String> crashEvents;
 	private List<String> failures;
@@ -46,7 +46,7 @@ public class TraceStats extends StatsReport {
 		} else {
 			this.tracesSuccessful++;
 		}
-		if (theTrace.isAsync()) this.tracesAsync++;
+		//if (theTrace.isAsync()) this.tracesAsync++;
 	}
 
 	public int getTraces() {
@@ -69,9 +69,9 @@ public class TraceStats extends StatsReport {
 		return tracesCrashed;
 	}
 
-	public int getTracesAsync() {
-		return tracesAsync;
-	}
+	//public int getTracesAsync() {
+	//	return tracesAsync;
+	//}
 	
 	public List<String>getCrashEvents() {
 		return this.crashEvents;
@@ -89,8 +89,8 @@ public class TraceStats extends StatsReport {
 				TAB + "crash: " + getTracesCrashed() + NEW_LINE +
 				printList (this.crashes) +
 				TAB + "exit: " + getTracesExit() + NEW_LINE + 
-				printList (this.exits) +
-				"Non repeatable issues:" + getTracesAsync();
+				printList (this.exits);// +
+				//"Non repeatable issues:" + getTracesAsync();
 	}
 
 }

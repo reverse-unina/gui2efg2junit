@@ -28,8 +28,8 @@ public class ReportGenerator extends StatsReport {
 	private Set<String> activity;
 	private Set<String> activityStates;
 
-	private int widgetCount = 0;
-	private int widgetSupport = 0;
+	//private int widgetCount = 0;
+	//private int widgetSupport = 0;
 	private Map<String,Integer> widgetTypes;
 	private Map<String,Integer> widgets;
 	private Map<String,Integer> widgetStates;
@@ -131,13 +131,13 @@ public class ReportGenerator extends StatsReport {
 				TAB + "different activity states found: " + this.activityStates.size() + NEW_LINE + 
 				TAB + "different activities found: " + this.activity.size() +
 				BREAK +
-				this.eventReport +
-				BREAK + 
-				"Views and widgets: " + this.widgetCount + NEW_LINE + 
-				TAB + "supported widgets: " + this.widgetSupport + NEW_LINE + 
-				expandMap(this.widgetTypes) +
-				TAB + "different widgets: " + sum(this.widgets) + " <-> " + sum(this.widgetStates)
-				;
+				this.eventReport; //+
+				//BREAK + 
+				//"Views and widgets: " + this.widgetCount + NEW_LINE + 
+				//TAB + "supported widgets: " + this.widgetSupport + NEW_LINE + 
+				//expandMap(this.widgetTypes) +
+				//TAB + "different widgets: " + sum(this.widgets) + " <-> " + sum(this.widgetStates)
+				//;
 	}
 	
 	public void countWidgets (ActivityState activity) {
@@ -149,11 +149,11 @@ public class ReportGenerator extends StatsReport {
 		activity = getCompleteActivity(activity);
 		
 		for (WidgetState w: activity) {
-			this.widgetCount++;
+		//	this.widgetCount++;
 			localCount++;
 			if (! (w.getSimpleType().equals("") || w.getSimpleType().equals(NULL)) ) {
 				inc (this.widgetTypes, w.getSimpleType());
-				this.widgetSupport++;
+		//		this.widgetSupport++;
 			}
 		}
 		this.activity.add(key);
