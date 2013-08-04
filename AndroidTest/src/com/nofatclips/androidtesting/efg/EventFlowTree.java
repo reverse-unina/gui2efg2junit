@@ -86,11 +86,6 @@ public class EventFlowTree extends XmlGraph implements Plottable {
 		}
 		return null;
 	}
-
-//	public String getDot () {
-//		EfgToDot g = new EfgToDot(this);
-//		return g.getDot();
-//	}
 	
 	public Document getDom () {
 		return this.efg;

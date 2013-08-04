@@ -26,7 +26,6 @@ public class DotUtilities {
 				target = target + " #" + event.getWidgetId();
 			}
 		}
-		//String nodeDesc = special?type:(type + "\\n'" + escapeDot(target) + "'");
 		String nodeDesc = special?type:(type + " '" + escapeDot(target) + "'");
 		return nodeDesc;
 
@@ -41,13 +40,6 @@ public class DotUtilities {
         for (int i = 0; i < sz; i++) {
             char ch = str.charAt(i);
             // handle unicode
-//            if (ch > 0xfff) {
-//                out.append("\\u").append(hex(ch));
-//            } else if (ch > 0xff) {
-//                out.append("\\u0").append(hex(ch));
-//            } else if (ch > 0x7f) {
-//                out.append("\\u00").append(hex(ch));
-//            } else 
            	if (ch < 32) {
                 switch (ch) {
                     case '\b' :

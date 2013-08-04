@@ -65,7 +65,6 @@ class Gui2EfcFrame extends JFrame  {
 		this.dotFileName = dotFileName;
 		this.dotEfgFileName = dotEfgFileName;
 		this.windowed = ((outputFileName.equals("")) || (inputFileName.equals("")));
-//		this.someLogger = Logger.getLogger(LOGGER);
 		this.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		
 		JSourceCodeArea xmlInput = new JSourceCodeArea();
@@ -82,7 +81,6 @@ class Gui2EfcFrame extends JFrame  {
 				if (code == JFileChooser.APPROVE_OPTION) {
 					File theFile = toLoad.getSelectedFile();
 					processFile (theFile);
-//					someLogger.fine(theFile.toString());
 				}
 			}
 		});
@@ -116,7 +114,6 @@ class Gui2EfcFrame extends JFrame  {
         });
 		
 		this.add(schermo);
-//		this.someLogger.setLevel(Level.FINER);
 		
 		if (inputFileName != "") { 
 			processFile(inputFileName);
@@ -124,7 +121,6 @@ class Gui2EfcFrame extends JFrame  {
 	}
 
 	public void processFile(String filename) {
-//		setFilename(filename);
 		processFile (new File (filename));
 	}
 	
@@ -189,20 +185,6 @@ class Gui2EfcFrame extends JFrame  {
 		}
 	}
 
-//	private void showInputXml(final Document doc) {
-//		String input="";
-//		try {
-//			input = this.guiTree.toXml();
-//		} catch (TransformerFactoryConfigurationError e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (TransformerException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		schermo.showCode(GUI_TREE, input);
-//	}
-
 	private void showInputXml () {
 		StringBuffer input= new StringBuffer();
 		try {
@@ -219,13 +201,11 @@ class Gui2EfcFrame extends JFrame  {
 		}
 		schermo.showCode(GUI_TREE, input.toString());
 	}
-
-		
+	
 	public boolean showEfg() throws IOException, TransformerException {
 		String xml="";
 		try {
 			xml = this.efg.toXml();
-			// this.someLogger.info(xml);
 		} catch (TransformerFactoryConfigurationError e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -400,7 +380,6 @@ class Gui2EfcFrame extends JFrame  {
 	private GuiTree guiTree;
 	private ActivityMap activityMap;
 	private EventFlowTree efg;
-//	private Logger someLogger;
 	private JSourceCodePane schermo;
 	private static final long serialVersionUID = 1L;
 

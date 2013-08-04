@@ -28,13 +28,11 @@ public class SourceCodeBuilder {
 	}
 	
 	public SourceCodeBuilder moreIndent () {
-//		s.append("+");
 		this.indent++;
 		return this;
 	}
 	
 	public SourceCodeBuilder lessIndent () {
-//		s.append("-");
 		this.indent--;
 		if (this.indent < 0)
 			this.indent = 0;
@@ -55,7 +53,6 @@ public class SourceCodeBuilder {
 	}
 
 	public SourceCodeBuilder loc (String code) {
-		//System.out.print("'"+code+"'" + " - first = '"+ ((code.length()>0)?code.charAt(0):"") + "' - last = '" + ((code.length()>0)?code.charAt(code.length()-1):"") + "'" + EOL);
 		if (isGuess() && (code.length()>0) && (code.charAt(0) == '}'))
 			lessIndent();
 		tab();

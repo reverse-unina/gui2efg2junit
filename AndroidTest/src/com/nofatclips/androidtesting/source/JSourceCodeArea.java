@@ -93,7 +93,6 @@ public class JSourceCodeArea extends JTextArea {
 		private void saveFile(File fileName) throws FileNotFoundException {
 			PrintWriter autput = new PrintWriter (fileName);
 			String text = JSourceCodeArea.this.getText();
-//			System.out.println(text);
 			autput.println(text);
 			autput.close();
 		}

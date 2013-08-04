@@ -51,8 +51,8 @@ public class GuiTreeToDot implements Plottable {
 	}
 
 	private void addTransition(Transition action, boolean first) {
-		Node start = getNode(action.getStartActivity()); //new Node (action.getStartActivity());
-		Node finish = getNode(action.getFinalActivity()); //new Node (action.getFinalActivity());
+		Node start = getNode(action.getStartActivity()); 
+		Node finish = getNode(action.getFinalActivity()); 
 		UserEvent event = action.getEvent();
 		
 		// Add main activity to nodes

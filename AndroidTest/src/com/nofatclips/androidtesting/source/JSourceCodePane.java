@@ -18,12 +18,10 @@ public class JSourceCodePane extends JTabbedPane implements Iterable<Component> 
 	
 	public void addEnabled (String s, Icon i, Component c) {
 		addTab (s,i,c,true);
-//		setEnabledAt(indexOfComponent(scroll), true);
 	}
 
 	public void addDisabled (String s, Icon i, Component c) {
 		addTab (s,i,c,false);
-//		setEnabledAt(indexOfComponent(scroll), false);
 	}
 	
 	public void addTab (String s, Icon i, Component c, boolean enabled) {
