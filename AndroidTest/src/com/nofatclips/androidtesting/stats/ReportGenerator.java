@@ -122,6 +122,23 @@ public class ReportGenerator extends StatsReport {
 
 	public String getReport () {
 		evaluate();
+		if (this.widgetCount!=0){
+			return this.traceReport + NEW_LINE +
+					"Actual traces: " + this.actualTraces + " (for " + this.actualTransitions + " transitions)" + NEW_LINE +
+					"List of actual crashed traces: " + expandList(this.actualCrashes) + 
+					BREAK +
+					"Depth reached: " + this.depth + NEW_LINE +
+					"Transitions: " + this.transitions + NEW_LINE + 
+					TAB + "different activity states found: " + this.activityStates.size() + NEW_LINE + 
+					TAB + "different activities found: " + this.activity.size() +
+					BREAK +
+					this.eventReport +
+					NEW_LINE + 
+					"Views and widgets: " + this.widgetCount + NEW_LINE + 
+					TAB + "supported widgets: " + this.widgetSupport + NEW_LINE + 
+					expandMap(this.widgetTypes);	
+		}
+		else{
 		return this.traceReport + NEW_LINE +
 				"Actual traces: " + this.actualTraces + " (for " + this.actualTransitions + " transitions)" + NEW_LINE +
 				"List of actual crashed traces: " + expandList(this.actualCrashes) + 
@@ -130,15 +147,8 @@ public class ReportGenerator extends StatsReport {
 				"Transitions: " + this.transitions + NEW_LINE + 
 				TAB + "different activity states found: " + this.activityStates.size() + NEW_LINE + 
 				TAB + "different activities found: " + this.activity.size() +
-				BREAK +
-				this.eventReport +
-				NEW_LINE + 
-				//BREAK + 
-				"Views and widgets: " + this.widgetCount + NEW_LINE + 
-				TAB + "supported widgets: " + this.widgetSupport + NEW_LINE + 
-				expandMap(this.widgetTypes) //+
-				//TAB + "different widgets: " + sum(this.widgets) + " <-> " + sum(this.widgetStates)
-				;
+				BREAK +	this.eventReport;
+		}
 	}
 	
 	public void countWidgets (ActivityState activity) {
